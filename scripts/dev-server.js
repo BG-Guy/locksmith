@@ -54,6 +54,15 @@ const server = http.createServer((req, res) => {
   console.log(`${req.method} ${urlPath}`);
 });
 
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`Port ${PORT} is already in use — is the dev server already running in another terminal?`);
+    console.error(`Run with a different port instead: PORT=4489 npm run dev`);
+    process.exit(1);
+  }
+  throw err;
+});
+
 server.listen(PORT, () => {
   console.log(`YZLocksmith dev server running at http://localhost:${PORT}`);
 });
