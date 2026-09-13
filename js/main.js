@@ -33,9 +33,12 @@ if (revealEls.length && "IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-visible"));
 }
 
-// Service quick-look teaser menu — hover a link on desktop to slide its
-// panel out from behind the nav; on touch, first tap "primes" (previews)
-// the link, second tap on the same link follows it.
+// Service quick-look teaser menu — mobile layout only (hidden above 760px
+// via .quick-look-section in style.css, since the desktop services grid
+// above already covers the same links). First tap "primes" (previews) a
+// link by sliding its panel out from behind the nav, second tap on the
+// same link follows it; a real pointer's hover still works the same way
+// if one's present.
 // Adapted from the "Side Menu with Hover Image Teasers" snippet in
 // github.com/BG-Guy/code-library (id: hover-teaser-side-menu) — same
 // same-width nav/teaser mechanism, restyled with icon panels instead of
