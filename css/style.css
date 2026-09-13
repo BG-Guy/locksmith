@@ -261,6 +261,10 @@ p {
   padding: 8px;
 }
 
+.mobile-nav-drawer {
+  display: none;
+}
+
 .nav-toggle span {
   width: 22px;
   height: 2px;
@@ -912,20 +916,16 @@ section {
 }
 
 /* ==========================================================================
-   Service quick-look teaser menu — mobile layout only (see the max-width:
-   760px query below, which is where this becomes visible)
+   Mobile nav drawer — hover/tap-teaser side menu, opened by the hamburger
+   button (see .mobile-nav-drawer above and the max-width:760px query below)
    (tap a link, a themed panel slides out from behind the nav — same-width
    nav/teaser trick: translateX(100%) exactly fills the other half)
    ========================================================================== */
 
-.quick-look-section {
-  display: none;
-}
-
 .teaser-menu {
   position: relative;
   overflow: hidden;
-  height: 400px;
+  height: 300px;
   border: 1px solid var(--color-line);
   border-radius: 6px;
 }
@@ -1052,17 +1052,14 @@ section {
     display: flex;
   }
 
-  .site-header.nav-open .main-nav {
-    display: flex;
+  .site-header.nav-open .mobile-nav-drawer {
+    display: block;
     position: absolute;
     top: 84px;
     left: 0;
     right: 0;
+    padding: 20px 28px 28px;
     background: var(--color-bg);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 28px 32px;
-    gap: 18px;
     border-bottom: 1px solid var(--color-line);
   }
 
@@ -1072,10 +1069,6 @@ section {
 
   .services-grid {
     grid-template-columns: 1fr;
-  }
-
-  .quick-look-section {
-    display: block;
   }
 
   .service-detail {

@@ -33,17 +33,16 @@ if (revealEls.length && "IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-visible"));
 }
 
-// Service quick-look teaser menu — mobile layout only (hidden above 760px
-// via .quick-look-section in style.css, since the desktop services grid
-// above already covers the same links). First tap "primes" (previews) a
-// link by sliding its panel out from behind the nav, second tap on the
-// same link follows it; a real pointer's hover still works the same way
-// if one's present.
+// Mobile nav drawer — opened by the hamburger button, closed by the site's
+// existing .mobile-nav-drawer + .site-header.nav-open CSS. First tap
+// "primes" (previews) a link by sliding its panel out from behind the nav,
+// second tap on the same link follows it; a real pointer's hover still
+// works the same way if one's present.
 // Adapted from the "Side Menu with Hover Image Teasers" snippet in
 // github.com/BG-Guy/code-library (id: hover-teaser-side-menu) — same
 // same-width nav/teaser mechanism, restyled with icon panels instead of
-// photos/colors since no service photography exists yet. Swap the icon
-// markup below for a real photo per service once available.
+// photos/colors since no site photography exists yet. Swap the icon
+// markup below for a real photo per link once available.
 function initHoverTeaserMenu(container, links) {
   container.innerHTML = `
     <div class="htm-teaser-layer">
@@ -116,45 +115,33 @@ function initHoverTeaserMenu(container, links) {
   });
 }
 
-const teaserMenuEl = document.querySelector("#serviceTeaserMenu");
+const mobileNavMenuEl = document.querySelector("#mobileNavMenu");
 
-if (teaserMenuEl) {
-  initHoverTeaserMenu(teaserMenuEl, [
+if (mobileNavMenuEl) {
+  initHoverTeaserMenu(mobileNavMenuEl, [
     {
-      id: "emergency",
-      label: "Emergency Lockout",
-      href: "services.html#emergency",
-      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="2" width="14" height="20" rx="1" stroke="currentColor" stroke-width="1.4"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/></svg>`,
-    },
-    {
-      id: "residential",
-      label: "Residential",
-      href: "services.html#residential",
+      id: "home",
+      label: "Home",
+      href: "index.html",
       icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11l8-7 8 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v10h12V10" stroke="currentColor" stroke-width="1.4"/><path d="M10 20v-6h4v6" stroke="currentColor" stroke-width="1.4"/></svg>`,
     },
     {
-      id: "commercial",
-      label: "Commercial",
-      href: "services.html#commercial",
-      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="3" width="14" height="18" stroke="currentColor" stroke-width="1.4"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+      id: "services",
+      label: "Services",
+      href: "services.html",
+      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`,
     },
     {
-      id: "automotive",
-      label: "Automotive",
-      href: "services.html#automotive",
-      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16l1.5-5.5A2 2 0 0 1 7.4 9h9.2a2 2 0 0 1 1.9 1.5L20 16" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><rect x="3" y="16" width="18" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/><circle cx="7.5" cy="20" r="1.3" fill="currentColor"/><circle cx="16.5" cy="20" r="1.3" fill="currentColor"/></svg>`,
+      id: "about",
+      label: "About",
+      href: "about.html",
+      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M12 8h.01M11 11h1v6h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
     },
     {
-      id: "rekeying",
-      label: "Lock Rekeying",
-      href: "services.html#rekeying",
-      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="12" r="4" stroke="currentColor" stroke-width="1.4"/><path d="M11 12h11M18 12v3M21 12v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
-    },
-    {
-      id: "high-security",
-      label: "High-Security",
-      href: "services.html#high-security",
-      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2 4 5v6c0 5 3.4 9.1 8 11 4.6-1.9 8-6 8-11V5l-8-3z" stroke="currentColor" stroke-width="1.4"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+      id: "contact",
+      label: "Contact",
+      href: "contact.html",
+      icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.4"/></svg>`,
     },
   ]);
 }
