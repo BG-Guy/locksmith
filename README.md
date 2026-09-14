@@ -1,6 +1,6 @@
-# YZLocksmith
+# Guardian Locksmith
 
-Marketing website for YZLocksmith, a locksmith business serving Long Island, NY. Static HTML/CSS/JS — no build step, no dependencies.
+Marketing website for Guardian Locksmith, a locksmith business serving Long Island, NY. Static HTML/CSS/JS — no build step, no dependencies.
 
 ## Structure
 
@@ -26,7 +26,7 @@ Then open http://localhost:8000
 ## Before launch — replace placeholders
 
 - Phone number: `(516) 555-0142` (appears in every page's header/footer and `tel:` links)
-- Email: `info@yzlocksmith.com`
+- Email: `info@guardianlocksmith.com`
 - License number in the footer (`License #placeholder-0000`)
 - Contact form on `contact.html` is a front-end demo only — wire `js/main.js`'s submit handler to a real backend or form service (e.g. Formspree, Netlify Forms) before launch
 - Add real customer testimonials/reviews once available — none are included, since fabricated reviews would be misleading on a live business site

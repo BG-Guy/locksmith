@@ -1,8 +1,8 @@
 {
-  "name": "yzlocksmith-site",
+  "name": "guardian-locksmith-site",
   "version": "1.0.0",
   "private": true,
-  "description": "YZLocksmith marketing site — static HTML/CSS/JS, no build step.",
+  "description": "Guardian Locksmith marketing site — static HTML/CSS/JS, no build step.",
   "scripts": {
     "dev": "node scripts/dev-server.js"
   }
