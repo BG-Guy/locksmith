@@ -1086,204 +1086,62 @@ section {
 }
 
 /* ==========================================================================
-   Homepage preloader — combination-dial spin, then the shackle lifts away
-   (adapted from a CodePen-style rotary lock: same rotate-through-positions
-   mechanism, restyled to the brand palette, timing compressed to ~2.5s so
-   an urgent visitor isn't stuck waiting on it)
+   Homepage preloader — the wordmark holds center, then the two halves of
+   the screen split apart like a vault door swinging open to reveal the
+   page underneath.
    ========================================================================== */
 
 .preloader {
   position: fixed;
   inset: 0;
   z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 26px;
-  background: var(--color-panel);
-  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.preloader.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.pl-lock {
-  width: 220px;
-  height: 300px;
-  position: relative;
-}
-
-.pl-body {
-  height: 220px;
-  width: 220px;
-  border-radius: 50%;
-  background-color: var(--color-panel-ink);
+.preloader-panel {
   position: absolute;
+  top: 0;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: table;
-  box-shadow: 4px 8px 14px 0 rgba(0, 0, 0, 0.35), inset 2px 4px 1px 0 rgba(255, 255, 255, 0.6),
-    inset -1px -2px 1px 0 rgba(0, 0, 0, 0.35);
+  width: 50%;
+  background: var(--color-panel);
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-.pl-body2 {
-  display: table-cell;
-  vertical-align: middle;
+.preloader-panel-left {
+  left: 0;
 }
 
-.pl-display {
-  height: 196px;
-  width: 196px;
-  border-radius: 50%;
-  background-color: var(--color-panel-soft);
-  margin: auto;
-  animation: plLockRotating 2s cubic-bezier(1, -0.06, 0, 1.165);
+.preloader-panel-right {
+  right: 0;
 }
 
-.pl-arrow {
-  height: 0;
-  width: 0;
-  margin: auto;
-  border: 11px solid transparent;
-  border-top-color: var(--color-panel-ink);
-  position: absolute;
-  top: 7px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+.preloader.is-opening .preloader-panel-left {
+  transform: translateX(-100%);
 }
 
-.pl-core {
-  width: 56px;
-  height: 56px;
-  background: var(--color-panel-ink);
-  border-radius: 50%;
+.preloader.is-opening .preloader-panel-right {
+  transform: translateX(100%);
+}
+
+.preloader-logo {
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 2;
   transform: translate(-50%, -50%);
-  box-shadow: inset 4px 8px 2px 0 rgba(255, 255, 255, 0.6), inset -2px -4px 2px 0 rgba(0, 0, 0, 0.25);
-}
-
-.pl-middleVisior {
-  background-color: var(--color-accent-bright);
-  height: 0;
-  width: 6px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.pl-longStick {
-  position: absolute;
-  height: 42px;
-  width: 6px;
-  background-color: var(--color-panel-ink);
-  top: 50%;
-  border-radius: 3px;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  transform: translateY(-50%) rotate(0deg) translateY(-72px);
-}
-
-.pl-shortStick {
-  position: absolute;
-  height: 22px;
-  width: 6px;
-  background-color: var(--color-panel-ink-soft);
-  top: 50%;
-  border-radius: 3px;
-  box-shadow: inset 0 2px 5px 0 rgba(0, 0, 0, 0.5);
-}
-
-.pl-nOfStick {
-  position: absolute;
-  left: 50%;
-  display: block;
-  color: var(--color-panel);
-  text-align: center;
-  font-size: 12px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  transform: translateX(-50%) translateY(42px);
-}
-
-.pl-handCont {
-  margin: 0 auto;
-  width: 160px;
-  position: relative;
-  top: 38px;
-  z-index: 5;
-  animation: plLockOpening 0.5s ease forwards;
-  animation-delay: 2s;
-}
-
-.pl-hand {
-  width: 126px;
-  height: 92px;
-  border-radius: 68px 68px 0 0;
-  border: 16px solid var(--color-panel-ink);
-  border-bottom-color: transparent;
-  margin: 0 auto;
-}
-
-.pl-sup1 {
-  width: 16px;
-  height: 108px;
-  background-color: var(--color-panel-ink);
-  position: relative;
-  float: right;
-  top: -28px;
-  right: 22px;
-}
-
-.preloader-caption {
+  white-space: nowrap;
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.15rem;
-  color: var(--color-panel-ink-soft);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  letter-spacing: -0.01em;
+  color: var(--color-panel-ink);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-@keyframes plLockRotating {
-  4% {
-    transform: rotate(0deg);
-  }
-  20% {
-    transform: rotate(180deg);
-  }
-  24% {
-    transform: rotate(180deg);
-  }
-  44% {
-    transform: rotate(-90deg);
-  }
-  48% {
-    transform: rotate(-90deg);
-  }
-  68% {
-    transform: rotate(54deg);
-  }
-  72% {
-    transform: rotate(54deg);
-  }
-  96% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+.preloader-logo span {
+  color: var(--color-accent-bright);
 }
 
-@keyframes plLockOpening {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-85px);
-  }
+.preloader.is-opening .preloader-logo {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
 }
