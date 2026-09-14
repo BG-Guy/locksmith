@@ -4,6 +4,7 @@
   "private": true,
   "description": "Guardian Locksmith marketing site — static HTML/CSS/JS, no build step.",
   "scripts": {
-    "dev": "node scripts/dev-server.js"
+    "dev": "node scripts/dev-server.js",
+    "build": "node scripts/build.js"
   }
 }

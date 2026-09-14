@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Guardian Locksmith — Design tokens
+   ========================================================================== */
+
+:root {
+  --color-bg: #f6f2ea;
+  --color-bg-alt: #ffffff;
+  --color-ink: #1b1b1d;
+  --color-ink-soft: #4a4640;
+  --color-panel: #1f2126;
+  --color-panel-soft: #2a2d33;
+  --color-panel-ink: #f1ece1;
+  --color-panel-ink-soft: #b9b3a6;
+  --color-accent: #b8863b;
+  --color-accent-bright: #d9a455;
+  --color-line: rgba(27, 27, 29, 0.12);
+  --color-line-dark: rgba(241, 236, 225, 0.14);
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", "Segoe UI", sans-serif;
+  --font-logo: "Teko", "Arial Narrow", sans-serif;
+
+  --max-width: 1180px;
+  --radius: 4px;
+}

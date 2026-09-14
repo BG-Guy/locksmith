@@ -1,55 +1,3 @@
-// Homepage preloader — wordmark holds center, then the two panels split
-// apart like a vault door swinging open.
-const preloader = document.querySelector("#preloader");
-
-if (preloader) {
-  document.body.style.overflow = "hidden";
-
-  window.setTimeout(() => {
-    preloader.classList.add("is-opening");
-  }, 800);
-
-  window.setTimeout(() => {
-    document.body.style.overflow = "";
-    preloader.remove();
-  }, 1500);
-}
-
-// Mobile nav toggle
-const header = document.querySelector(".site-header");
-const navToggle = document.querySelector(".nav-toggle");
-
-if (navToggle && header) {
-  navToggle.addEventListener("click", () => {
-    header.classList.toggle("nav-open");
-  });
-
-  document.querySelectorAll(".main-nav a").forEach((link) => {
-    link.addEventListener("click", () => header.classList.remove("nav-open"));
-  });
-}
-
-// Reveal-on-scroll
-const revealEls = document.querySelectorAll(".reveal");
-
-if (revealEls.length && "IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  revealEls.forEach((el) => observer.observe(el));
-} else {
-  revealEls.forEach((el) => el.classList.add("is-visible"));
-}
-
 // Mobile nav drawer — opened by the hamburger button, closed by the site's
 // existing .mobile-nav-drawer + .site-header.nav-open CSS. First tap
 // "primes" (previews) a link by sliding its panel out from behind the nav,
@@ -161,18 +109,4 @@ if (mobileNavMenuEl) {
       icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.4"/></svg>`,
     },
   ]);
-}
-
-// Contact form (static demo — no backend wired up yet)
-const contactForm = document.querySelector("#contact-form");
-
-if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const successMsg = document.querySelector("#form-success");
-    if (successMsg) {
-      successMsg.classList.add("is-visible");
-    }
-    contactForm.reset();
-  });
 }

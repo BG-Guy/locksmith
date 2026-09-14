@@ -1,0 +1,31 @@
+/* ==========================================================================
+   CTA band
+   ========================================================================== */
+
+.cta-band {
+  background: var(--color-accent);
+  color: #1b1b1d;
+  text-align: center;
+}
+
+.cta-band h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  margin-bottom: 18px;
+}
+
+.cta-band p {
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin: 0 auto 34px;
+  color: #1b1b1d;
+  opacity: 0.82;
+}
+
+.cta-band .btn-primary {
+  background: #1b1b1d;
+  color: #f6f2ea;
+}
+
+.cta-band .btn-primary:hover {
+  background: #33302a;
+}

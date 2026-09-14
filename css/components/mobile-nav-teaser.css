@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Mobile nav drawer — hover/tap-teaser side menu, opened by the hamburger
+   button (see .mobile-nav-drawer in header.css and the max-width:760px
+   query there) (tap a link, a themed panel slides out from behind the nav
+   — same-width nav/teaser trick: translateX(100%) exactly fills the other
+   half)
+   ========================================================================== */
+
+.teaser-menu {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+}
+
+.htm-teaser-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--color-bg-alt);
+}
+
+.htm-teaser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-panel);
+  transform: translateX(0%);
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.htm-teaser.is-active {
+  transform: translateX(100%);
+}
+
+.htm-teaser svg {
+  width: 72px;
+  height: 72px;
+  color: var(--color-accent);
+  opacity: 0.22;
+}
+
+.htm-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+  width: 50%;
+  height: 100%;
+  padding: 0 20px;
+  background: var(--color-bg-alt);
+}
+
+.htm-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-ink);
+  padding: 5px 0;
+  transition: color 0.2s ease;
+}
+
+.htm-link .htm-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.htm-link.is-active {
+  color: var(--color-accent);
+}
+
+.htm-link.is-active .htm-dot {
+  opacity: 1;
+  transform: translateX(10px);
+}

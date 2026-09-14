@@ -1,0 +1,71 @@
+{
+  "home": {
+    "outputFile": "index.html",
+    "title": "Guardian Locksmith — 24/7 Locksmith Serving Long Island, NY",
+    "description": "Guardian Locksmith provides emergency lockout, residential, commercial, and automotive locksmith services across Long Island, NY. Licensed, insured, and dispatched 24/7.",
+    "activeNav": "home",
+    "headerCta": { "label": "Request Service", "href": "contact.html" },
+    "hasPreloader": true,
+    "contentFile": "pages/home.html",
+    "ctaBand": {
+      "wrapClass": "wrap reveal",
+      "title": "Locked out right now?",
+      "text": "Call Guardian Locksmith and a technician will be on the way in minutes — no matter the time.",
+      "href": "tel:+15165550142",
+      "label": "Call (516) 555-0142"
+    }
+  },
+  "services": {
+    "outputFile": "services.html",
+    "title": "Services — Guardian Locksmith",
+    "description": "Emergency lockout, residential, commercial, automotive locksmith, rekeying, and high-security lock installation across Long Island, NY.",
+    "activeNav": "services",
+    "headerCta": { "label": "Request Service", "href": "contact.html" },
+    "pageHero": {
+      "eyebrow": "Services",
+      "title": "Full-service locksmith work, done right the first time.",
+      "lede": "Every technician carries a stocked van covering the jobs below, so most calls are resolved in a single visit — no return trips."
+    },
+    "contentFile": "pages/services.html",
+    "ctaBand": {
+      "wrapClass": "wrap",
+      "title": "Not sure which service you need?",
+      "text": "Call us and describe the issue — we'll recommend the right fix and a flat-rate quote on the spot.",
+      "href": "tel:+15165550142",
+      "label": "Call (516) 555-0142"
+    }
+  },
+  "about": {
+    "outputFile": "about.html",
+    "title": "About — Guardian Locksmith",
+    "description": "Guardian Locksmith is a licensed, insured locksmith company serving Long Island, NY with 24/7 residential, commercial, and automotive service.",
+    "activeNav": "about",
+    "headerCta": { "label": "Request Service", "href": "contact.html" },
+    "pageHero": {
+      "eyebrow": "About Guardian Locksmith",
+      "title": "Local locksmiths, built for how Long Island actually calls for help.",
+      "lede": "We started Guardian Locksmith to fix a simple problem: locksmith dispatchers who quote one price and charge another. We do the opposite."
+    },
+    "contentFile": "pages/about.html",
+    "ctaBand": {
+      "wrapClass": "wrap",
+      "title": "Have a question before you call?",
+      "text": "Reach out and a real person will get back to you — usually within the hour.",
+      "href": "contact.html",
+      "label": "Contact Us"
+    }
+  },
+  "contact": {
+    "outputFile": "contact.html",
+    "title": "Contact — Guardian Locksmith",
+    "description": "Contact Guardian Locksmith for 24/7 locksmith service across Long Island, NY. Call, email, or request service online.",
+    "activeNav": "contact",
+    "headerCta": { "label": "Call Now", "href": "tel:+15165550142" },
+    "pageHero": {
+      "eyebrow": "Contact",
+      "title": "Get in touch, or just call us.",
+      "lede": "For anything urgent, calling is fastest. For quotes, scheduling, or general questions, the form below works too."
+    },
+    "contentFile": "pages/contact.html"
+  }
+}

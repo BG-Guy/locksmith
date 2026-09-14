@@ -1,0 +1,38 @@
+/* ==========================================================================
+   Section rhythm
+   ========================================================================== */
+
+section {
+  padding: 96px 0;
+}
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  margin-top: 16px;
+}
+
+.section-head p {
+  margin-top: 16px;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+}
+
+.section-dark {
+  background: var(--color-panel);
+  color: var(--color-panel-ink);
+}
+
+.section-dark .section-head p {
+  color: var(--color-panel-ink-soft);
+}
+
+@media (max-width: 760px) {
+  section {
+    padding: 64px 0;
+  }
+}

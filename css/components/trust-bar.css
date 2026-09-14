@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Trust bar
+   ========================================================================== */
+
+.trust-bar {
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.trust-bar .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 28px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+.trust-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-accent);
+}

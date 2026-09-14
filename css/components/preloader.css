@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Homepage preloader — the wordmark holds center, then the two halves of
+   the screen split apart like a vault door swinging open to reveal the
+   page underneath.
+   ========================================================================== */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.preloader-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: var(--color-panel);
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.preloader-panel-left {
+  left: 0;
+}
+
+.preloader-panel-right {
+  right: 0;
+}
+
+.preloader.is-opening .preloader-panel-left {
+  transform: translateX(-100%);
+}
+
+.preloader.is-opening .preloader-panel-right {
+  transform: translateX(100%);
+}
+
+.preloader-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: var(--font-logo);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8vw, 4.4rem);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-panel-ink);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.preloader-logo span {
+  color: var(--color-accent-bright);
+}
+
+.preloader.is-opening .preloader-logo {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+}
