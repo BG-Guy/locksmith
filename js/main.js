@@ -1,3 +1,37 @@
+// Homepage preloader — builds the dial's tick marks, then dismisses the
+// overlay once the 2.5s spin-and-unlock animation finishes.
+const preloader = document.querySelector("#preloader");
+
+if (preloader) {
+  const stickContainer = preloader.querySelector("#preloaderSticks");
+
+  for (let i = 0; i < 40; i++) {
+    if (i % 5 === 0) {
+      const long = document.createElement("div");
+      long.className = "pl-longStick";
+      long.style.transform = `translateY(-50%) rotate(${9 * i}deg) translateY(-72px)`;
+      const number = document.createElement("span");
+      number.className = "pl-nOfStick";
+      number.textContent = i;
+      long.appendChild(number);
+      stickContainer.appendChild(long);
+    } else {
+      const short = document.createElement("div");
+      short.className = "pl-shortStick";
+      short.style.transform = `translateY(-50%) rotate(${9 * i}deg) translateY(-82px)`;
+      stickContainer.appendChild(short);
+    }
+  }
+
+  document.body.style.overflow = "hidden";
+
+  window.setTimeout(() => {
+    preloader.classList.add("is-hidden");
+    document.body.style.overflow = "";
+    window.setTimeout(() => preloader.remove(), 600);
+  }, 2500);
+}
+
 // Mobile nav toggle
 const header = document.querySelector(".site-header");
 const navToggle = document.querySelector(".nav-toggle");
