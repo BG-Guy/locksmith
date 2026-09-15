@@ -1,0 +1,408 @@
+/* Styles unique to index.html: the big dark hero, the trust bar beneath
+   it, the services/how-it-works/service-area sections, the scroll-reveal
+   animation, and the vault-door preloader. Shared UI (header, footer,
+   buttons, CTA band) lives in components/ instead. */
+
+.hero {
+  position: relative;
+  background: var(--color-panel);
+  color: var(--color-panel-ink);
+  overflow: hidden;
+}
+
+.hero-keyhole {
+  position: absolute;
+  right: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 620px;
+  height: 620px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero .wrap {
+  position: relative;
+  padding: 108px 28px 96px;
+  display: grid;
+  grid-template-columns: minmax(0, 620px) 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+  margin: 18px 0 22px;
+  color: var(--color-panel-ink);
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--color-accent-bright);
+}
+
+.hero-lede {
+  font-size: 1.1rem;
+  color: var(--color-panel-ink-soft);
+  max-width: 480px;
+  margin-bottom: 34px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-line-dark);
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: var(--color-panel-ink-soft);
+  font-weight: 500;
+}
+
+.hero-badge svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.hero-card {
+  background: var(--color-panel-soft);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 6px;
+  padding: 34px;
+}
+
+.hero-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-panel-ink);
+  margin-bottom: 6px;
+}
+
+.hero-card-sub {
+  font-size: 0.9rem;
+  color: var(--color-panel-ink-soft);
+  margin-bottom: 24px;
+}
+
+.hero-response {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.hero-response strong {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: var(--color-accent-bright);
+}
+
+.hero-response span {
+  font-size: 0.85rem;
+  color: var(--color-panel-ink-soft);
+}
+
+.hero-card hr {
+  border: none;
+  border-top: 1px solid var(--color-line-dark);
+  margin: 24px 0;
+}
+
+.hero-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--color-panel-ink-soft);
+}
+
+.hero-card li svg {
+  width: 15px;
+  height: 15px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* Trust bar */
+
+.trust-bar {
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.trust-bar .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 28px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+.trust-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-accent);
+}
+
+/* Section heading used above the services grid and how-it-works steps */
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  margin-top: 16px;
+}
+
+.section-head p {
+  margin-top: 16px;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+}
+
+.section-dark {
+  background: var(--color-panel);
+  color: var(--color-panel-ink);
+}
+
+.section-dark .section-head p {
+  color: var(--color-panel-ink-soft);
+}
+
+/* Services grid preview (links out to the full services page) */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
+}
+
+.service-card {
+  background: var(--color-bg-alt);
+  padding: 38px 34px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.service-card:hover {
+  background: #fffdf9;
+  transform: translateY(-2px);
+}
+
+.service-num {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+}
+
+.service-card h3 {
+  font-size: 1.28rem;
+  margin: 18px 0 12px;
+}
+
+.service-card p {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+
+.service-card a.svc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* How it works: three numbered steps */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: var(--color-accent);
+  margin-bottom: 18px;
+}
+
+.step h3 {
+  font-size: 1.15rem;
+  color: var(--color-panel-ink);
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: var(--color-panel-ink-soft);
+  font-size: 0.94rem;
+}
+
+/* Service area: town chips */
+
+.area-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.town-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.town-chip {
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.86rem;
+  color: var(--color-ink-soft);
+  background: var(--color-bg-alt);
+}
+
+/* Fade-and-rise animation for sections as they scroll into view */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 980px) {
+  .hero .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-keyhole {
+    display: none;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .area-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 760px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Preloader — the wordmark holds center, then the two halves of the
+   screen split apart like a vault door swinging open to reveal the page
+   underneath. Homepage only. */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.preloader-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: var(--color-panel);
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.preloader-panel-left {
+  left: 0;
+}
+
+.preloader-panel-right {
+  right: 0;
+}
+
+.preloader.is-opening .preloader-panel-left {
+  transform: translateX(-100%);
+}
+
+.preloader.is-opening .preloader-panel-right {
+  transform: translateX(100%);
+}
+
+.preloader-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: var(--font-logo);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8vw, 4.4rem);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-panel-ink);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.preloader-logo span {
+  color: var(--color-accent-bright);
+}
+
+.preloader.is-opening .preloader-logo {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+}

@@ -1,0 +1,53 @@
+/* Styles unique to about.html: the two-column story/values layout below
+   the shared page-hero banner. */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-copy p + p {
+  margin-top: 18px;
+}
+
+.about-copy p {
+  color: var(--color-ink-soft);
+  font-size: 1.02rem;
+}
+
+.value-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.value-item {
+  display: flex;
+  gap: 18px;
+}
+
+.value-num {
+  font-family: var(--font-display);
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.value-item h4 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.value-item p {
+  color: var(--color-ink-soft);
+  font-size: 0.94rem;
+}
+
+@media (max-width: 980px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
