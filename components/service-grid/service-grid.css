@@ -1,0 +1,65 @@
+/* Grid of clickable service cards, used on the home, services, and town
+   pages. Each card is a single link to that service's page. */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-alt);
+  padding: 34px 30px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+  background: #fffdf9;
+  transform: translateY(-2px);
+}
+
+/* Small category label above the card title (Emergency, Residential, ...) */
+.service-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.service-card h3 {
+  font-size: 1.28rem;
+  margin: 14px 0 10px;
+}
+
+.service-card p {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+
+.svc-link {
+  margin-top: auto;
+  padding-top: 18px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+@media (max-width: 980px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}

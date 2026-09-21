@@ -1,0 +1,32 @@
+/* Breadcrumb trail (Home / Locations / Huntington / Service) shown at the
+   top of dark hero banners on service and town pages. */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  font-size: 0.84rem;
+  color: var(--color-panel-ink-soft);
+}
+
+.crumbs a {
+  color: var(--color-panel-ink-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.crumbs a:hover,
+.crumbs a:focus-visible {
+  color: var(--color-accent-bright);
+}
+
+.crumb-sep {
+  opacity: 0.5;
+}
+
+/* The current page */
+.crumbs [aria-current] {
+  color: var(--color-panel-ink);
+}

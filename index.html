@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="components/header/header.css">
 <link rel="stylesheet" href="components/mobile-nav/mobile-nav.css">
 <link rel="stylesheet" href="components/footer/footer.css">
+<link rel="stylesheet" href="components/section-head/section-head.css">
+<link rel="stylesheet" href="components/service-grid/service-grid.css">
+<link rel="stylesheet" href="components/town-chips/town-chips.css">
 <link rel="stylesheet" href="components/cta-band/cta-band.css">
 <link rel="stylesheet" href="home.css">
 </head>
@@ -26,6 +29,7 @@
   <div class="preloader-logo">Guardian <span>Locksmith</span></div>
 </div>
 
+<!-- build:header:start -->
 <header class="site-header">
   <div class="wrap">
     <a href="index.html" class="logo">
@@ -40,6 +44,7 @@
     <nav class="main-nav">
       <a href="index.html" class="active">Home</a>
       <a href="services.html">Services</a>
+      <a href="locations.html">Locations</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -68,6 +73,7 @@
     <ul class="mobile-nav-list">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="services.html">Services</a></li>
+      <li><a href="locations.html">Locations</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -76,6 +82,7 @@
     </div>
   </nav>
 </div>
+<!-- build:header:end -->
 
 <section class="hero">
   <svg class="hero-keyhole" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -163,42 +170,80 @@
   </div>
   <div class="wrap">
     <div class="services-grid reveal">
-      <div class="service-card">
-        <span class="service-num">01</span>
-        <h3>Emergency Lockout</h3>
-        <p>Locked out of your house, car, or office? We get you back inside fast, without damaging your locks.</p>
-        <a class="svc-link" href="services.html">Learn more →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">02</span>
-        <h3>Residential Locksmith</h3>
-        <p>Lock installs, rekeys, smart lock setup, and deadbolt upgrades for homes across Nassau and Suffolk.</p>
-        <a class="svc-link" href="services.html">Learn more →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">03</span>
-        <h3>Commercial Locksmith</h3>
-        <p>Master key systems, access control, panic hardware, and after-hours service for businesses.</p>
-        <a class="svc-link" href="services.html">Learn more →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">04</span>
-        <h3>Automotive Locksmith</h3>
-        <p>Car key replacement, fob programming, and ignition repair for most makes and models, on-site.</p>
-        <a class="svc-link" href="services.html">Learn more →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">05</span>
-        <h3>Lock Rekeying</h3>
-        <p>Moved in, lost a key, or had a break-in attempt? Rekey your existing hardware in under an hour.</p>
-        <a class="svc-link" href="services.html">Learn more →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">06</span>
-        <h3>High-Security Installs</h3>
-        <p>Pick- and bump-resistant deadbolts, safes, and reinforced strike plates for real peace of mind.</p>
-        <a class="svc-link" href="services.html">Learn more →</a>
-      </div>
+<!-- build:services-grid:start -->
+<a class="service-card" href="home-lockout-service/">
+  <span class="service-tag">Emergency</span>
+  <h3>Home Lockout Service</h3>
+  <p>Locked out of your house or apartment? A technician gets you back inside without damaging the door or the lock.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="car-lockout-service/">
+  <span class="service-tag">Emergency</span>
+  <h3>Car Lockout Service</h3>
+  <p>Keys locked in the car? We unlock most vehicles without scratching the paint or damaging the door.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="lock-rekeying/">
+  <span class="service-tag">Residential</span>
+  <h3>Lock Rekeying</h3>
+  <p>Moved in, lost a key, or changed roommates? Rekeying makes old keys stop working without replacing the lock.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="lock-installation/">
+  <span class="service-tag">Residential</span>
+  <h3>Lock Installation</h3>
+  <p>Worn, broken, or outdated locks replaced with new hardware that fits your door and your budget.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="deadbolt-installation/">
+  <span class="service-tag">Residential</span>
+  <h3>Deadbolt Installation</h3>
+  <p>Reinforced deadbolts and strike plates that make entry doors much harder to kick in or force.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="smart-lock-installation/">
+  <span class="service-tag">Residential</span>
+  <h3>Smart Lock Installation</h3>
+  <p>Keypad and Wi-Fi smart locks installed, paired, and tested so you can stop carrying keys.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="safe-installation/">
+  <span class="service-tag">Residential</span>
+  <h3>Safe Installation</h3>
+  <p>Home and business safes delivered, anchored, and set up so they stay put and stay locked.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="car-key-replacement/">
+  <span class="service-tag">Automotive</span>
+  <h3>Car Key Replacement</h3>
+  <p>Lost every key or only have one? We cut and program replacement car keys, including transponder keys, on site.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="key-fob-programming/">
+  <span class="service-tag">Automotive</span>
+  <h3>Key Fob Programming</h3>
+  <p>Dead, lost, or new key fobs and remotes programmed to your vehicle at your location.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="ignition-repair/">
+  <span class="service-tag">Automotive</span>
+  <h3>Ignition Repair</h3>
+  <p>Key won't turn, stuck in the ignition, or worn out? Ignition cylinders repaired or replaced on site.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="master-key-systems/">
+  <span class="service-tag">Commercial</span>
+  <h3>Master Key Systems</h3>
+  <p>One master key for managers and separate keys for each tenant, office, or door.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<a class="service-card" href="panic-bar-installation/">
+  <span class="service-tag">Commercial</span>
+  <h3>Panic Bar Installation</h3>
+  <p>Panic bars and exit devices installed and adjusted so emergency exits open with one push.</p>
+  <span class="svc-link">Learn more →</span>
+</a>
+<!-- build:services-grid:end -->
     </div>
   </div>
 </section>
@@ -238,18 +283,20 @@
         <p style="margin-top:16px; color:var(--color-ink-soft); font-size:1.05rem;">Our technicians are positioned across Nassau and Suffolk County so a real person is always close by — not dispatched from across the island.</p>
       </div>
       <div class="town-list">
-        <span class="town-chip">Hempstead</span>
-        <span class="town-chip">Levittown</span>
-        <span class="town-chip">Huntington</span>
-        <span class="town-chip">Babylon</span>
-        <span class="town-chip">Smithtown</span>
-        <span class="town-chip">Patchogue</span>
-        <span class="town-chip">Garden City</span>
-        <span class="town-chip">Freeport</span>
-        <span class="town-chip">Bay Shore</span>
-        <span class="town-chip">Islip</span>
-        <span class="town-chip">Riverhead</span>
-        <span class="town-chip">Massapequa</span>
+<!-- build:town-chips:start -->
+<a class="town-chip" href="locksmith-services-near-hempstead/">Hempstead</a>
+<a class="town-chip" href="locksmith-services-near-levittown/">Levittown</a>
+<a class="town-chip" href="locksmith-services-near-garden-city/">Garden City</a>
+<a class="town-chip" href="locksmith-services-near-freeport/">Freeport</a>
+<a class="town-chip" href="locksmith-services-near-massapequa/">Massapequa</a>
+<a class="town-chip" href="locksmith-services-near-huntington/">Huntington</a>
+<a class="town-chip" href="locksmith-services-near-babylon/">Babylon</a>
+<a class="town-chip" href="locksmith-services-near-smithtown/">Smithtown</a>
+<a class="town-chip" href="locksmith-services-near-patchogue/">Patchogue</a>
+<a class="town-chip" href="locksmith-services-near-bay-shore/">Bay Shore</a>
+<a class="town-chip" href="locksmith-services-near-islip/">Islip</a>
+<a class="town-chip" href="locksmith-services-near-riverhead/">Riverhead</a>
+<!-- build:town-chips:end -->
       </div>
     </div>
   </div>
@@ -263,11 +310,12 @@
   </div>
 </section>
 
+<!-- build:footer:start -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="logo-text">Guardian <span style="color:#D9A455;">Locksmith</span></span>
+        <span class="logo-text">Guardian <span>Locksmith</span></span>
         <p>Licensed, insured locksmith services across Long Island, NY. Residential, commercial, and automotive — available 24/7.</p>
       </div>
       <div>
@@ -275,16 +323,18 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="locations.html">Locations</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
-        <h4>Services</h4>
+        <h4>Popular Services</h4>
         <ul>
-          <li><a href="services.html">Emergency Lockout</a></li>
-          <li><a href="services.html">Residential</a></li>
-          <li><a href="services.html">Commercial</a></li>
-          <li><a href="services.html">Automotive</a></li>
+          <li><a href="home-lockout-service/">Home Lockout Service</a></li>
+          <li><a href="car-key-replacement/">Car Key Replacement</a></li>
+          <li><a href="lock-rekeying/">Lock Rekeying</a></li>
+          <li><a href="deadbolt-installation/">Deadbolt Installation</a></li>
+          <li><a href="smart-lock-installation/">Smart Lock Installation</a></li>
         </ul>
       </div>
       <div>
@@ -302,6 +352,7 @@
     </div>
   </div>
 </footer>
+<!-- build:footer:end -->
 
 <script src="components/mobile-nav/mobile-nav.js" defer></script>
 <script src="home.js" defer></script>

@@ -1,0 +1,36 @@
+/* Rounded chips that name towns. A chip is a link when we have a page for
+   that town, and plain text when we do not. Used on the home page's service
+   area section and at the bottom of service, town, and services pages. */
+
+.town-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.town-chip {
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.86rem;
+  color: var(--color-ink-soft);
+  background: var(--color-bg-alt);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+a.town-chip:hover,
+a.town-chip:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* A short section holding just a heading and chips, sitting under a grid */
+.chips-section {
+  padding: 8px 0 88px;
+}
+
+.chips-title {
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  margin-bottom: 20px;
+}

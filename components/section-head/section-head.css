@@ -1,0 +1,19 @@
+/* Heading block that introduces a section: an eyebrow label, an H2, and a
+   short paragraph. Sits above grids of cards on the home, services, town,
+   and locations pages. */
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  margin-top: 16px;
+}
+
+.section-head p {
+  margin-top: 16px;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+}
