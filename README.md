@@ -25,31 +25,39 @@ The URL is the search phrase, and the same phrase is used in the title, H1, meta
 
 Then run `npm run build`. It validates the copy (title ≤ 60 chars, a `$` range in every cost section, no hardcoded town names, unique titles and descriptions, one H1 per page), regenerates every page plus `sitemap.xml`, `robots.txt`, and `llms.txt`, and checks every local link.
 
-**Generated, never hand-edited:** `services.html`, `locations.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and every `[service]/`, `[service]-near-[town]/`, and `locksmith-services-near-[town]/` folder (listed in `build/generated-manifest.json`). The header and footer of `index.html`, `about.html`, and `contact.html`, plus the home page's service grid and town chips, sit between `<!-- build:NAME:start/end -->` markers and are rewritten on each build.
+**Generated, never hand-edited (all inside `docs/`):** `services.html`, `locations.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and every `[service]/`, `[service]-near-[town]/`, and `locksmith-services-near-[town]/` folder (listed in `build/generated-manifest.json`). The header and footer of `index.html`, `about.html`, and `contact.html`, plus the home page's service grid and town chips, sit between `<!-- build:NAME:start/end -->` markers and are rewritten on each build.
 
 ## Structure
 
-Each page's own styles and behavior live next to it. Styles and scripts used by more than one page live in `components/`, one subfolder per component. `global.css` holds only CSS variables, the reset, and base typography.
+The repo root holds only the tooling. The whole published website lives in `docs/`, which is what GitHub Pages serves.
 
 ```
-index.html                       Home
-home.css / home.js                 → its styles / preloader + scroll-reveal
-about.html / contact.html        Hand-written pages (about.css, contact.css/js)
-global.css                       Variables, reset, base typography
-
 build/                           The generator (npm run build)
   build.js                         Entry point: validate, render, write, check
   services-data.js / locations-data.js   The copy and the towns
+  config.js / urls.js              Phone, domain, URL formulas
   seo.js                           Placeholders, titles, meta, schema, sitemap
   pages.js / layout.js             Page templates / shared header, footer, <head>
   check-links.js                   Fails the build on a broken local link
+scripts/dev-server.js            Local server for docs/ (npm run dev)
 
-components/
-  header/  mobile-nav/  footer/  buttons/  cta-band/  page-hero/
-  service-grid/   Clickable service cards      town-chips/   Town pills
-  section-head/   Eyebrow + H2 + intro          breadcrumbs/  Trail above hero
-  service-page/   Detailed service page         location-page/ Town cards grid
+docs/                            The published site
+  index.html                       Home
+  home.css / home.js                 → its styles / preloader + scroll-reveal
+  about.html / contact.html        Hand-written pages (about.css, contact.css/js)
+  global.css                       Variables, reset, base typography
+  components/                      Shared UI, one folder each with its own CSS
+    header/  mobile-nav/  footer/  buttons/  cta-band/  page-hero/
+    service-grid/   Clickable service cards      town-chips/   Town pills
+    section-head/   Eyebrow + H2 + intro          breadcrumbs/  Trail above hero
+    service-page/   Detailed service page         location-page/ Town cards grid
+  services.html, locations.html    Generated overview pages
+  [service]/  [service]-near-[town]/  locksmith-services-near-[town]/
+                                   Generated SEO pages (168 folders)
+  sitemap.xml, robots.txt, llms.txt   Generated
 ```
+
+Each page's own styles and behavior live next to it. Styles and scripts used by more than one page live in `docs/components/`. `global.css` holds only CSS variables, the reset, and base typography.
 
 ## Running locally
 

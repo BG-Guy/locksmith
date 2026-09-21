@@ -17,6 +17,6 @@ module.exports = {
   REGION: "Long Island",
   REGION_STATE: "NY",
 
-  // Repo root: generated pages are written here, next to the hand-made ones.
-  ROOT_DIR: path.join(__dirname, ".."),
+  // The published site: generated pages are written here, next to the hand-made ones.
+  ROOT_DIR: path.join(__dirname, "..", "docs"),
 };

@@ -44,7 +44,7 @@ function checkLinks(rootDir) {
 module.exports = { checkLinks };
 
 if (require.main === module) {
-  const { checked, broken } = checkLinks(path.join(__dirname, ".."));
+  const { checked, broken } = checkLinks(path.join(__dirname, "..", "docs"));
   console.log(`Checked ${checked} local links.`);
   if (broken.length) {
     console.error(`${broken.length} broken:\n  ${broken.join("\n  ")}`);
