@@ -96,7 +96,7 @@
   display: block;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1225px) {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;

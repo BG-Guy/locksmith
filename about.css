@@ -45,7 +45,7 @@
   font-size: 0.94rem;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1225px) {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
