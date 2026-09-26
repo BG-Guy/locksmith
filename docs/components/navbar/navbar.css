@@ -1,0 +1,294 @@
+/* Navbar: the sticky site header and everything that makes it work on a
+   phone — the hamburger button and the slide-in panel it opens. One
+   component because the bar and the drawer share state (.nav-open on
+   .site-header) and toggle logic; see navbar.js. Desktop layout first,
+   the mobile-only rules are grouped under one @media block below it. */
+
+/* --------------------------------------------------------------- The bar */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin: 0 auto;
+  background: rgba(246, 242, 234, 0.92);
+  backdrop-filter: blur(8px);
+
+  /* How far into the first 100px of scroll the page is, 0 to 1 — written
+     every scroll frame by navbar.js. Grows the bar from a narrow, rounded,
+     floating pill at the very top of the page into a flush, square,
+     full-width bar by the time the page has scrolled 100px. */
+  --navbar-progress: 0;
+  width: calc(90% + 10% * var(--navbar-progress));
+  margin-top: calc(14px - 14px * var(--navbar-progress));
+  border-radius: calc(42px - 42px * var(--navbar-progress));
+  box-shadow: 0 10px 28px rgba(27, 27, 29, calc(0.05 + 0.07 * var(--navbar-progress)));
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 84px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-mark svg {
+  width: 20px;
+  height: 20px;
+}
+
+.logo-text {
+  font-family: var(--font-logo);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.logo-text span {
+  color: var(--color-accent);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--color-ink);
+}
+
+.main-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.phone-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+
+.phone-pill svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+}
+
+/* The hamburger button. Hidden above 760px, where .main-nav (above) is
+   shown instead. */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--color-ink);
+}
+
+/* --------------------------------------------------------- Mobile layout */
+
+@media (max-width: 760px) {
+  .main-nav {
+    display: none;
+  }
+
+  .phone-pill span {
+    display: none;
+  }
+
+  /* The logo, phone icon, and hamburger alone are already a tight fit on a
+     narrow phone; a full "Request Service" button pushed the row wider
+     than the screen. The drawer's own call-to-action covers this action. */
+  .header-actions .btn-primary {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* A narrow screen has no room to spare for the floating-pill effect —
+     stay a plain, flush, full-width bar throughout the scroll. */
+  .site-header {
+    width: 100%;
+    margin-top: 0;
+    border-radius: 0;
+  }
+}
+
+/* -------------------------------------------------------- Mobile drawer */
+
+/* The drawer sits directly under <body>, not inside <header>, because the
+   header's backdrop-filter would otherwise create a containing block that
+   clips this fixed-position drawer to the header's own height. */
+.mobile-nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  visibility: hidden;
+  pointer-events: none;
+  /* Clip the closed panel at its off-canvas position (see .mobile-nav-panel
+     below) so it can't add phantom width to the page and let mobile
+     browsers swipe/rubber-band the whole site sideways. */
+  overflow: hidden;
+}
+
+.site-header.nav-open ~ .mobile-nav-drawer {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-nav-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.site-header.nav-open ~ .mobile-nav-drawer .mobile-nav-scrim {
+  opacity: 1;
+}
+
+.mobile-nav-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 82%;
+  max-width: 340px;
+  background: var(--color-panel);
+  display: flex;
+  flex-direction: column;
+  padding: 26px 26px 32px;
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.35);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.site-header.nav-open ~ .mobile-nav-drawer .mobile-nav-panel {
+  transform: translateX(0);
+}
+
+.mobile-nav-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.mobile-nav-panel-title {
+  font-family: var(--font-logo);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-panel-ink-soft);
+}
+
+.mobile-nav-close {
+  display: flex;
+  background: none;
+  border: none;
+  padding: 6px;
+  margin: -6px;
+  color: var(--color-panel-ink);
+  cursor: pointer;
+}
+
+.mobile-nav-close svg {
+  width: 22px;
+  height: 22px;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-list li {
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.mobile-nav-list li:first-child {
+  border-top: 1px solid var(--color-line-dark);
+}
+
+.mobile-nav-list a {
+  display: block;
+  padding: 18px 2px;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  color: var(--color-panel-ink);
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-nav-list a:hover,
+.mobile-nav-list a.active {
+  color: var(--color-accent-bright);
+  padding-left: 10px;
+}
+
+.mobile-nav-panel-foot {
+  margin-top: auto;
+  padding-top: 28px;
+}

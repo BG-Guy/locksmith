@@ -36,8 +36,7 @@ const FOOTER_SERVICES = [
 const BASE_STYLES = [
   "global.css",
   "components/buttons/buttons.css",
-  "components/header/header.css",
-  "components/mobile-nav/mobile-nav.css",
+  "components/navbar/navbar.css",
   "components/footer/footer.css",
 ];
 
@@ -191,7 +190,7 @@ ${body}
 
 ${footer({ root })}
 
-<script src="${root}components/mobile-nav/mobile-nav.js" defer></script>
+<script src="${root}components/navbar/navbar.js" defer></script>
 </body>
 </html>
 `;

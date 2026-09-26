@@ -1,8 +1,13 @@
-// Mobile nav: opens/closes the slide-in panel from the header's hamburger
-// button. Closed by its own close button, the scrim, a nav link, or Escape.
+// Navbar: the hamburger toggle for the mobile drawer, and the scroll
+// listener that grows the sticky bar from a floating pill into a flush,
+// full-width bar over the first 100px of scroll (the sizing itself is
+// CSS, driven by the --navbar-progress custom property; see navbar.css).
+
 const header = document.querySelector(".site-header");
 const navToggle = document.querySelector(".nav-toggle");
 const mobileNavDrawer = document.querySelector("#mobileNavDrawer");
+
+// ----------------------------------------------------------- Mobile drawer
 
 function openMobileNav() {
   header.classList.add("nav-open");
@@ -35,4 +40,31 @@ if (mobileNavDrawer) {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMobileNav();
   });
+}
+
+// -------------------------------------------------------- Scroll-grow bar
+
+// Distance, in pixels, over which the bar grows from a pill to full width.
+const GROW_DISTANCE = 100;
+
+function updateNavbarProgress() {
+  const progress = Math.min(window.scrollY, GROW_DISTANCE) / GROW_DISTANCE;
+  header.style.setProperty("--navbar-progress", progress);
+}
+
+if (header) {
+  let ticking = false;
+  updateNavbarProgress();
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateNavbarProgress();
+        ticking = false;
+      });
+    },
+    { passive: true }
+  );
 }

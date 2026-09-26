@@ -47,7 +47,7 @@ docs/                            The published site
   about.html / contact.html        Hand-written pages (about.css, contact.css/js)
   global.css                       Variables, reset, base typography
   components/                      Shared UI, one folder each with its own CSS
-    header/  mobile-nav/  footer/  buttons/  cta-band/  page-hero/
+    navbar/  footer/  buttons/  cta-band/  page-hero/
     service-grid/   Clickable service cards      town-chips/   Town pills
     section-head/   Eyebrow + H2 + intro          breadcrumbs/  Trail above hero
     service-page/   Detailed service page         location-page/ Town cards grid
