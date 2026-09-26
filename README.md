@@ -27,6 +27,8 @@ Then run `npm run build`. It validates the copy (title ≤ 60 chars, a `$` range
 
 **Generated, never hand-edited (all inside `docs/`):** `services.html`, `locations.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and every `[service]/`, `[service]-near-[town]/`, and `locksmith-services-near-[town]/` folder (listed in `build/generated-manifest.json`). The header and footer of `index.html`, `about.html`, and `contact.html`, plus the home page's service grid and town chips, sit between `<!-- build:NAME:start/end -->` markers and are rewritten on each build.
 
+`docs/` has to stay flat for those 168 folders — the URL is the search phrase, so a `[service]-near-[town]/` folder can't be nested under a subfolder without changing its live URL. To find one without scanning the whole folder, see **[build/PAGES.md](build/PAGES.md)**, a categorized index rebuilt with everything else.
+
 ## Structure
 
 The repo root holds only the tooling. The whole published website lives in `docs/`, which is what GitHub Pages serves.
