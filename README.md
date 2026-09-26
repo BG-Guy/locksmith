@@ -71,7 +71,7 @@ Then open the URL it prints (defaults to http://localhost:4488; override with `P
 
 - **Prices** in `build/services-data.js` are estimates. Confirm each range with the owner.
 - **Towns and local notes** in `build/locations-data.js`: confirm the towns are ones the business serves and that the local details are true.
-- **`SITE_URL`** in `build/config.js` is the GitHub Pages address. Change it to the real domain, then rebuild (canonicals, sitemap, and schema use it).
+- **`SITE_URL`** in `build/config.js` is set to `https://havenlocksmith.com` (the domain in `docs/CNAME`). If that domain ever changes, update it here and rebuild — canonicals, the sitemap, and schema all use it.
 - Phone number `(516) 555-0142`, email `info@havenlocksmith.com`, and the footer license number (`License #placeholder-0000`).
 - The contact form is a front-end demo only. Wire `contact.js` to a real backend or form service before launch.
 - Add real customer reviews once available. None are included, since fabricated reviews would be misleading.

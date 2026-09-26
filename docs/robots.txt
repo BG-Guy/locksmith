@@ -25,4 +25,4 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-Sitemap: https://bg-guy.github.io/locksmith/sitemap.xml
+Sitemap: https://havenlocksmith.com/sitemap.xml

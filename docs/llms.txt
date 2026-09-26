@@ -8,30 +8,30 @@
 
 ## Services
 
-- [Home Lockout Service](https://bg-guy.github.io/locksmith/home-lockout-service/): Locked out of your house or apartment? A technician gets you back inside without damaging the door or the lock.
-- [Car Lockout Service](https://bg-guy.github.io/locksmith/car-lockout-service/): Keys locked in the car? We unlock most vehicles without scratching the paint or damaging the door.
-- [Lock Rekeying](https://bg-guy.github.io/locksmith/lock-rekeying/): Moved in, lost a key, or changed roommates? Rekeying makes old keys stop working without replacing the lock.
-- [Lock Installation](https://bg-guy.github.io/locksmith/lock-installation/): Worn, broken, or outdated locks replaced with new hardware that fits your door and your budget.
-- [Deadbolt Installation](https://bg-guy.github.io/locksmith/deadbolt-installation/): Reinforced deadbolts and strike plates that make entry doors much harder to kick in or force.
-- [Smart Lock Installation](https://bg-guy.github.io/locksmith/smart-lock-installation/): Keypad and Wi-Fi smart locks installed, paired, and tested so you can stop carrying keys.
-- [Safe Installation](https://bg-guy.github.io/locksmith/safe-installation/): Home and business safes delivered, anchored, and set up so they stay put and stay locked.
-- [Car Key Replacement](https://bg-guy.github.io/locksmith/car-key-replacement/): Lost every key or only have one? We cut and program replacement car keys, including transponder keys, on site.
-- [Key Fob Programming](https://bg-guy.github.io/locksmith/key-fob-programming/): Dead, lost, or new key fobs and remotes programmed to your vehicle at your location.
-- [Ignition Repair](https://bg-guy.github.io/locksmith/ignition-repair/): Key won't turn, stuck in the ignition, or worn out? Ignition cylinders repaired or replaced on site.
-- [Master Key Systems](https://bg-guy.github.io/locksmith/master-key-systems/): One master key for managers and separate keys for each tenant, office, or door.
-- [Panic Bar Installation](https://bg-guy.github.io/locksmith/panic-bar-installation/): Panic bars and exit devices installed and adjusted so emergency exits open with one push.
+- [Home Lockout Service](https://havenlocksmith.com/home-lockout-service/): Locked out of your house or apartment? A technician gets you back inside without damaging the door or the lock.
+- [Car Lockout Service](https://havenlocksmith.com/car-lockout-service/): Keys locked in the car? We unlock most vehicles without scratching the paint or damaging the door.
+- [Lock Rekeying](https://havenlocksmith.com/lock-rekeying/): Moved in, lost a key, or changed roommates? Rekeying makes old keys stop working without replacing the lock.
+- [Lock Installation](https://havenlocksmith.com/lock-installation/): Worn, broken, or outdated locks replaced with new hardware that fits your door and your budget.
+- [Deadbolt Installation](https://havenlocksmith.com/deadbolt-installation/): Reinforced deadbolts and strike plates that make entry doors much harder to kick in or force.
+- [Smart Lock Installation](https://havenlocksmith.com/smart-lock-installation/): Keypad and Wi-Fi smart locks installed, paired, and tested so you can stop carrying keys.
+- [Safe Installation](https://havenlocksmith.com/safe-installation/): Home and business safes delivered, anchored, and set up so they stay put and stay locked.
+- [Car Key Replacement](https://havenlocksmith.com/car-key-replacement/): Lost every key or only have one? We cut and program replacement car keys, including transponder keys, on site.
+- [Key Fob Programming](https://havenlocksmith.com/key-fob-programming/): Dead, lost, or new key fobs and remotes programmed to your vehicle at your location.
+- [Ignition Repair](https://havenlocksmith.com/ignition-repair/): Key won't turn, stuck in the ignition, or worn out? Ignition cylinders repaired or replaced on site.
+- [Master Key Systems](https://havenlocksmith.com/master-key-systems/): One master key for managers and separate keys for each tenant, office, or door.
+- [Panic Bar Installation](https://havenlocksmith.com/panic-bar-installation/): Panic bars and exit devices installed and adjusted so emergency exits open with one push.
 
 ## Service areas
 
-- [Hempstead, Nassau County](https://bg-guy.github.io/locksmith/locksmith-services-near-hempstead/)
-- [Levittown, Nassau County](https://bg-guy.github.io/locksmith/locksmith-services-near-levittown/)
-- [Garden City, Nassau County](https://bg-guy.github.io/locksmith/locksmith-services-near-garden-city/)
-- [Freeport, Nassau County](https://bg-guy.github.io/locksmith/locksmith-services-near-freeport/)
-- [Massapequa, Nassau County](https://bg-guy.github.io/locksmith/locksmith-services-near-massapequa/)
-- [Huntington, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-huntington/)
-- [Babylon, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-babylon/)
-- [Smithtown, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-smithtown/)
-- [Patchogue, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-patchogue/)
-- [Bay Shore, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-bay-shore/)
-- [Islip, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-islip/)
-- [Riverhead, Suffolk County](https://bg-guy.github.io/locksmith/locksmith-services-near-riverhead/)
+- [Hempstead, Nassau County](https://havenlocksmith.com/locksmith-services-near-hempstead/)
+- [Levittown, Nassau County](https://havenlocksmith.com/locksmith-services-near-levittown/)
+- [Garden City, Nassau County](https://havenlocksmith.com/locksmith-services-near-garden-city/)
+- [Freeport, Nassau County](https://havenlocksmith.com/locksmith-services-near-freeport/)
+- [Massapequa, Nassau County](https://havenlocksmith.com/locksmith-services-near-massapequa/)
+- [Huntington, Suffolk County](https://havenlocksmith.com/locksmith-services-near-huntington/)
+- [Babylon, Suffolk County](https://havenlocksmith.com/locksmith-services-near-babylon/)
+- [Smithtown, Suffolk County](https://havenlocksmith.com/locksmith-services-near-smithtown/)
+- [Patchogue, Suffolk County](https://havenlocksmith.com/locksmith-services-near-patchogue/)
+- [Bay Shore, Suffolk County](https://havenlocksmith.com/locksmith-services-near-bay-shore/)
+- [Islip, Suffolk County](https://havenlocksmith.com/locksmith-services-near-islip/)
+- [Riverhead, Suffolk County](https://havenlocksmith.com/locksmith-services-near-riverhead/)

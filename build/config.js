@@ -5,8 +5,7 @@ const path = require("path");
 
 module.exports = {
   // Absolute base URL used for canonicals, the sitemap, and structured data.
-  // TODO: replace with the real domain once the site has one.
-  SITE_URL: "https://bg-guy.github.io/locksmith",
+  SITE_URL: "https://havenlocksmith.com",
 
   BRAND: "Haven Locksmith",
   PHONE_DISPLAY: "(516) 555-0142",
