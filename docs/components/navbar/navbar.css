@@ -109,26 +109,26 @@
   gap: 18px;
 }
 
+/* The big call CTA: a filled .btn-primary button (see buttons.css), just
+   with the phone icon added and the gap between it and the number. */
 .phone-pill {
-  display: flex;
-  align-items: center;
   gap: 9px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--color-ink);
 }
 
 .phone-pill svg {
   width: 16px;
   height: 16px;
-  color: var(--color-accent);
+  /* Not --color-accent here: the button's own fill IS that accent color,
+     so an accent-colored icon on it would vanish. Match the button's
+     text color instead. */
+  color: currentColor;
 }
 
-/* The hamburger button. Hidden above 1100px, where .main-nav (above) is
-   shown instead. Below that, the logo + full nav links + phone number +
-   "Request Service" button no longer fit one row and start wrapping onto
-   each other — measured empirically, not a round tablet-width guess. */
+/* The hamburger button. Hidden above 1180px, where .main-nav (above) is
+   shown instead. Below that, the logo + full nav links + "Request
+   Service" + the big call button no longer fit one row and start
+   wrapping onto each other — measured empirically, not a round
+   tablet-width guess (and re-measured after the call button grew). */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -147,7 +147,7 @@
 
 /* --------------------------------------------------------- Mobile layout */
 
-@media (max-width: 1100px) {
+@media (max-width: 1180px) {
   .main-nav {
     display: none;
   }
@@ -156,10 +156,11 @@
     display: none;
   }
 
-  /* The logo, phone icon, and hamburger alone are already a tight fit on a
-     narrow phone; a full "Request Service" button pushed the row wider
-     than the screen. The drawer's own call-to-action covers this action. */
-  .header-actions .btn-primary {
+  /* The logo, call button, and hamburger alone are already a tight fit on
+     a narrow phone; a full "Request Service" button pushed the row wider
+     than the screen. The call button stays — it's the one CTA that
+     matters most on mobile — the drawer covers "Request Service". */
+  .header-actions .btn-outline {
     display: none;
   }
 

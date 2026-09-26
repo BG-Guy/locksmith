@@ -69,11 +69,11 @@ function header({ active, root }) {
 ${links}
     </nav>
     <div class="header-actions">
-      <a href="tel:${cfg.PHONE_TEL}" class="phone-pill">
+      <a href="${root}contact.html" class="btn btn-outline">Request Service</a>
+      <a href="tel:${cfg.PHONE_TEL}" class="btn btn-primary phone-pill">
         ${PHONE_ICON}
         <span>${cfg.PHONE_DISPLAY}</span>
       </a>
-      <a href="${root}contact.html" class="btn btn-primary">Request Service</a>
     </div>
     <button class="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -123,7 +123,7 @@ function footer({ root }) {
         <span class="logo-text">${brandHtml()}</span>
         <p>Licensed, insured locksmith services across Long Island, NY. Residential, commercial, and automotive — available 24/7.</p>
       </div>
-      <div>
+      <div class="footer-col">
         <h4>Company</h4>
         <ul>
           <li><a href="${root}about.html">About Us</a></li>
@@ -132,13 +132,13 @@ function footer({ root }) {
           <li><a href="${root}contact.html">Contact</a></li>
         </ul>
       </div>
-      <div>
+      <div class="footer-col">
         <h4>Popular Services</h4>
         <ul>
 ${popular}
         </ul>
       </div>
-      <div>
+      <div class="footer-col footer-col-contact">
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:${cfg.PHONE_TEL}">${cfg.PHONE_DISPLAY}</a></li>

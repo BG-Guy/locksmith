@@ -5,6 +5,10 @@
 
 .hero {
   position: relative;
+  /* Override the base <section> padding (global.css): .hero .wrap below
+     already sets the exact top/bottom spacing this section wants, so
+     without this the two stack and leave a large empty gap up top. */
+  padding: 0;
   background: var(--color-panel);
   color: var(--color-panel-ink);
   overflow: hidden;

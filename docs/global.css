@@ -106,8 +106,13 @@ p {
 }
 
 /* Base vertical rhythm between page sections */
+/* Every section paints its own background — never leave it to inherit
+   body's (see body, above): a section that wants to be dark already sets
+   that explicitly (.hero, .page-hero, .svc-hero, .section-dark), so this
+   default only ever applies to the plain, light ones. */
 section {
   padding: 96px 0;
+  background: var(--color-bg);
 }
 
 @media (max-width: 760px) {
