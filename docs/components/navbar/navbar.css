@@ -11,16 +11,21 @@
   top: 0;
   z-index: 100;
   margin: 0 auto;
+  background: rgba(246, 242, 234, 0.92);
+  backdrop-filter: blur(8px);
 
-  /* No fill: the bar is fully transparent, by design, at every scroll
-     position. How far into the first 100px of scroll the page is, 0 to
-     1 — written every scroll frame by navbar.js — so the growth reads
-     through the row widening and the nav items spreading toward the
-     edges, from a narrower inset at the very top of the page to the
-     full page width by 100px scrolled. */
+  /* How far into the first 100px of scroll the page is, 0 to 1 — written
+     every scroll frame by navbar.js. Grows the bar from a narrow, rounded,
+     floating pill at the very top of the page into a flush, square,
+     full-width bar by the time the page has scrolled 100px. The page's
+     own background (body, in global.css) is a dark color to match every
+     page's first section, so the pill reads as a distinct light shape
+     against it instead of blending into a same-toned page. */
   --navbar-progress: 0;
   width: calc(90% + 10% * var(--navbar-progress));
   margin-top: calc(14px - 14px * var(--navbar-progress));
+  border-radius: calc(42px - 42px * var(--navbar-progress));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, calc(0.14 + 0.1 * var(--navbar-progress)));
 }
 
 .site-header .wrap {
@@ -162,11 +167,12 @@
     display: flex;
   }
 
-  /* A narrow screen has no room to spare for the growing-width effect —
-     stay flush and full width throughout the scroll. */
+  /* A narrow screen has no room to spare for the floating-pill effect —
+     stay a plain, flush, full-width bar throughout the scroll. */
   .site-header {
     width: 100%;
     margin-top: 0;
+    border-radius: 0;
   }
 }
 

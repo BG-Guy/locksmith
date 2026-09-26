@@ -39,7 +39,13 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  /* Every page's first section (.hero, .page-hero, .svc-hero) is this
+     same dark color. Body's own background only ever shows through in
+     the thin gap the sticky navbar leaves around itself (see
+     components/navbar/) — matching it here, instead of the page's usual
+     light --color-bg, is what makes the navbar's light pill read as a
+     distinct floating shape instead of blending into a same-toned page. */
+  background: var(--color-panel);
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 16px;
