@@ -118,4 +118,11 @@
   .phone-pill span {
     display: none;
   }
+
+  /* The logo, phone icon, and hamburger alone are already a tight fit on a
+     narrow phone; a full "Request Service" button pushed the row wider
+     than the screen. The drawer's own call-to-action covers this action. */
+  .header-actions .btn-primary {
+    display: none;
+  }
 }

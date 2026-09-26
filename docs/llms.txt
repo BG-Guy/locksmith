@@ -1,9 +1,9 @@
-# Guardian Locksmith
+# Haven Locksmith
 
 > Licensed and insured locksmith serving Nassau and Suffolk counties on Long Island, NY. Home, car, and commercial locksmith work, with same-day service and free estimates.
 
 - Phone: (516) 555-0142
-- Email: info@guardianlocksmith.com
+- Email: info@havenlocksmith.com
 - Hours: 24 hours a day, 7 days a week
 
 ## Services

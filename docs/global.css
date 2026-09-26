@@ -30,10 +30,16 @@
 
 html {
   scroll-behavior: smooth;
+  /* Safety net: nothing on the site should scroll sideways. Without this,
+     off-canvas elements like the mobile nav drawer (translated past the
+     right edge, see components/mobile-nav/) let mobile browsers swipe the
+     whole page left/right even though desktop tools don't show it. */
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);

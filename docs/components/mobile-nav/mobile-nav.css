@@ -34,6 +34,10 @@
   z-index: 300;
   visibility: hidden;
   pointer-events: none;
+  /* Clip the closed panel at its off-canvas position (see .mobile-nav-panel
+     below) so it can't add phantom width to the page and let mobile
+     browsers swipe/rubber-band the whole site sideways. */
+  overflow: hidden;
 }
 
 .site-header.nav-open ~ .mobile-nav-drawer {

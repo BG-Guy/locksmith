@@ -65,5 +65,5 @@ server.on("error", (err) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Guardian Locksmith dev server running at http://localhost:${PORT}`);
+  console.log(`Haven Locksmith dev server running at http://localhost:${PORT}`);
 });

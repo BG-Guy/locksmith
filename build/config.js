@@ -8,10 +8,10 @@ module.exports = {
   // TODO: replace with the real domain once the site has one.
   SITE_URL: "https://bg-guy.github.io/locksmith",
 
-  BRAND: "Guardian Locksmith",
+  BRAND: "Haven Locksmith",
   PHONE_DISPLAY: "(516) 555-0142",
   PHONE_TEL: "+15165550142",
-  EMAIL: "info@guardianlocksmith.com",
+  EMAIL: "info@havenlocksmith.com",
 
   // The one region the business serves, used on pages that have no town.
   REGION: "Long Island",

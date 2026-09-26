@@ -7,6 +7,13 @@ const cfg = require("./config");
 const urls = require("./urls");
 const { SERVICES } = require("./services-data");
 
+// The logo mark: the first word of the brand name in the accent weight,
+// the rest wrapped in <span> so CSS can style it separately.
+function brandHtml() {
+  const [first, ...rest] = cfg.BRAND.split(" ");
+  return `${first} <span>${rest.join(" ")}</span>`;
+}
+
 // Main navigation, in display order. `id` matches the `active` argument.
 const NAV = [
   { id: "home", label: "Home", href: "index.html" },
@@ -57,7 +64,7 @@ function header({ active, root }) {
           <path d="M12 12v8M9 16h6M9 19h6" stroke="#D9A455" stroke-width="1.6" stroke-linecap="round"/>
         </svg>
       </span>
-      <span class="logo-text">Guardian <span>Locksmith</span></span>
+      <span class="logo-text">${brandHtml()}</span>
     </a>
     <nav class="main-nav">
 ${links}
@@ -114,7 +121,7 @@ function footer({ root }) {
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="logo-text">Guardian <span>Locksmith</span></span>
+        <span class="logo-text">${brandHtml()}</span>
         <p>Licensed, insured locksmith services across Long Island, NY. Residential, commercial, and automotive — available 24/7.</p>
       </div>
       <div>

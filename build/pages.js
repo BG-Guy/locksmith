@@ -197,7 +197,7 @@ ${otherServices}
   </div>
 </section>
 
-${ctaBand(`Need ${service.name} ${town ? `Near ${town.name}` : `on ${cfg.REGION}`}?`, "Call Guardian Locksmith for a flat-rate quote before any work begins. Same-day service is often available.")}`;
+${ctaBand(`Need ${service.name} ${town ? `Near ${town.name}` : `on ${cfg.REGION}`}?`, `Call ${cfg.BRAND} for a flat-rate quote before any work begins. Same-day service is often available.`)}`;
 
   const url = abs(path);
   return {
@@ -279,7 +279,7 @@ ${cards}
   </div>
 </section>
 
-${ctaBand(`Locked out near ${town.name}?`, "Call Guardian Locksmith and a technician will be on the way in minutes, no matter the time.")}`;
+${ctaBand(`Locked out near ${town.name}?`, `Call ${cfg.BRAND} and a technician will be on the way in minutes, no matter the time.`)}`;
 
   return {
     type: "town-hub", priority: "0.9", path, file: `${path}index.html`, h1, title, description,
@@ -308,7 +308,7 @@ function locationsIndexPage() {
   const state = cfg.REGION_STATE;
   const h1 = `Locksmith Service Areas on ${cfg.REGION}, ${state}`;
   const title = seo.makeTitle(h1, `Locksmith Service Areas on ${cfg.REGION}`);
-  const description = `Guardian Locksmith serves ${TOWNS.length} towns across Nassau and Suffolk counties, from Freeport to Riverhead. Same-day service. Pick your town or call ${cfg.PHONE_DISPLAY}.`;
+  const description = `${cfg.BRAND} serves ${TOWNS.length} towns across Nassau and Suffolk counties, from Freeport to Riverhead. Same-day service. Pick your town or call ${cfg.PHONE_DISPLAY}.`;
   const counties = [...new Set(TOWNS.map((t) => t.county))];
 
   const blocks = counties
