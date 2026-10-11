@@ -1,0 +1,91 @@
+# Weekly SEO agent: reads Google Search Console, improves the site, and opens a
+# pull request for review. The agent and its playbook come from the shared
+# seo-agent plugin (one copy for every site); this file only wires up the
+# schedule, the site's build tools, and secrets.
+#
+# Needs repo secrets: ANTHROPIC_API_KEY (or CLAUDE_CODE_OAUTH_TOKEN, see below)
+#                     GSC_SERVICE_ACCOUNT_JSON
+# Needs repo setting: Settings > Actions > General > Workflow permissions >
+#                     "Allow GitHub Actions to create and approve pull requests"
+name: SEO agent (weekly)
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"   # Monday 04:00 UTC = Sunday midnight EDT / 11pm EST
+  workflow_dispatch:      # run on demand from the Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: seo-agent
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the agent reads git history when diagnosing a declining page
+
+      # --- The site's own build toolchain: adjust per site ---
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install site dependencies (if any)
+        run: if [ -f package-lock.json ]; then npm ci; fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "google-api-python-client>=2.100" "google-auth>=2.23"
+
+      # If last week's SEO PR hasn't been merged yet, don't stack new edits on
+      # top of it: this week only reports.
+      - name: Choose mode
+        id: mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          open=$(gh pr list --label seo-agent --state open --json number --jq length)
+          if [ "$open" -gt 0 ]; then echo "mode=report-only"; else echo "mode=changes"; fi >> "$GITHUB_OUTPUT"
+
+      - uses: anthropics/claude-code-action@v1
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          SEO_AGENT_MODE: ${{ steps.mode.outputs.mode }}
+        with:
+          # Billed to your Claude subscription. To pay per use with an API key
+          # (must be workspace-scoped, with credit) use this line instead:
+          # anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          plugin_marketplaces: https://github.com/BG-Guy/seo-agent.git
+          plugins: seo-agent@seo-agent
+          prompt: |
+            Invoke the seo-agent:seo-weekly skill and run this week's SEO cycle for this repository.
+            Config: seo-agent.config.json. Mode: the SEO_AGENT_MODE environment variable.
+            Do not commit, push, or open pull requests; leave all edits in the working tree.
+          claude_args: >-
+            --model claude-sonnet-5 --max-turns 120
+            --allowedTools "Read,Write,Edit,Glob,Grep,Skill,Bash(python3:*),Bash(node:*),Bash(npm:*),Bash(npx:*),Bash(git diff:*),Bash(git status:*),Bash(git log:*),Bash(git show:*),Bash(ls:*),Bash(mkdir:*)"
+
+      - name: Find this week's report
+        id: report
+        run: |
+          report=$(ls -t seo-agent/reports/*.md | head -1)
+          echo "path=$report" >> "$GITHUB_OUTPUT"
+          echo "date=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+          cat "$report" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open the weekly SEO pull request
+        if: steps.mode.outputs.mode == 'changes'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: seo-agent/${{ steps.report.outputs.date }}
+          title: "SEO: weekly agent report ${{ steps.report.outputs.date }}"
+          body-path: ${{ steps.report.outputs.path }}
+          commit-message: "SEO: weekly agent changes ${{ steps.report.outputs.date }}"
+          labels: seo-agent
+          delete-branch: true

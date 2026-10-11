@@ -1,0 +1,20 @@
+{
+  "site_url": "https://havenlocksmith.com",
+  "gsc_property": "sc-domain:havenlocksmith.com",
+  "site_type": "local-service",
+  "project_rules": "README.md",
+  "content_sources": [
+    { "path": "build/services-data.js", "what": "Every service's name, description, and page copy. Edit here first." },
+    { "path": "build/locations-data.js", "what": "The towns served and their local details" },
+    { "path": "build/seo.js", "what": "Title, meta description, and structured-data rules" },
+    { "path": "build/config.js", "what": "Business details used across the site" },
+    { "path": "build/pages.js", "what": "Page templates (only for fixes that must apply to many pages)" },
+    { "path": "build/layout.js", "what": "Shared layout: head, navigation, footer" }
+  ],
+  "protected_paths": ["docs/", "build/PAGES.md", "build/generated-manifest.json"],
+  "build_command": "node build/build.js",
+  "key_pages": ["/"],
+  "timezone": "America/New_York",
+  "weekly_page_budget": 5,
+  "cooldown_days": 28
+}
