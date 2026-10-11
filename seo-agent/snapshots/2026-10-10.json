@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-10-11T23:33:20+00:00",
+  "site": "https://havenlocksmith.com",
+  "property": "sc-domain:havenlocksmith.com",
+  "windows": {
+    "last_7": [
+      "2026-10-04",
+      "2026-10-10"
+    ],
+    "prev_7": [
+      "2026-09-27",
+      "2026-10-03"
+    ],
+    "last_28": [
+      "2026-09-13",
+      "2026-10-10"
+    ],
+    "prev_28": [
+      "2026-08-16",
+      "2026-09-12"
+    ]
+  },
+  "totals": {
+    "last_7": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0.0,
+      "position": null
+    },
+    "prev_7": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0.0,
+      "position": null
+    },
+    "last_28": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0.0,
+      "position": null
+    },
+    "prev_28": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0.0,
+      "position": null
+    }
+  },
+  "has_search_data": false,
+  "top_queries_28d": [],
+  "top_pages_28d": [],
+  "opportunities": {
+    "striking_distance": [],
+    "low_ctr_top_positions": [],
+    "declining_pages": [],
+    "cannibalization": [],
+    "content_gaps": []
+  },
+  "tracked_changes": [],
+  "index_health": {
+    "sitemaps": [],
+    "url_inspection": [
+      {
+        "url": "https://havenlocksmith.com/",
+        "verdict": "PASS",
+        "coverage": "Submitted and indexed",
+        "indexing": "INDEXING_ALLOWED",
+        "robots": "ALLOWED",
+        "fetch": "SUCCESSFUL",
+        "last_crawl": "2026-10-11T20:42:49Z",
+        "google_canonical": "https://havenlocksmith.com/",
+        "user_canonical": null
+      }
+    ]
+  }
+}
