@@ -1,10 +1,12 @@
 // Page shell: the <head> and <body> frame every generated page shares.
-// The navbar and footer markup live in navbar.js and footer.js; they are
-// re-exported here so build.js and pages.js keep a single import, and the
-// hand-made pages (index, about, contact) get the same header/footer
-// injected between their <!-- build:... --> markers.
+// The page-transition door, navbar, and footer markup live in
+// page-transition.js, navbar.js, and footer.js; they are re-exported here so
+// build.js and pages.js keep a single import, and the hand-made pages
+// (index, about, contact) get the same blocks injected between their
+// <!-- build:... --> markers.
 
 const { esc } = require("./markup");
+const { pageTransition } = require("./page-transition");
 const { NAV, header, drawer, headerBlock } = require("./navbar");
 const { footer } = require("./footer");
 
@@ -17,11 +19,14 @@ const BASE_STYLES = [
   "components/call-orb/call-orb.css",
   "components/navbar/navbar.css",
   "components/footer/footer.css",
+  "components/page-transition/page-transition.css",
 ];
 
 // A complete generated page. `body` is the <main> content; `root` is the
-// path back to the site root ("" or "../").
-function page({ title, description, canonical, root, styles = [], jsonld, active, body }) {
+// path back to the site root ("" or "../"); `heading` is the page's <h1>
+// (falling back to its <title>), which the page-transition door shows when
+// the page is reached by a link.
+function page({ title, heading = title, description, canonical, root, styles = [], jsonld, active, body }) {
   const css = [...BASE_STYLES, ...styles]
     .map((f) => `<link rel="stylesheet" href="${root}${f}">`)
     .join("\n");
@@ -47,6 +52,8 @@ ${css}
 </head>
 <body>
 
+${pageTransition({ root, title: heading })}
+
 ${headerBlock({ active, root })}
 
 <main id="main" tabindex="-1">
@@ -56,9 +63,10 @@ ${body}
 ${footer({ root })}
 
 <script src="${root}components/navbar/navbar.js" defer></script>
+<script src="${root}components/page-transition/page-transition.js" defer></script>
 </body>
 </html>
 `;
 }
 
-module.exports = { NAV, esc, header, drawer, headerBlock, footer, page };
+module.exports = { NAV, esc, pageTransition, header, drawer, headerBlock, footer, page };

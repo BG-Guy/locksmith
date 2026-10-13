@@ -321,7 +321,7 @@ ${ctaBand(`Need ${service.name} ${town ? `Near ${town.name}` : `on ${cfg.REGION}
     title,
     description,
     html: layout.page({
-      title, description, canonical: url, root, styles: SERVICE_STYLES,
+      title, heading: h1, description, canonical: url, root, styles: SERVICE_STYLES,
       active: town ? "locations" : "services",
       jsonld: seo.schemaGraph({
         url, town, serviceName: service.name, name: h1, description,
@@ -396,7 +396,7 @@ ${ctaBand(`Locked out near ${town.name}?`, `Call ${cfg.BRAND} and a technician w
   return {
     type: "town-hub", priority: "0.9", path, file: `${path}index.html`, h1, title, description,
     html: layout.page({
-      title, description, canonical: url, root, styles: TOWN_HUB_STYLES, active: "locations",
+      title, heading: h1, description, canonical: url, root, styles: TOWN_HUB_STYLES, active: "locations",
       jsonld: seo.schemaGraph({ url, town, crumbs: crumbs.map((c) => ({ name: c.name, url: c.href ? absCrumb(c.href) : url })) }),
       body,
     }),
@@ -485,7 +485,7 @@ ${ctaBand("Not sure if we cover your street?", "Call and we will confirm right a
   return {
     type: "locations", priority: "0.8", path: urls.locationsIndex, file: urls.locationsIndex, h1, title, description,
     html: layout.page({
-      title, description, canonical: url, root, styles: LOCATIONS_STYLES, active: "locations",
+      title, heading: h1, description, canonical: url, root, styles: LOCATIONS_STYLES, active: "locations",
       jsonld: seo.schemaGraph({ url, crumbs: [{ name: "Home", url: `${cfg.SITE_URL}/` }, { name: "Locations", url }] }),
       body,
     }),
@@ -546,7 +546,7 @@ ${ctaBand("Not sure which service you need?", "Call us and describe the problem.
   return {
     type: "services", priority: "0.8", path: urls.servicesIndex, file: urls.servicesIndex, h1, title, description,
     html: layout.page({
-      title, description, canonical: url, root, styles: SERVICES_INDEX_STYLES, active: "services",
+      title, heading: h1, description, canonical: url, root, styles: SERVICES_INDEX_STYLES, active: "services",
       jsonld: seo.schemaGraph({ url, crumbs: [{ name: "Home", url: `${cfg.SITE_URL}/` }, { name: "Services", url }] }),
       body,
     }),

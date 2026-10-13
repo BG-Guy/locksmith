@@ -19,11 +19,35 @@
 <link rel="stylesheet" href="components/call-orb/call-orb.css">
 <link rel="stylesheet" href="components/navbar/navbar.css">
 <link rel="stylesheet" href="components/footer/footer.css">
+<link rel="stylesheet" href="components/page-transition/page-transition.css">
 <link rel="stylesheet" href="components/page-hero/page-hero.css">
 <link rel="stylesheet" href="components/section-head/section-head.css">
 <link rel="stylesheet" href="contact.css">
 </head>
 <body>
+
+<!-- build:page-transition:start -->
+<div class="page-transition" aria-hidden="true">
+  <div class="page-transition-panel page-transition-panel-left"></div>
+  <div class="page-transition-panel page-transition-panel-right"></div>
+  <div class="page-transition-brand">
+    <span class="page-transition-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#keyhole"></use></svg></span>
+    <span class="page-transition-logo">Haven <span>Locksmith</span></span>
+    <span class="page-transition-bar"></span>
+    <span class="page-transition-title" data-title="Contact"></span>
+  </div>
+</div>
+<script>
+  try {
+    var trip = JSON.parse(sessionStorage.getItem("page-transition"));
+    sessionStorage.removeItem("page-transition");
+    var here = location.pathname.replace(/(\/index)?\.html$/, "").replace(/\/$/, "");
+    if (trip && trip.to === here && Date.now() - trip.at < 10000) {
+      document.documentElement.classList.add("is-arriving");
+    }
+  } catch (error) {}
+</script>
+<!-- build:page-transition:end -->
 
 <!-- build:header:start -->
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -291,6 +315,7 @@
 <!-- build:footer:end -->
 
 <script src="components/navbar/navbar.js" defer></script>
+<script src="components/page-transition/page-transition.js" defer></script>
 <script src="contact.js" defer></script>
 </body>
 </html>

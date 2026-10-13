@@ -1,6 +1,6 @@
-/* Styles unique to index.html: the vault-door preloader, the full-screen
-   hero with its animated lock cutaway, and the services, how-it-works and
-   service-area sections. Shared pieces (navbar, footer, buttons, call orb,
+/* Styles unique to index.html: the full-screen hero with its animated lock
+   cutaway, and the services, how-it-works and service-area sections. Shared
+   pieces (the vault-door preloader, navbar, footer, buttons, call orb,
    section heads, service cards, town chips, CTA band) live in components/. */
 
 /* ------------------------------------------------------------ Page tokens */
@@ -11,142 +11,14 @@
   --hero-overlap: 40px;
 }
 
-/* ------------------------------------------------------------- Preloader */
-
-/* The vault door: two charcoal halves meeting on a brass seam, with the
-   wordmark centered on it. Runs on CSS timing alone: the wordmark holds
-   for 0.8s, the halves swing apart over 0.7s, and the whole layer hides
-   itself at 1.5s. With reduced motion (global.css) it is gone at once. */
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  display: grid;
-  place-items: center;
-  animation: preloader-done 0s linear 1.5s both;
-}
-
-.preloader-panel {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50%;
-  background-color: var(--color-panel);
-  animation: 0.7s cubic-bezier(0.76, 0, 0.24, 1) 0.8s both;
-}
-
-/* Each half carries one side of a 1px brass seam, so the two read as a
-   single door until they part. */
-.preloader-panel-left {
-  left: 0;
-  box-shadow: inset -1px 0 0 var(--color-accent-line);
-  animation-name: preloader-door-left;
-}
-
-.preloader-panel-right {
-  right: 0;
-  box-shadow: inset 1px 0 0 var(--color-accent-line);
-  animation-name: preloader-door-right;
-}
-
-/* Keyhole mark, wordmark, and a hairline that fills while the door holds.
-   The block fades out just before the halves part. */
-.preloader-brand {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  padding: 0 var(--gutter);
-  animation: preloader-brand-out 0.3s ease-in 0.6s both;
-}
-
-.preloader-mark {
-  display: grid;
-  place-items: center;
-  width: 64px;
-  height: 64px;
-  border: 1px solid var(--color-accent-line);
-  border-radius: 50%;
-  background: rgba(217, 164, 85, 0.08);
-  box-shadow: 0 0 0 7px rgba(217, 164, 85, 0.05);
-  color: var(--color-accent-bright);
-}
-
-.preloader-mark .icon {
-  width: 28px;
-  height: 28px;
-}
-
-.preloader-logo {
-  font-family: var(--font-logo);
-  font-size: clamp(2.4rem, 8vw, 4.4rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--color-panel-ink);
-}
-
-.preloader-logo span {
-  color: var(--color-accent-bright);
-}
-
-.preloader-bar {
-  position: relative;
-  width: 120px;
-  height: 2px;
-  overflow: hidden;
-  border-radius: 2px;
-  background: rgba(241, 236, 225, 0.12);
-}
-
-.preloader-bar::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--color-accent-bright);
-  transform-origin: left center;
-  animation: preloader-fill 0.55s var(--ease-out) 0.05s both;
-}
-
-@keyframes preloader-fill {
-  from { transform: scaleX(0); }
-}
-
-@keyframes preloader-brand-out {
-  to { opacity: 0; transform: scale(0.96); }
-}
-
-@keyframes preloader-door-left {
-  to { transform: translateX(-100%); }
-}
-
-@keyframes preloader-door-right {
-  to { transform: translateX(100%); }
-}
-
-@keyframes preloader-done {
-  to { visibility: hidden; }
-}
-
-/* The page can't scroll behind the closed door (home.js adds this class
-   only while the preloader is still showing). The scrollbar's gutter stays
-   reserved, so nothing shifts sideways when the lock lifts. */
-html.is-preloading {
-  overflow: hidden;
-  scrollbar-gutter: stable;
-}
-
 /* ------------------------------------------------------------------ Hero */
 
 /* One full screen of flat charcoal.
    A flex column, so the copy + drawing row takes all the height that the
    fixed navbar (above) and the facts row (below) leave, centered in it.
    --seq is when the opening sequence starts: almost at once, or as the
-   vault door begins to open when the preloader is on the page. */
+   vault door (components/page-transition/) begins to open when it plays as
+   the page's preloader. */
 .hero {
   --focus-ring: var(--color-accent-bright);
   --seq: 0.2s;
@@ -166,7 +38,7 @@ html.is-preloading {
   color: var(--color-panel-ink);
 }
 
-.preloader ~ main .hero {
+.page-transition--preload ~ main .hero {
   --seq: 0.85s;
 }
 
@@ -1511,12 +1383,8 @@ html.is-preloading {
   translate: none;
 }
 
-/* Printing: no preloader, every block visible */
+/* Printing: every block visible (the door hides itself, see its component) */
 @media print {
-  .preloader {
-    display: none;
-  }
-
   .has-reveal .reveal {
     opacity: 1;
     translate: none;

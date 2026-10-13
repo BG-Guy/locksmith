@@ -1,0 +1,255 @@
+/* The vault door (markup: build/page-transition.js): two charcoal halves
+   meeting on a brass seam, with the logo, a loading bar, and the page's
+   title on it. It plays three ways, all on CSS timing:
+   - .page-transition--preload: on every load of the home page (no title);
+   - html.is-arriving: on a page reached through a link on this site;
+   - html.is-leaving: shutting over the page being left (page-transition.js).
+   With reduced motion (global.css) it is gone at once and never shuts. */
+
+/* ---------------------------------------------------------------- The door */
+
+/* A full-screen layer above everything (navbar 200, drawer 400), hidden
+   unless one of the states below plays it */
+.page-transition {
+  --door-ease: cubic-bezier(0.76, 0, 0.24, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+}
+
+/* Each half carries one side of a 1px brass seam, so the two read as a
+   single door while they meet */
+.page-transition-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: var(--color-panel);
+}
+
+.page-transition-panel-left {
+  left: 0;
+  border-right: 1px solid var(--color-accent-line);
+}
+
+.page-transition-panel-right {
+  right: 0;
+  border-left: 1px solid var(--color-accent-line);
+}
+
+/* Keyhole mark, wordmark, and a hairline that fills while the door holds.
+   The title hangs below them, out of the flow, so the logo sits in exactly
+   the same spot with or without one. */
+.page-transition-brand {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 0 var(--gutter);
+}
+
+.page-transition-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--color-accent-line);
+  border-radius: 50%;
+  background: rgba(217, 164, 85, 0.08);
+  box-shadow: 0 0 0 7px rgba(217, 164, 85, 0.05);
+  color: var(--color-accent-bright);
+}
+
+.page-transition-mark .icon {
+  width: 28px;
+  height: 28px;
+}
+
+.page-transition-logo {
+  font-family: var(--font-logo);
+  font-size: clamp(2.4rem, 8vw, 4.4rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-panel-ink);
+}
+
+.page-transition-logo span {
+  color: var(--color-accent-bright);
+}
+
+.page-transition-bar {
+  position: relative;
+  width: 120px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(241, 236, 225, 0.12);
+}
+
+.page-transition-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent-bright);
+  transform-origin: left center;
+}
+
+/* The page title, under the bar in the site's stamped-label style. CSS
+   draws it from data-title (see the markup). It sits on a plate of the
+   door's own charcoal, so the seam stops at the title instead of striking
+   through its letters. Hidden unless arriving. */
+.page-transition-title {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  width: max-content;
+  max-width: calc(100vw - 2 * var(--gutter));
+  padding: 6px 14px;
+  background: var(--color-panel);
+  transform: translateX(-50%);
+  font-family: var(--font-logo);
+  font-size: clamp(1.15rem, 0.95rem + 0.8vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgba(241, 236, 225, 0.75);
+  opacity: 0;
+}
+
+.page-transition-title::before {
+  content: attr(data-title);
+}
+
+/* ---------------------------------------------------------------- Opening */
+
+/* The door starts shut and holds the logo for 0.8s while the bar fills; the
+   logo fades just before the halves swing apart over 0.7s, and the layer
+   hides itself at 1.5s. Same timing for the preloader and an arrival. */
+.page-transition--preload,
+.is-arriving .page-transition {
+  visibility: visible;
+  animation: page-transition-done 0s linear 1.5s both;
+}
+
+.page-transition--preload .page-transition-panel-left,
+.is-arriving .page-transition-panel-left {
+  animation: page-transition-open-left 0.7s var(--door-ease) 0.8s both;
+}
+
+.page-transition--preload .page-transition-panel-right,
+.is-arriving .page-transition-panel-right {
+  animation: page-transition-open-right 0.7s var(--door-ease) 0.8s both;
+}
+
+.page-transition--preload .page-transition-brand,
+.is-arriving .page-transition-brand {
+  animation: page-transition-brand-out 0.3s ease-in 0.6s both;
+}
+
+.page-transition--preload .page-transition-bar::after,
+.is-arriving .page-transition-bar::after {
+  animation: page-transition-fill 0.55s var(--ease-out) 0.05s both;
+}
+
+/* Arriving through a link: the title rises in under the logo at once, and
+   fades out with it */
+.is-arriving .page-transition-title {
+  opacity: 1;
+  animation: page-transition-title-in 0.3s var(--ease-out) both;
+}
+
+/* ---------------------------------------------------------------- Shutting */
+
+/* Leaving for another page: the halves slide in from the edges and meet in
+   0.45s, and the logo settles onto the seam as they close. The bar stays
+   empty and no title shows: the next page fills the bar and shows its own
+   title, so the hand-off between the two pages is seamless. (Placed after
+   Opening so it wins on the home page, whose door is --preload too.) */
+.is-leaving .page-transition {
+  visibility: visible;
+  animation: none;
+}
+
+.is-leaving .page-transition-panel-left {
+  animation: page-transition-close-left 0.45s var(--door-ease) both;
+}
+
+.is-leaving .page-transition-panel-right {
+  animation: page-transition-close-right 0.45s var(--door-ease) both;
+}
+
+.is-leaving .page-transition-brand {
+  animation: page-transition-brand-in 0.2s var(--ease-out) 0.3s both;
+}
+
+.is-leaving .page-transition-bar::after {
+  transform: scaleX(0);
+  animation: none;
+}
+
+/* -------------------------------------------------------------- Keyframes */
+
+@keyframes page-transition-open-left {
+  to { transform: translateX(-100%); }
+}
+
+@keyframes page-transition-open-right {
+  to { transform: translateX(100%); }
+}
+
+@keyframes page-transition-close-left {
+  from { transform: translateX(-100%); }
+}
+
+@keyframes page-transition-close-right {
+  from { transform: translateX(100%); }
+}
+
+@keyframes page-transition-brand-in {
+  from { opacity: 0; transform: scale(0.96); }
+}
+
+@keyframes page-transition-brand-out {
+  to { opacity: 0; transform: scale(0.96); }
+}
+
+@keyframes page-transition-fill {
+  from { transform: scaleX(0); }
+}
+
+@keyframes page-transition-title-in {
+  from { opacity: 0; translate: 0 6px; }
+}
+
+@keyframes page-transition-done {
+  to { visibility: hidden; }
+}
+
+/* ------------------------------------------------------------ Scroll lock */
+
+/* The page can't scroll behind the shut door (page-transition.js adds this
+   while the door opens). The scrollbar's gutter stays reserved, so nothing
+   shifts sideways when the lock lifts. */
+html.transition-locked {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* ------------------------------------------------------------------ Print */
+
+@media print {
+  .page-transition {
+    display: none;
+  }
+}

@@ -22,6 +22,7 @@ The URL is the search phrase, and the same phrase is used in the title, H1, meta
 | URL formulas                     | `build/urls.js`                         |
 | Navbar + mobile menu             | `build/navbar.js`                       |
 | Footer                           | `build/footer.js`                       |
+| Page-change animation (the door) | `build/page-transition.js` + `docs/components/page-transition/` |
 | `<head>` + stylesheets per page  | `build/layout.js`                       |
 | Icons (which icon a service uses)| `build/icons.js` + `docs/components/icons/icons.svg` |
 | Page layouts                     | `build/pages.js`                        |
@@ -46,13 +47,14 @@ build/                           The generator (npm run build)
   pages.js                         Page templates (service, town hub, overview pages)
   layout.js                        The page shell: <head> and stylesheets
   navbar.js / footer.js            The navbar + mobile menu / the footer
+  page-transition.js               The vault door between pages (and the home preloader)
   markup.js / icons.js             Shared bits: escaping, wordmark, call button / icon helper
   check-links.js                   Fails the build on a broken link or a missing icon
 scripts/dev-server.js            Local server for docs/ (npm run dev)
 
 docs/                            The published site
   index.html                       Home
-  home.css / home.js                 → its styles / preloader, filter tabs, scroll-reveal
+  home.css / home.js                 → its styles / filter tabs, scroll-reveal
   about.html / contact.html        Hand-written pages (about.css, contact.css/js)
   global.css                       Design tokens, reset, base typography
   components/                      Shared UI, one folder each with its own CSS
@@ -63,6 +65,8 @@ docs/                            The published site
     section-head/   Eyebrow + H2 + intro             service-grid/   Clickable service cards
     town-chips/     Town pills                       service-page/   Detailed service page
     location-page/  Town cards grid                  services-index/ services.html layout
+    logo/           Keyhole mark + wordmark
+    page-transition/  Vault door: home preloader + the animation between pages
   services.html, locations.html    Generated overview pages
   [service]/  [service]-near-[town]/  locksmith-services-near-[town]/
                                    Generated SEO pages (168 folders)
@@ -74,6 +78,8 @@ Each page's own styles and behavior live next to it. Styles and scripts used by 
 ## Design
 
 Flat design in charcoal + brass + cream (tokens in `docs/global.css`), with Anton for headlines, Barlow for text, and Teko for labels and the logo. Flat means solid colors separated by contrast and 1px lines: no shadows, gradients, blur, or background textures, and hover states change color rather than lifting. The navbar is fixed: a floating capsule at the top of the page that grows into a full-width dark bar over the first 100px of scroll; on phones and tablets the menu slides in from the left. The round brass call button (`components/call-orb/`) is the main call-to-action everywhere, and only the navbar's one pulses. The home hero fills exactly one screen and plays a single animation: a pin-tumbler lock opening.
+
+Moving between pages plays the vault door (`components/page-transition/`): it swings shut over the page being left, then opens on the next page with that page's title under the logo. It is the same door the home page shows as its preloader, with the same timing. Phone and email links, jumps within a page, new-tab clicks, and visitors who ask for reduced motion skip it, and a page opened from Google or a bookmark shows no door at all (except the home page's preloader).
 
 ## Running locally
 

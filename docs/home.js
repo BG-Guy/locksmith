@@ -1,35 +1,13 @@
-// Behavior unique to index.html: the scroll lock behind the preloader, the
-// services filter tabs, and the reveal-on-scroll animation.
+// Behavior unique to index.html: the services filter tabs and the
+// reveal-on-scroll animation.
 //
-// The vault-door preloader and the hero's lock animation run on CSS timing
-// alone (home.css): the doors start opening at 0.8s and the hero sequence
-// starts with them, or almost at once when the page has no preloader. Both
-// share one clock, so they stay in sync, and nothing can get stuck closed
-// if this script fails to load.
+// The vault-door preloader (components/page-transition/, which also holds
+// the page still behind it) and the hero's lock animation run on CSS timing
+// alone: the doors start opening at 0.8s and the hero sequence starts with
+// them (home.css). Both share one clock, so they stay in sync, and nothing
+// can get stuck closed if a script fails to load.
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// ------------------------------------------------------------ Preloader lock
-
-// Keep the page from scrolling behind the closed doors, and release it as
-// soon as the preloader's last CSS step ("preloader-done") has run. A timer
-// backs that up, so the page can never stay locked.
-const preloader = document.querySelector("#preloader");
-
-function lockScrollWhilePreloading() {
-  const lastStep = preloader.getAnimations?.().find((a) => a.animationName === "preloader-done");
-  if (!lastStep || lastStep.playState === "finished") return;
-
-  const root = document.documentElement;
-  const release = () => root.classList.remove("is-preloading");
-  root.classList.add("is-preloading");
-  lastStep.finished.then(release, release);
-  window.setTimeout(release, 3000);
-}
-
-if (preloader && !prefersReducedMotion) {
-  lockScrollWhilePreloading();
-}
 
 // ------------------------------------------------------ Services filter tabs
 
