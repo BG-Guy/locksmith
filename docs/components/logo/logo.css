@@ -1,0 +1,57 @@
+/* Logo: the brand mark used in the navbar, the mobile drawer, and the
+   footer. Markup comes from logo() in build/markup.js; each place that uses
+   it only resizes and recolors it in its own stylesheet. */
+
+/* A keyhole in a solid brass ring (it echoes a lock cylinder's face),
+   then the Teko wordmark. --logo-accent colors the "LOCKSMITH" half. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  /* So the focus ring follows the logo's rounded shape */
+  border-radius: var(--radius-pill);
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  /* A solid charcoal disc inside a solid brass ring */
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-panel-deep);
+  color: var(--color-accent-bright);
+  transition: box-shadow 0.3s var(--ease-out);
+}
+
+.logo-mark .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover: a flat brass halo ring around the badge */
+.logo:hover .logo-mark {
+  box-shadow: 0 0 0 4px rgba(217, 164, 85, 0.25);
+}
+
+.logo-text {
+  position: relative;
+  /* Teko's capitals sit high in their line box; this centers them optically */
+  top: 0.08em;
+  font-family: var(--font-logo);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.logo-text span {
+  color: var(--logo-accent, var(--color-accent-deep));
+  transition: color 0.3s var(--ease-out);
+}

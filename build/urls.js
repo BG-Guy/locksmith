@@ -16,4 +16,8 @@ module.exports = {
   // Hand-made overview pages that are still generated from the data.
   servicesIndex: "services.html",
   locationsIndex: "locations.html",
+
+  // A county's section on the locations page — "Nassau County" ->
+  // "nassau-county", linked as locations.html#nassau-county
+  countyAnchor: (county) => county.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
 };

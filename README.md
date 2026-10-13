@@ -20,12 +20,16 @@ The URL is the search phrase, and the same phrase is used in the title, H1, meta
 | Towns, nearby places, local note | `build/locations-data.js`               |
 | Phone, email, domain             | `build/config.js`                       |
 | URL formulas                     | `build/urls.js`                         |
-| Header / footer / nav            | `build/layout.js`                       |
+| Navbar + mobile menu             | `build/navbar.js`                       |
+| Footer                           | `build/footer.js`                       |
+| `<head>` + stylesheets per page  | `build/layout.js`                       |
+| Icons (which icon a service uses)| `build/icons.js` + `docs/components/icons/icons.svg` |
 | Page layouts                     | `build/pages.js`                        |
+| Colors, fonts, radii, spacing    | `docs/global.css` (design tokens)       |
 
 Then run `npm run build`. It validates the copy (title ≤ 60 chars, a `$` range in every cost section, no hardcoded town names, unique titles and descriptions, one H1 per page), regenerates every page plus `sitemap.xml`, `robots.txt`, and `llms.txt`, and checks every local link.
 
-**Generated, never hand-edited (all inside `docs/`):** `services.html`, `locations.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and every `[service]/`, `[service]-near-[town]/`, and `locksmith-services-near-[town]/` folder (listed in `build/generated-manifest.json`). The header and footer of `index.html`, `about.html`, and `contact.html`, plus the home page's service grid and town chips, sit between `<!-- build:NAME:start/end -->` markers and are rewritten on each build.
+**Generated, never hand-edited (all inside `docs/`):** `services.html`, `locations.html`, `sitemap.xml`, `robots.txt`, `llms.txt`, and every `[service]/`, `[service]-near-[town]/`, and `locksmith-services-near-[town]/` folder (listed in `build/generated-manifest.json`). The header and footer of `index.html`, `about.html`, and `contact.html`, plus the data-driven blocks on them (the home page's hero facts, service filter tabs, service grid, and town chips; the contact form's service list), sit between `<!-- build:NAME:start/end -->` markers and are rewritten on each build.
 
 `docs/` has to stay flat for those 168 folders — the URL is the search phrase, so a `[service]-near-[town]/` folder can't be nested under a subfolder without changing its live URL. To find one without scanning the whole folder, see **[build/PAGES.md](build/PAGES.md)**, a categorized index rebuilt with everything else.
 
@@ -39,20 +43,26 @@ build/                           The generator (npm run build)
   services-data.js / locations-data.js   The copy and the towns
   config.js / urls.js              Phone, domain, URL formulas
   seo.js                           Placeholders, titles, meta, schema, sitemap
-  pages.js / layout.js             Page templates / shared header, footer, <head>
-  check-links.js                   Fails the build on a broken local link
+  pages.js                         Page templates (service, town hub, overview pages)
+  layout.js                        The page shell: <head> and stylesheets
+  navbar.js / footer.js            The navbar + mobile menu / the footer
+  markup.js / icons.js             Shared bits: escaping, wordmark, call button / icon helper
+  check-links.js                   Fails the build on a broken link or a missing icon
 scripts/dev-server.js            Local server for docs/ (npm run dev)
 
 docs/                            The published site
   index.html                       Home
-  home.css / home.js                 → its styles / preloader + scroll-reveal
+  home.css / home.js                 → its styles / preloader, filter tabs, scroll-reveal
   about.html / contact.html        Hand-written pages (about.css, contact.css/js)
-  global.css                       Variables, reset, base typography
+  global.css                       Design tokens, reset, base typography
   components/                      Shared UI, one folder each with its own CSS
-    navbar/  footer/  buttons/  cta-band/  page-hero/
-    service-grid/   Clickable service cards      town-chips/   Town pills
-    section-head/   Eyebrow + H2 + intro          breadcrumbs/  Trail above hero
-    service-page/   Detailed service page         location-page/ Town cards grid
+    navbar/         Fixed bar + left slide-in menu   footer/         Site footer
+    icons/          Icon sprite + base style         call-orb/       Round call button
+    buttons/        Pill buttons                     cta-band/       Brass call-to-action panel
+    page-hero/      Dark banner on inner pages       breadcrumbs/    Trail above a hero
+    section-head/   Eyebrow + H2 + intro             service-grid/   Clickable service cards
+    town-chips/     Town pills                       service-page/   Detailed service page
+    location-page/  Town cards grid                  services-index/ services.html layout
   services.html, locations.html    Generated overview pages
   [service]/  [service]-near-[town]/  locksmith-services-near-[town]/
                                    Generated SEO pages (168 folders)
@@ -60,6 +70,10 @@ docs/                            The published site
 ```
 
 Each page's own styles and behavior live next to it. Styles and scripts used by more than one page live in `docs/components/`. `global.css` holds only CSS variables, the reset, and base typography.
+
+## Design
+
+Flat design in charcoal + brass + cream (tokens in `docs/global.css`), with Anton for headlines, Barlow for text, and Teko for labels and the logo. Flat means solid colors separated by contrast and 1px lines: no shadows, gradients, blur, or background textures, and hover states change color rather than lifting. The navbar is fixed: a floating capsule at the top of the page that grows into a full-width dark bar over the first 100px of scroll; on phones and tablets the menu slides in from the left. The round brass call button (`components/call-orb/`) is the main call-to-action everywhere, and only the navbar's one pulses. The home hero fills exactly one screen and plays a single animation: a pin-tumbler lock opening.
 
 ## Running locally
 

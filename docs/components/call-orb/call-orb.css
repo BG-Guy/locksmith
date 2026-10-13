@@ -1,0 +1,248 @@
+/* Call orb: the round "call us" button (the site's circular call CTA), and
+   the call block (orb + phone number as one link). Markup comes from
+   callOrb()/callBlock() in build/markup.js; hand-made pages copy it. Used in
+   the navbar, the mobile drawer, the CTA band, service-page sidebars, the
+   footer, and the contact page. */
+
+/* ----------------------------------------------------------------- The orb */
+
+/* A circle sized by --orb-size (set by the size modifiers below) with the
+   phone icon centered at ~45% of it. The transparent border keeps the
+   circle visible in Windows high-contrast mode, which drops backgrounds. */
+.call-orb {
+  --orb-size: 52px;
+  --orb-ring: rgba(217, 164, 85, 0.65);
+  --orb-ring-scale: 1.5;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  text-decoration: none;
+  transition:
+    transform 0.3s var(--ease-out),
+    background-color 0.2s var(--ease-out);
+}
+
+/* The handset: a slightly heavier stroke than other icons so it holds up
+   on brass at small sizes */
+.call-orb .icon {
+  width: calc(var(--orb-size) * 0.45);
+  height: calc(var(--orb-size) * 0.45);
+  stroke-width: 2;
+  transition: transform 0.35s var(--ease-out);
+}
+
+/* Sizes: 40px for compact spots, 52px for the navbar and cards, 76px for
+   the CTA band. Bigger orbs ripple a little less far, so every pulse
+   reaches about the same distance past its orb. */
+.call-orb--sm {
+  --orb-size: 40px;
+  --orb-ring-scale: 1.55;
+}
+
+.call-orb--md {
+  --orb-size: 52px;
+  --orb-ring-scale: 1.5;
+}
+
+.call-orb--lg {
+  --orb-size: 76px;
+  --orb-ring-scale: 1.38;
+}
+
+/* -------------------------------------------------------------- Tones */
+
+/* Brass: a flat brass disc with a charcoal handset, for light or dark
+   surfaces. Hover brightens the brass (see below). */
+.call-orb--brass {
+  --orb-fill-hover: var(--color-accent-bright);
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* Dark: a flat charcoal disc with a brass handset, for brass surfaces (the
+   CTA panel). Its pulse rings are charcoal too, so they show on the brass. */
+.call-orb--dark {
+  --orb-ring: rgba(27, 27, 29, 0.4);
+  --orb-fill-hover: var(--color-panel-soft);
+  background: var(--color-ink);
+  color: var(--color-accent-bright);
+}
+
+/* ------------------------------------------------------------- The pulse */
+
+/* A calm "ringing" pulse: two thin rings ripple out of the orb a beat
+   apart, fade, then rest, every 2.6s. Off by default — a container opts its
+   orbs in with `--call-orb-pulse: call-orb-pulse`. Only the navbar does, so
+   there is never more than one ringing orb on screen. */
+.call-orb::before,
+.call-orb::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1.5px solid var(--orb-ring);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: var(--call-orb-pulse, none) 2.6s var(--ease-out) infinite;
+}
+
+.call-orb::after {
+  animation-delay: 0.45s;
+}
+
+@keyframes call-orb-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  62%,
+  100% {
+    transform: scale(var(--orb-ring-scale));
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: no rings at all (they rest at opacity 0) */
+@media (prefers-reduced-motion: reduce) {
+  .call-orb::before,
+  .call-orb::after {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------- Hover, press, and focus */
+
+/* Hover or focus: the orb swells a touch and its fill shifts to the
+   tone's hover color, and the handset tilts as if lifted. Hovering
+   anywhere on a call block does the same. */
+.call-orb:hover,
+.call-orb:focus-visible,
+.call-block:hover .call-orb,
+.call-block:focus-visible .call-orb {
+  transform: scale(1.05);
+  background: var(--orb-fill-hover);
+}
+
+.call-orb:hover .icon,
+.call-orb:focus-visible .icon,
+.call-block:hover .call-orb .icon,
+.call-block:focus-visible .call-orb .icon {
+  transform: rotate(-12deg);
+}
+
+.call-orb:active,
+.call-block:active .call-orb {
+  transform: scale(0.96);
+  transition-duration: 0.08s;
+}
+
+/* Focus ring: the global ring, whose color follows the surface (deep brass
+   on light, bright brass on dark — see --focus-ring in global.css). On
+   brass (the dark tone) a brass ring would vanish, so it turns charcoal. */
+.call-orb--dark:focus-visible,
+.call-block--dark:focus-visible {
+  outline-color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------- The call block */
+
+/* Orb + "Call 24/7" + the number: one link, one big tap target. The text
+   takes its color from the surface it sits on (the parent sets `color`).
+   It never wraps, so layouts can rely on its full width. */
+.call-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: var(--radius-pill);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The big orb gets a little more room beside it */
+.call-block:has(> .call-orb--lg) {
+  column-gap: 18px;
+}
+
+/* The right padding gives the pill-shaped focus ring air after the number
+   (dropped on phones, see Responsive). It sits on the text, not the link,
+   so where a page visually hides the text the ring stays a clean circle. */
+.call-block-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-right: 8px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* "Call 24/7": a small stamped label, muted by opacity so it adapts to
+   light and dark surfaces alike */
+.call-block-kicker {
+  font-family: var(--font-logo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.call-block-number {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Beside the big orb, the number becomes a headline in Anton */
+.call-orb--lg + .call-block-text {
+  gap: 7px;
+}
+
+.call-orb--lg + .call-block-text .call-block-kicker {
+  font-size: 1.05rem;
+}
+
+.call-orb--lg + .call-block-text .call-block-number {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1rem + 1.6vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Dark tone sits on brass: charcoal text at full strength, because muted
+   charcoal falls below 4.5:1 on the deeper end of the brass */
+.call-block--dark {
+  color: var(--color-ink);
+}
+
+.call-block--dark .call-block-kicker {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------ Responsive */
+
+/* Phones: the small orb grows to the 44px minimum tap size, and the text
+   drops its focus-ring air so the big call block still fits narrow cards
+   (the mobile drawer's call card is ~196px wide on a 320px screen) */
+@media (max-width: 760px) {
+  .call-orb--sm {
+    --orb-size: 44px;
+  }
+
+  .call-block-text {
+    padding-right: 0;
+  }
+}
+
+/* Very narrow phones: the big orb shrinks so orb + number still share a row */
+@media (max-width: 400px) {
+  .call-orb--lg {
+    --orb-size: 64px;
+  }
+}

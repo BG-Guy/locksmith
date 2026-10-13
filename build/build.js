@@ -14,9 +14,10 @@ const cfg = require("./config");
 const urls = require("./urls");
 const seo = require("./seo");
 const layout = require("./layout");
-const { allPages, homeServiceCards, homeTownChips } = require("./pages");
+const { allPages, homeServiceCards, homeServiceFilters, homeFacts, homeTownChips, contactServiceOptions } = require("./pages");
 const { checkLinks } = require("./check-links");
-const { SERVICES } = require("./services-data");
+const { SERVICE_ICONS, CATEGORY_ICONS } = require("./icons");
+const { CATEGORIES, SERVICES } = require("./services-data");
 const { TOWNS } = require("./locations-data");
 
 const ROOT = cfg.ROOT_DIR;
@@ -81,10 +82,14 @@ function injectBlock(html, name, content, file) {
     errors.push(`${file}: missing <!-- build:${name}:start/end --> markers`);
     return html;
   }
-  return html.replace(re, `$1\n${content}\n$2`);
+  // A replacer function inserts `content` literally: as a plain string, a
+  // "$1" or "$&" inside it (a price like "$150") would be read as a pattern.
+  return html.replace(re, (_match, start, end) => `${start}\n${content}\n${end}`);
 }
 
-// Keep the shared header/footer, and the home page's grid and chips, in sync.
+// Keep the shared header/footer, and every data-driven block on the
+// hand-made pages (home grid, filters, facts, chips; contact form options),
+// in sync with the data.
 function syncHandPages() {
   for (const { file, active } of HAND_PAGES) {
     const full = path.join(ROOT, file);
@@ -92,11 +97,22 @@ function syncHandPages() {
     html = injectBlock(html, "header", layout.headerBlock({ active, root: "" }), file);
     html = injectBlock(html, "footer", layout.footer({ root: "" }), file);
     if (file === "index.html") {
+      html = injectBlock(html, "home-facts", homeFacts(), file);
+      html = injectBlock(html, "services-filters", homeServiceFilters(), file);
       html = injectBlock(html, "services-grid", homeServiceCards(), file);
       html = injectBlock(html, "town-chips", homeTownChips(), file);
     }
+    if (file === "contact.html") {
+      html = injectBlock(html, "service-options", contactServiceOptions(), file);
+    }
     fs.writeFileSync(full, html);
   }
+}
+
+// Every service and category needs an icon (see build/icons.js).
+function checkIcons() {
+  for (const s of SERVICES) if (!SERVICE_ICONS[s.slug]) errors.push(`service "${s.slug}": no icon in SERVICE_ICONS (build/icons.js)`);
+  for (const c of CATEGORIES) if (!CATEGORY_ICONS[c.id]) errors.push(`category "${c.id}": no icon in CATEGORY_ICONS (build/icons.js)`);
 }
 
 // ------------------------------------------------------------------- Main
@@ -104,6 +120,7 @@ function syncHandPages() {
 function main() {
   // 1. The copy rules, before anything is written.
   errors.push(...seo.validateData(SERVICES, TOWNS));
+  checkIcons();
   if (errors.length) return report();
 
   // 2. Render every page and check it.

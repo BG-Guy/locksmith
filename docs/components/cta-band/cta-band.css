@@ -1,30 +1,124 @@
-/* Brass-colored call-to-action banner. Used at the bottom of the home,
-   services, and about pages (not contact, which is itself the CTA). */
+/* The closing call-to-action near the bottom of most pages: a flat brass
+   rounded panel on the cream page, with the pitch on the left and the call
+   block (or a dark button) on the right. Markup comes from ctaBand() in
+   build/pages.js; the hand-made pages copy it. Not on contact.html, which is
+   itself the call to action. */
 
+/* ------------------------------------------------------------------ Band */
+
+/* The section stays cream (global default). The section above it already
+   ends with generous padding, so the band adds space only below the panel. */
 .cta-band {
+  padding: 0 0 var(--section-pad);
+}
+
+/* ----------------------------------------------------------------- Panel */
+
+/* Solid brass. All text on it is full-strength ink: softer tints drop
+   below 4.5:1 on the brass. */
+.cta-panel {
+  --focus-ring: var(--color-ink);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px 56px;
+  padding: clamp(40px, 5.5vw, 72px) clamp(28px, 6vw, 80px);
+  border-radius: var(--radius-xl);
   background: var(--color-accent);
-  color: #1b1b1d;
-  text-align: center;
+  color: var(--color-ink);
 }
 
-.cta-band h2 {
-  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-  margin-bottom: 18px;
+/* A large keyhole pressed faintly into the brass, peeking in from the
+   right edge so it doesn't sit squarely behind the phone number. Drawn as
+   an inline SVG so it costs no extra request. */
+.cta-panel::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -110px;
+  width: 270px;
+  height: 378px;
+  transform: translateY(-50%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Cpath fill='%231b1b1d' fill-opacity='.06' d='M50 8a32 32 0 0 1 16.5 59.4L76 128a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6l9.5-60.6A32 32 0 0 1 50 8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
 }
 
-.cta-band p {
-  font-size: 1.05rem;
-  max-width: 520px;
-  margin: 0 auto 34px;
-  color: #1b1b1d;
-  opacity: 0.82;
+/* ------------------------------------------------------------------ Copy */
+
+/* The pitch takes the room left of the actions; when they can't share a
+   row (mid-size screens) the actions wrap underneath */
+.cta-copy {
+  flex: 1 1 420px;
+  max-width: 640px;
 }
 
-.cta-band .btn-primary {
-  background: #1b1b1d;
-  color: #f6f2ea;
+.cta-copy h2 {
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 0.95;
 }
 
-.cta-band .btn-primary:hover {
-  background: #33302a;
+.cta-copy p {
+  margin-top: 16px;
+  max-width: 50ch;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* --------------------------------------------------------------- Actions */
+
+/* Holds the dark call block, or a .btn-dark (see buttons.css) */
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ------------------------------------------------------------ Responsive */
+
+/* Phones: everything stacks and centers. The call block turns into a
+   column (big orb above the number) so it fits any width, and the
+   watermark is dropped: on a narrow panel it can only sit behind text. */
+@media (max-width: 760px) {
+  .cta-panel {
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    padding: 44px 24px;
+    text-align: center;
+  }
+
+  .cta-copy {
+    flex: 0 1 auto;
+  }
+
+  .cta-copy p {
+    margin-inline: auto;
+  }
+
+  .cta-actions {
+    justify-content: center;
+  }
+
+  .cta-actions .call-block {
+    flex-direction: column;
+    gap: 14px;
+    padding: 4px;
+    border-radius: var(--radius-lg);
+  }
+
+  .cta-actions .call-block-text {
+    align-items: center;
+  }
+
+  .cta-panel::before {
+    display: none;
+  }
 }

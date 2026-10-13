@@ -1,6 +1,8 @@
 // Link checker: confirms every local href/src in every HTML file points to
-// a file (or a folder with an index.html) that exists. Catches a wrong URL
-// before it ships. Runs at the end of `npm run build`, or on its own:
+// a file (or a folder with an index.html) that exists, and that every icon
+// reference (icons.svg#name) names a symbol the sprite really has. Catches a
+// wrong URL or a blank icon before it ships. Runs at the end of
+// `npm run build`, or on its own:
 //   node build/check-links.js
 
 const fs = require("fs");
@@ -17,6 +19,16 @@ function findHtmlFiles(dir, found = []) {
     else if (entry.name.endsWith(".html")) found.push(full);
   }
   return found;
+}
+
+// The ids defined in an SVG sprite file, read once per file.
+const spriteIdCache = new Map();
+function spriteIds(file) {
+  if (!spriteIdCache.has(file)) {
+    const svg = fs.readFileSync(file, "utf8");
+    spriteIdCache.set(file, new Set([...svg.matchAll(/<symbol[^>]*\sid="([^"]+)"/g)].map((m) => m[1])));
+  }
+  return spriteIdCache.get(file);
 }
 
 // Returns { checked, broken: ["page.html -> missing/link/"] }.
@@ -36,6 +48,11 @@ function checkLinks(rootDir) {
         fs.existsSync(target) &&
         (fs.statSync(target).isFile() || fs.existsSync(path.join(target, "index.html")));
       if (!exists) broken.push(`${path.relative(rootDir, file)} -> ${raw}`);
+      // An icon reference must also name a symbol that exists in the sprite.
+      const fragment = raw.split("#")[1];
+      if (exists && fragment && ref.endsWith(".svg") && !spriteIds(target).has(fragment)) {
+        broken.push(`${path.relative(rootDir, file)} -> ${raw} (no such icon in ${path.basename(ref)})`);
+      }
     }
   }
   return { checked, broken };

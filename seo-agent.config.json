@@ -9,7 +9,9 @@
     { "path": "build/seo.js", "what": "Title, meta description, and structured-data rules" },
     { "path": "build/config.js", "what": "Business details used across the site" },
     { "path": "build/pages.js", "what": "Page templates (only for fixes that must apply to many pages)" },
-    { "path": "build/layout.js", "what": "Shared layout: head, navigation, footer" }
+    { "path": "build/layout.js", "what": "Shared page shell: the <head> and the stylesheets every page loads" },
+    { "path": "build/navbar.js", "what": "Site navigation: the navbar and the mobile menu" },
+    { "path": "build/footer.js", "what": "Site footer" }
   ],
   "protected_paths": ["docs/", "build/PAGES.md", "build/generated-manifest.json"],
   "build_command": "node build/build.js",

@@ -1,269 +1,834 @@
-/* The detailed service page: a dark hero (headline, call buttons, "what's
-   included" card), then the four-section SEO copy beside a sticky quote box,
-   then links to other towns and other services. Used by every page in
-   [service]-near-[town]/ and [service]/. */
+/* The service page (every [service]/ and [service]-near-[town]/ page): a dark
+   hero with the pitch and a "What's included" card, then the four-section
+   copy beside a sidebar (On this page, the flat-rate quote, related
+   services), then nearby towns and the other services. Markup comes from
+   servicePage() in build/pages.js. */
 
 /* ------------------------------------------------------------------- Hero */
 
+/* Dark charcoal stage. The header is fixed over the page, so the top padding
+   clears it; the bottom padding is 40px deeper than it looks, because the
+   content panel after the hero rides up over it (see "Content panel"). */
 .svc-hero {
+  --focus-ring: var(--color-accent-bright);
+  --eyebrow-color: var(--color-accent-bright);
+  --eyebrow-line: var(--color-accent-line);
+  --eyebrow-bg: rgba(217, 164, 85, 0.08);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: calc(var(--header-clearance) + 40px) 0 calc(40px + 80px);
   background: var(--color-panel);
   color: var(--color-panel-ink);
-  padding: 56px 0 64px;
 }
 
-.svc-hero .wrap {
+/* Copy on the left, "What's included" card on the right, under the
+   breadcrumbs (the top margin collapses with the trail's own spacing) */
+.svc-hero-grid {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
-  gap: 56px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 408px);
+  gap: 48px clamp(48px, 6vw, 88px);
+  align-items: center;
+  margin-top: 28px;
 }
 
 .svc-hero h1 {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  margin: 16px 0 20px;
+  margin-top: 22px;
+  font-size: clamp(2.5rem, 4.6vw, 4rem);
+  line-height: 0.95;
   color: var(--color-panel-ink);
 }
 
-.svc-lede {
-  font-size: 1.1rem;
-  color: var(--color-panel-ink-soft);
-  max-width: 560px;
-  margin-bottom: 30px;
+/* The place in the H1 ("Near Huntington, NY") in brass, like the brass
+   phrase in the home hero's headline */
+.svc-h1-place {
+  color: var(--color-accent-bright);
 }
 
+.svc-lede {
+  margin-top: 22px;
+  max-width: 34rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--color-panel-ink-soft);
+}
+
+/* Call + estimate buttons (the shared .btn pills) */
 .svc-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-top: 32px;
 }
 
-/* Trust signals under the buttons */
+/* Trust points under the buttons: icon wells and short labels */
 .svc-trust {
   list-style: none;
-  margin: 0;
-  padding: 22px 0 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 26px;
+  gap: 14px 28px;
+  margin: 36px 0 0;
+  padding: 24px 0 0;
   border-top: 1px solid var(--color-line-dark);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-panel-ink-soft);
 }
 
-/* "What's included" checklist card */
+.svc-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-panel-ink);
+}
+
+.svc-trust-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(217, 164, 85, 0.12);
+  color: var(--color-accent-bright);
+}
+
+.svc-trust-icon .icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* "What's included": a flat dark panel with a brass hairline, a
+   checklist, and the typical price on a darker plate across the bottom */
 .svc-included {
+  overflow: hidden;
+  padding: 30px 30px 0;
+  border: 1px solid var(--color-accent-line);
+  border-radius: var(--radius-lg);
   background: var(--color-panel-soft);
-  border: 1px solid var(--color-line-dark);
-  border-radius: 6px;
-  padding: 30px;
+}
+
+.svc-included-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+/* The service's own icon, in a ringed well like a lock cylinder face */
+.svc-included-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(217, 164, 85, 0.12);
+  box-shadow: inset 0 0 0 1px var(--color-accent-line);
+  color: var(--color-accent-bright);
+}
+
+.svc-included-icon .icon {
+  width: 26px;
+  height: 26px;
 }
 
 .svc-included-title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.45rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--color-panel-ink);
-  margin-bottom: 18px;
 }
 
-.svc-included ul {
+.svc-included-list {
   list-style: none;
+  display: grid;
+  gap: 14px;
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  padding: 20px 0 0;
 }
 
-.svc-included li {
-  position: relative;
-  padding-left: 26px;
-  font-size: 0.94rem;
+.svc-included-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--color-panel-ink);
+}
+
+.svc-included-list .icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--color-accent-bright);
+}
+
+.svc-included-cost {
+  margin: 24px -30px 0;
+  padding: 20px 30px 24px;
+  border-top: 1px solid var(--color-accent-line);
+  background: rgba(22, 23, 26, 0.5);
+}
+
+.svc-included .svc-cost-label,
+.svc-included .svc-price-joiner,
+.svc-included .svc-price-note {
   color: var(--color-panel-ink-soft);
 }
 
-/* Check mark drawn with borders */
-.svc-included li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.4em;
-  width: 12px;
-  height: 7px;
-  border-left: 2px solid var(--color-accent);
-  border-bottom: 2px solid var(--color-accent);
-  transform: rotate(-45deg);
+.svc-included .svc-price-range {
+  color: var(--color-accent-bright);
 }
 
-/* ------------------------------------------------------------ Copy + sidebar */
+/* ------------------------------------------------------------- Price display */
+
+/* "Typical cost" label + the range in big Teko numbers ("$20 to $50") with
+   the qualifier beside it. Used on the dark hero card and the white quote
+   card; each of those sets the colors. */
+.svc-cost-label {
+  font-family: var(--font-logo);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.svc-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-top: 8px;
+}
+
+.svc-price-range {
+  font-family: var(--font-logo);
+  font-size: 2.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* "to" / "and up" between the numbers, small so the numbers lead */
+.svc-price-joiner {
+  margin: 0 0.1em;
+  font-size: 0.5em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.svc-price-note {
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+/* ----------------------------------------------------------- Content panel */
+
+/* The cream panel after the hero rides up over the hero's bottom edge with
+   rounded top corners (the hero's bottom padding leaves room for it) */
+.svc-hero + section {
+  position: relative;
+  margin-top: -40px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
 
 .svc-content {
-  padding: 80px 0;
+  padding: clamp(64px, 7vw, 96px) 0;
 }
 
+/* Copy on the left, sidebar on the right. The sidebar stretches to the
+   copy's full height so its quote card has room to stay in view. */
 .svc-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 64px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) 348px;
+  gap: clamp(48px, 6vw, 88px);
 }
 
+/* The four copy sections, divided by hairlines */
 .svc-section + .svc-section {
-  margin-top: 52px;
+  margin-top: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--color-line);
+}
+
+/* Small stamped topic label above each H2, led by a short brass rule. Also
+   used over the panels at the bottom of the page. */
+.svc-topic {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-logo);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+}
+
+/* Teko sits high in its line box, so the rule is nudged up to its middle */
+.svc-topic::before {
+  content: "";
+  flex-shrink: 0;
+  width: 28px;
+  height: 2px;
+  margin-top: -2px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  transition: width 0.35s var(--ease-out);
+}
+
+/* The section reached from the "On this page" list gets a longer rule */
+.svc-section:target .svc-topic::before {
+  width: 56px;
 }
 
 .svc-section h2 {
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-  margin-bottom: 16px;
-  text-wrap: balance;
+  margin: 14px 0 20px;
+  font-size: clamp(1.75rem, 2.6vw, 2.35rem);
+  line-height: 1;
 }
 
-.svc-section p {
-  color: var(--color-ink-soft);
-  font-size: 1.04rem;
-  line-height: 1.75;
+.svc-section > p:not(.svc-topic) {
   max-width: 68ch;
+  font-size: 1.06rem;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+  text-wrap: pretty;
 }
 
-.svc-section p + p {
+.svc-section > p:not(.svc-topic) + p {
   margin-top: 16px;
 }
 
-/* Sidebar stays in view while the copy scrolls */
-.svc-side {
-  position: sticky;
-  top: 108px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+/* The town's own paragraph (town pages only), set apart as a local note */
+.svc-local {
+  max-width: 68ch;
+  margin-top: 24px;
+  padding: 20px 24px 22px;
+  border: 1px solid rgba(184, 134, 59, 0.28);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-alt);
 }
 
+.svc-local-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-logo);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+}
+
+.svc-local-label .icon {
+  width: 18px;
+  height: 18px;
+  margin-top: -2px;
+}
+
+.svc-local p:not(.svc-local-label) {
+  margin-top: 10px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+}
+
+/* ----------------------------------------------------------------- Sidebar */
+
+/* Two rows: the "track" (contents list + quote card) takes all the spare
+   height, so the quote card can stick inside it while the copy scrolls;
+   related services sit underneath, level with the end of the copy */
+.svc-side {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 36px;
+  min-width: 0;
+}
+
+/* Small stamped titles over the sidebar blocks */
+.svc-side-title {
+  margin-bottom: 12px;
+  font-family: var(--font-logo);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+/* "On this page": the four topic labels as jump links */
+.svc-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.svc-toc a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 12px 2px 10px;
+  border-bottom: 1px solid var(--color-line);
+  font-family: var(--font-logo);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: color 0.25s var(--ease-out);
+}
+
+/* Nudged up to the middle of the Teko label (Teko sits high in its box) */
+.svc-toc .icon {
+  width: 16px;
+  height: 16px;
+  margin-top: -2px;
+  color: var(--color-ink-soft);
+  transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.svc-toc a:hover,
+.svc-toc a:focus-visible {
+  color: var(--color-accent-deep);
+}
+
+.svc-toc a:hover .icon,
+.svc-toc a:focus-visible .icon {
+  color: var(--color-accent-deep);
+  transform: translateX(3px);
+}
+
+/* On the light page, deep brass keeps the focus ring at 4.6:1+ */
+.svc-toc a:focus-visible {
+  outline-color: var(--color-accent-deep);
+}
+
+/* After a jump, the matching link stays marked (where :has() is supported) */
+.svc-content:has(#why:target) .svc-toc a[href="#why"],
+.svc-content:has(#how:target) .svc-toc a[href="#how"],
+.svc-content:has(#cost:target) .svc-toc a[href="#cost"],
+.svc-content:has(#risk:target) .svc-toc a[href="#risk"] {
+  color: var(--color-accent-deep);
+}
+
+/* The flat-rate quote card. On wide screens it sticks just below the fixed
+   header while the copy scrolls past. A flex column, so the inline call
+   block and button stack with exact spacing. */
 .svc-quote {
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  background: var(--color-bg-alt);
-  border: 1px solid var(--color-line);
-  border-radius: 6px;
+  margin-top: 32px;
   padding: 28px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
 }
 
 .svc-quote-title {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  line-height: 1;
   text-transform: uppercase;
+  color: var(--color-ink);
 }
 
-.svc-quote p:not(.svc-quote-title) {
+.svc-quote .svc-cost-label {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-line);
   color: var(--color-ink-soft);
-  font-size: 0.94rem;
 }
 
-.svc-related-title {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 8px;
+.svc-quote .svc-price-range {
+  color: var(--color-ink);
 }
 
+.svc-quote .svc-price-joiner,
+.svc-quote .svc-price-note {
+  color: var(--color-ink-soft);
+}
+
+.svc-quote-text {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+/* The round call button + number (components/call-orb/), kept to its own
+   width, then the full-width outline button */
+.svc-quote .call-block {
+  align-self: flex-start;
+  margin-top: 22px;
+}
+
+.svc-quote .btn {
+  margin-top: 18px;
+}
+
+/* Related services: pill-shaped mini cards with an icon well */
 .svc-related ul {
   list-style: none;
+  display: grid;
+  gap: 10px;
   margin: 0;
   padding: 0;
 }
 
-.svc-related a {
-  display: block;
-  padding: 12px 0;
-  border-top: 1px solid var(--color-line);
-  font-weight: 600;
+.svc-related-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 9px 18px 9px 9px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: border-color 0.25s var(--ease-out);
 }
 
-.svc-related li:last-child a {
-  border-bottom: 1px solid var(--color-line);
-}
-
-.svc-related a:hover,
-.svc-related a:focus-visible {
-  color: var(--color-accent);
-}
-
-/* ------------------------------------------------------- Bottom link blocks */
-
-.svc-more {
-  padding: 0 0 88px;
-}
-
-.svc-more .wrap {
+/* The icon well: a flat brass tint that fills solid brass on hover/focus */
+.svc-related-icon {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-deep);
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
 }
 
-.svc-more h2 {
-  font-size: 1.4rem;
-  margin-bottom: 18px;
+.svc-related-icon .icon {
+  width: 22px;
+  height: 22px;
 }
 
+.svc-related-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.svc-related-arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--color-ink-soft);
+  transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.svc-related-card:hover,
+.svc-related-card:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.svc-related-card:hover .svc-related-icon,
+.svc-related-card:focus-visible .svc-related-icon {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.svc-related-card:hover .svc-related-arrow,
+.svc-related-card:focus-visible .svc-related-arrow {
+  color: var(--color-accent-deep);
+  transform: translateX(3px);
+}
+
+.svc-related-card:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+
+/* A white card on a light page: deep brass keeps the focus ring at 4.6:1+ */
+.svc-related-card:focus-visible {
+  outline-color: var(--color-accent-deep);
+}
+
+/* ------------------------------------------------- More: places + services */
+
+/* Two white panels: where we offer the service, and every other service.
+   No top padding: the content section above already ends with its own. */
+.svc-more {
+  padding-top: 0;
+}
+
+.svc-more-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.svc-more-block {
+  padding: clamp(28px, 3.2vw, 40px);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+}
+
+.svc-more-block h2 {
+  margin: 14px 0 24px;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  line-height: 1;
+}
+
+/* Links to the town hub and the no-town service page, under the chips.
+   Each is a full 44px tall so it is an easy tap on a phone. */
 .svc-more-links {
-  margin-top: 18px;
-  font-size: 0.92rem;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  margin: 24px 0 0;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--color-line);
 }
 
 .svc-more-links a {
-  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.98rem;
   font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-accent-deep);
+  text-decoration: none;
+  text-underline-offset: 4px;
 }
 
-/* Two-column list of links to the other services */
+.svc-more-links .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.svc-more-links a:hover,
+.svc-more-links a:focus-visible {
+  text-decoration: underline;
+}
+
+.svc-more-links a:focus-visible {
+  outline-color: var(--color-accent-deep);
+}
+
+.svc-more-links a:hover .icon,
+.svc-more-links a:focus-visible .icon {
+  transform: translateX(3px);
+}
+
+/* The other services: a two-column list, each with its small icon */
 .svc-links {
   list-style: none;
   margin: 0;
   padding: 0;
   columns: 2;
-  column-gap: 24px;
+  column-gap: 28px;
 }
 
 .svc-links li {
   break-inside: avoid;
-  padding: 5px 0;
 }
 
 .svc-links a {
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.3;
   color: var(--color-ink-soft);
-  transition: color 0.2s ease;
+  text-decoration: none;
+  transition: color 0.25s var(--ease-out);
+}
+
+.svc-links .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent-deep);
+  transition: transform 0.25s var(--ease-out);
 }
 
 .svc-links a:hover,
 .svc-links a:focus-visible {
-  color: var(--color-accent);
+  color: var(--color-ink);
 }
 
-/* ------------------------------------------------------------- Responsive */
+.svc-links a:hover .icon,
+.svc-links a:focus-visible .icon {
+  transform: scale(1.12);
+}
 
+.svc-links a:focus-visible {
+  outline-color: var(--color-accent-deep);
+}
+
+/* -------------------------------------------------------------- Responsive */
+
+/* Tablet: the hero and the copy/sidebar split stack. The "On this page"
+   list is dropped (it only helps beside the copy); the quote card and
+   related services sit side by side under the copy instead. */
 @media (max-width: 1225px) {
-  .svc-hero .wrap,
-  .svc-layout,
-  .svc-more .wrap {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .svc-hero-grid,
+  .svc-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The card keeps a comfortable width instead of spanning the page; its
+     checklist splits into two columns to stay short */
+  .svc-included {
+    max-width: 760px;
+  }
+
+  .svc-included-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 28px;
   }
 
   .svc-side {
+    grid-template-rows: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 24px;
+  }
+
+  .svc-toc {
+    display: none;
+  }
+
+  .svc-quote {
     position: static;
+    margin-top: 0;
+  }
+
+  .svc-more-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
+/* Phone: tighter hero, full-width buttons, everything in one column */
 @media (max-width: 760px) {
-  .svc-content {
-    padding: 56px 0;
+  .svc-hero {
+    padding: calc(var(--header-clearance) + 20px) 0 calc(40px + 56px);
+  }
+
+  /* The category · place eyebrow can wrap to two lines on a phone; a
+     softer corner keeps a two-line pill from looking pinched */
+  .svc-hero .eyebrow {
+    border-radius: var(--radius-md);
+    line-height: 1.2;
+  }
+
+  /* The breadcrumb links are 44px tall here, so they bring their own air */
+  .svc-hero-grid {
+    margin-top: 12px;
+  }
+
+  .svc-hero h1 {
+    margin-top: 18px;
+    font-size: clamp(2.1rem, 9vw, 2.75rem);
+  }
+
+  .svc-lede {
+    margin-top: 16px;
+    font-size: 1.05rem;
+  }
+
+  .svc-actions {
+    margin-top: 26px;
+  }
+
+  .svc-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .svc-trust {
+    gap: 12px 20px;
+    margin-top: 28px;
+    padding-top: 20px;
+  }
+
+  .svc-trust li {
+    font-size: 0.9rem;
+  }
+
+  .svc-included {
+    padding: 24px 22px 0;
+  }
+
+  .svc-included-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .svc-included-icon .icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .svc-included-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .svc-included-cost {
+    margin: 22px -22px 0;
+    padding: 18px 22px 22px;
+  }
+
+  .svc-price-range {
+    font-size: 2.3rem;
+  }
+
+  .svc-section + .svc-section {
+    margin-top: 44px;
+    padding-top: 44px;
+  }
+
+  .svc-section > p:not(.svc-topic) {
+    font-size: 1.02rem;
+  }
+
+  .svc-local {
+    padding: 18px 18px 20px;
+  }
+
+  .svc-side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .svc-quote {
+    padding: 24px 22px;
+  }
+
+  .svc-more-block {
+    padding: 26px 22px;
   }
 
   .svc-links {

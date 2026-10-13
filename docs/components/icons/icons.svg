@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<!-- Shared icon sprite: every icon on the site is one symbol below, drawn on
+     a 24x24 grid as plain strokes kept inside roughly 2-22. The line weight,
+     round caps and color come from components/icons/icons.css (set on the
+     <svg class="icon"> and inherited), so shapes here never set stroke or
+     fill. The one exception is a small solid detail (a keyhole dot, a rotation
+     arrowhead), drawn with fill="currentColor" stroke="none" so it still
+     follows the text color. Use icon(name) from build/icons.js in templates,
+     or <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#name"></use></svg>
+     in hand-made pages; the link checker fails the build on an unknown name. -->
+
+<!-- ================================ UI icons ================================ -->
+
+<!-- Contact and navigation: the call action, contact details, the mobile menu
+     (left-aligned bars, matching the hamburger's place on the left) -->
+<symbol id="phone" viewBox="0 0 24 24"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H8a1.5 1.5 0 0 1 1.5 1.5v3l-1 2a12.75 12.75 0 0 0 6 6l2-1h3a1.5 1.5 0 0 1 1.5 1.5v3.5a1.5 1.5 0 0 1-1.5 1.5A17 17 0 0 1 3 4.5z"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/></symbol>
+<symbol id="map-pin" viewBox="0 0 24 24"><path d="M12 21c-3.5-3.25-7-6.6-7-11a7 7 0 0 1 14 0c0 4.4-3.5 7.75-7 11z"/><circle cx="12" cy="10" r="2.75"/></symbol>
+<symbol id="menu" viewBox="0 0 24 24"><path d="M4 6.5h16M4 12h10.5M4 17.5h16"/></symbol>
+<symbol id="close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+
+<!-- Arrows: link and button affordances (arrow-down is the hero's scroll cue) -->
+<symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
+<symbol id="arrow-up-right" viewBox="0 0 24 24"><path d="M6.5 17.5l11-11M8.5 6.5h9v9"/></symbol>
+<symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4.5v15M6 13.5l6 6 6-6"/></symbol>
+<symbol id="chevron-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+
+<!-- Marks: confirmations and "what's included" list items -->
+<symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><path d="M8.25 12.25l2.5 2.5 5-5"/></symbol>
+
+<!-- Trust and promises: licensed and insured, open 24/7, flat-rate pricing,
+     booking, ID-verified technician (the tag's hole is a solid dot so it
+     stays a hole at 18px) -->
+<symbol id="shield-check" viewBox="0 0 24 24"><path d="M12 2.75l7.5 2.75v6c0 4.5-3.2 7.9-7.5 9.5-4.3-1.6-7.5-5-7.5-9.5v-6z"/><path d="M8.75 11.75L11 14l4.25-4.25"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><path d="M12 7v5l3.25 2"/></symbol>
+<symbol id="tag" viewBox="0 0 24 24"><path d="M3.75 11.25V5.75a2 2 0 0 1 2-2h5.5l8.5 8.5q1 1 0 2l-5.5 5.5q-1 1-2 0z"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></symbol>
+<symbol id="calendar" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="16.5" rx="2.5"/><path d="M3.5 9.5h17M8 2.75v3.5M16 2.75v3.5M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 17h.01M12 17h.01"/></symbol>
+<symbol id="user-check" viewBox="0 0 24 24"><circle cx="9" cy="7.5" r="3.75"/><path d="M2.5 20.5v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1M16 11l2 2 3.5-3.5"/></symbol>
+
+<!-- Dispatch and urgency: the side-view service van, and the bolt that marks
+     emergency work -->
+<symbol id="van" viewBox="0 0 24 24"><path d="M5 16.5H3.5a1 1 0 0 1-1-1V7A1.5 1.5 0 0 1 4 5.5h10.5l4 4.5H20a1.5 1.5 0 0 1 1.5 1.5v4a1 1 0 0 1-1 1H19M9 16.5h6M12.5 5.5V10h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="M13.5 2.5L4.5 13.5h7l-1 8 9-11h-7z"/></symbol>
+
+<!-- Locks and keys: the trade's own vocabulary. Every keyhole inside a lock
+     body is the same glyph: a solid dot over a short slot -->
+<symbol id="key" viewBox="0 0 24 24"><circle cx="6.75" cy="16.5" r="4"/><path d="M9.5 13.75L19.25 4l2 2M16.25 7l2 2"/></symbol>
+<symbol id="keyhole" viewBox="0 0 24 24"><path d="M10.5 13.25a4.75 4.75 0 1 1 3 0l1.75 7.25h-6.5z"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5M12 16v2"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></symbol>
+<symbol id="lock-open" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 7.5-2M12 16v2"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></symbol>
+
+<!-- Places and vehicles: the service categories (CATEGORY_ICONS in
+     build/icons.js). The car is a front view so it never reads as the
+     side-view car in car-lock -->
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-7.5 9 7.5M5.5 9.25V19.5A1.5 1.5 0 0 0 7 21h10a1.5 1.5 0 0 0 1.5-1.5V9.25M10 21v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/></symbol>
+<symbol id="car" viewBox="0 0 24 24"><rect x="3.5" y="10" width="17" height="7" rx="2"/><path d="M5.5 10l1.4-4.2A2 2 0 0 1 8.8 4.5h6.4a2 2 0 0 1 1.9 1.3L18.5 10M6 17v1.5a1 1 0 0 0 1 1h1.5a1 1 0 0 0 1-1V17M14.5 17v1.5a1 1 0 0 0 1 1H17a1 1 0 0 0 1-1V17M10.5 13.5h3"/><circle cx="7.25" cy="13.5" r="1.25" fill="currentColor" stroke="none"/><circle cx="16.75" cy="13.5" r="1.25" fill="currentColor" stroke="none"/></symbol>
+<symbol id="building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M15 9h3a2 2 0 0 1 2 2v10M8.5 7.5h3M8.5 11h3M8.5 14.5h3M17 13h1M17 16.5h1M8.5 21v-2.5h3V21"/></symbol>
+
+<!-- ============================== Service icons ============================= -->
+<!-- One per service (SERVICE_ICONS in build/icons.js); each drawing shows the
+     job itself. The two rotation icons share one arrowhead: a small solid
+     rounded triangle, which stays legible at 18px where a stroked one blurs. -->
+
+<!-- house-key (home lockout): house outline with a keyhole in the middle -->
+<symbol id="house-key" viewBox="0 0 24 24"><path d="M12 3.5l8 6.75v9.25a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5v-9.25z"/><circle cx="12" cy="13.5" r="1.75" fill="currentColor" stroke="none"/><path d="M12 14.5v3"/></symbol>
+
+<!-- car-lock (car lockout): side-view car with a small padlock badge above the hood -->
+<symbol id="car-lock" viewBox="0 0 24 24"><path d="M4.5 19H3.5a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h1L8 11h4.5l3 3h4a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1H19M8.5 19H15"/><circle cx="6.5" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><rect x="15.5" y="5" width="6" height="4.5" rx="1"/><path d="M17.25 5V4a1.25 1.25 0 0 1 2.5 0v1"/></symbol>
+
+<!-- key-rotate (rekeying): a key inside a clockwise circular arrow -->
+<symbol id="key-rotate" viewBox="0 0 24 24"><path d="M20.47 11.26A8.5 8.5 0 1 1 18.01 5.99"/><path d="M19.07 4.93Q19.42 4.58 19.56 5.06L20.35 7.98Q20.49 8.46 20 8.33L17.08 7.54Q16.6 7.4 16.95 7.05Z" fill="currentColor" stroke="none"/><circle cx="9.25" cy="14.75" r="1.75"/><path d="M10.5 13.5L15 9l1.5 1.5"/></symbol>
+
+<!-- lever-lock (lock installation): lever handle on a tall backplate, keyhole below -->
+<symbol id="lever-lock" viewBox="0 0 24 24"><rect x="3.5" y="2.5" width="6.5" height="19" rx="3.25"/><path d="M10 6.75h8.75a1.75 1.75 0 0 1 0 3.5H10M6.75 15v2.5"/><circle cx="6.75" cy="14.25" r="1.4" fill="currentColor" stroke="none"/></symbol>
+
+<!-- deadbolt: the door's edge with the bolt thrown into a strike plate -->
+<symbol id="deadbolt" viewBox="0 0 24 24"><rect x="3.25" y="3" width="7.5" height="18" rx="2"/><path d="M10.75 10.25h7.5v3.5h-7.5M15.75 5.5h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3"/><circle cx="7" cy="12" r="1.25" fill="currentColor" stroke="none"/></symbol>
+
+<!-- keypad (smart lock): keypad body with a 3x3 button grid and a signal arc -->
+<symbol id="keypad" viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="3"/><path d="M9.5 6.75a3.5 3.5 0 0 1 5 0M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01M8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01"/></symbol>
+
+<!-- safe: box on two feet with a combination dial and a door handle -->
+<symbol id="safe" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="16" rx="2.5"/><path d="M6.5 19v2M17.5 19v2M17 8.5v5"/><circle cx="10.5" cy="11" r="3.75"/><circle cx="10.5" cy="11" r="1.1" fill="currentColor" stroke="none"/></symbol>
+
+<!-- car-key (car key replacement): rounded remote head with two buttons and a cut metal blade -->
+<symbol id="car-key" viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="9.5" height="11" rx="3.25"/><circle cx="7.25" cy="9.75" r="1.25" fill="currentColor" stroke="none"/><circle cx="7.25" cy="14.25" r="1.25" fill="currentColor" stroke="none"/><path d="M12 10h8.5a1 1 0 0 1 1 1v1L20 13.75h-1.5l-1.25-1.25h-1.5L14.5 13.75H12"/></symbol>
+
+<!-- key-fob (fob programming): keyless remote sending signal arcs -->
+<symbol id="key-fob" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="10" height="13" rx="3.5"/><path d="M6.75 13h3.5M6.75 17h3.5M13.5 6a3.5 3.5 0 0 1 3.5 3.5M13.5 2.5a7 7 0 0 1 7 7"/></symbol>
+
+<!-- ignition (ignition repair): the cylinder's bezel with its keyhole, and an
+     arrow turning the key clockwise -->
+<symbol id="ignition" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="11.25" r="1.5" fill="currentColor" stroke="none"/><path d="M12 12.25v2.5M6.83 10.12A5.5 5.5 0 0 1 17.17 10.12"/><path d="M18.44 9.66Q18.81 9.52 18.74 9.91L18.27 12.54Q18.19 12.94 17.89 12.68L15.83 10.97Q15.52 10.72 15.9 10.58Z" fill="currentColor" stroke="none"/></symbol>
+
+<!-- key-ring (master key systems): a ring holding two different keys,
+     one with a round bow and one with a square bow -->
+<symbol id="key-ring" viewBox="0 0 24 24"><circle cx="6.25" cy="12" r="3.5"/><circle cx="11" cy="8" r="2.25"/><path d="M13.25 8h8M17.75 8V5.5M20.75 8V5"/><rect x="8.75" y="13.75" width="4.5" height="4.5" rx="1.25"/><path d="M13.25 16h8M17.75 16v2.5M20.75 16v3"/></symbol>
+
+<!-- panic-bar (panic bar installation): door with a horizontal push bar on two brackets -->
+<symbol id="panic-bar" viewBox="0 0 24 24"><rect x="4.5" y="2.5" width="15" height="19" rx="2"/><path d="M7.5 11.5v4M16.5 11.5v4M7.5 13.5h9"/></symbol>
+</svg>

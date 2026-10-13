@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Home page: hero, services preview, how-it-works, service area, CTA.
-     Styles: home.css (plus global.css and components/). -->
+<!-- Home page: vault-door preloader, full-screen hero with an animated lock
+     cutaway, services (filterable by category), how it works, service area,
+     and the closing call-to-action band.
+     Styles: home.css (plus global.css and components/). Behavior: home.js. -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +13,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="global.css">
+<link rel="stylesheet" href="components/icons/icons.css">
+<link rel="stylesheet" href="components/logo/logo.css">
 <link rel="stylesheet" href="components/buttons/buttons.css">
+<link rel="stylesheet" href="components/call-orb/call-orb.css">
 <link rel="stylesheet" href="components/navbar/navbar.css">
 <link rel="stylesheet" href="components/footer/footer.css">
 <link rel="stylesheet" href="components/section-head/section-head.css">
@@ -22,313 +27,499 @@
 </head>
 <body>
 
+<!-- Preloader: a vault door holds the wordmark, then splits open to reveal
+     the page. It runs on CSS timing alone (home.css), so it can never get
+     stuck if a script fails; the hero's lock animation shares its clock. -->
 <div id="preloader" class="preloader" aria-hidden="true">
   <div class="preloader-panel preloader-panel-left"></div>
   <div class="preloader-panel preloader-panel-right"></div>
-  <div class="preloader-logo">Haven <span>Locksmith</span></div>
+  <div class="preloader-brand">
+    <span class="preloader-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#keyhole"></use></svg></span>
+    <span class="preloader-logo">Haven <span>Locksmith</span></span>
+    <span class="preloader-bar"></span>
+  </div>
 </div>
 
 <!-- build:header:start -->
+<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
-  <div class="wrap">
+  <div class="site-header-inner">
+    <button type="button" class="nav-toggle" aria-controls="mobileNavDrawer" aria-expanded="false" aria-label="Open menu">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#menu"></use></svg>
+    </button>
     <a href="index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4" stroke="#D9A455" stroke-width="1.6"/>
-          <path d="M12 12v8M9 16h6M9 19h6" stroke="#D9A455" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </span>
+      <span class="logo-mark" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#keyhole"></use></svg></span>
       <span class="logo-text">Haven <span>Locksmith</span></span>
     </a>
-    <nav class="main-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="services.html">Services</a>
-      <a href="locations.html">Locations</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+    <nav class="main-nav" aria-label="Main">
+      <ul class="main-nav-list">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
     <div class="header-actions">
-      <a href="contact.html" class="btn btn-outline">Request Service</a>
-      <a href="tel:+15165550142" class="btn btn-primary phone-pill">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>(516) 555-0142</span>
-      </a>
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--md call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
     </div>
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
   <div class="mobile-nav-scrim"></div>
-  <nav class="mobile-nav-panel" aria-label="Site navigation">
-    <div class="mobile-nav-panel-head">
-      <span class="mobile-nav-panel-title">Menu</span>
-      <button class="mobile-nav-close" aria-label="Close menu">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-nav-head">
+      <span class="logo-text">Haven <span>Locksmith</span></span>
+      <button type="button" class="mobile-nav-close" aria-label="Close menu">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#close"></use></svg>
       </button>
     </div>
-    <ul class="mobile-nav-list">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="locations.html">Locations</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="mobile-nav-panel-foot">
-      <a href="tel:+15165550142" class="btn btn-primary btn-block">Call (516) 555-0142</a>
+    <nav class="mobile-nav-body" aria-label="Main">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" aria-current="page"><span>Home</span><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="services.html"><span>Services</span><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="locations.html"><span>Locations</span><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="about.html"><span>About</span><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="contact.html"><span>Contact</span><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#chevron-right"></use></svg></a></li>
+      </ul>
+    </nav>
+    <div class="mobile-nav-call">
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--lg call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
+      <a class="btn btn-ghost btn-block" href="contact.html">Request service<svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></a>
     </div>
-  </nav>
+    <ul class="mobile-nav-trust">
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#shield-check"></use></svg>Licensed &amp; insured</li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#clock"></use></svg>Open 24/7</li>
+    </ul>
+  </div>
 </div>
 <!-- build:header:end -->
 
+<main id="main" class="home" tabindex="-1">
+
+<!-- Hero: the pitch and both call actions on the left; on the right, a
+     cutaway of a pin-tumbler lock that opens itself as the preloader clears.
+     Quick facts and a scroll cue run along the bottom. -->
 <section class="hero">
-  <svg class="hero-keyhole" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="70" r="45" stroke="#D9A455" stroke-width="2"/>
-    <path d="M100 105 L100 175 L75 175 L75 140 L125 140 L125 175 L100 175" stroke="#D9A455" stroke-width="2"/>
-  </svg>
-  <div class="wrap">
-    <div>
-      <span class="eyebrow">24/7 Emergency Response · Long Island, NY</span>
+  <div class="wrap hero-main">
+    <div class="hero-copy">
+      <span class="eyebrow hero-status">On call now · Nassau &amp; Suffolk</span>
       <h1>Locked out? <em>Help is closer</em> than you think.</h1>
       <p class="hero-lede">Haven Locksmith dispatches licensed, background-checked technicians across Nassau and Suffolk County for home, business, and automotive lockouts — day or night.</p>
       <div class="hero-actions">
-        <a href="tel:+15165550142" class="btn btn-primary">Call (516) 555-0142</a>
-        <a href="contact.html" class="btn btn-ghost">Request Service Online</a>
+        <a class="btn btn-primary" href="tel:+15165550142"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg>Call (516) 555-0142</a>
+        <a class="btn btn-ghost" href="contact.html">Request service online<svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></a>
       </div>
-      <div class="hero-badges">
-        <span class="hero-badge">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2 4 5v6c0 5 3.4 9.1 8 11 4.6-1.9 8-6 8-11V5l-8-3z" stroke="currentColor" stroke-width="1.4"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Licensed &amp; Insured
-        </span>
-        <span class="hero-badge">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-          Open 24 Hours
-        </span>
-        <span class="hero-badge">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.7 1.5 6.8L12 17l-6.2 3.5 1.5-6.8-5.1-4.7 6.9-.7L12 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          Upfront, Flat-Rate Pricing
-        </span>
-      </div>
-    </div>
-    <div class="hero-card">
-      <p class="hero-card-title">Dispatch Estimate</p>
-      <p class="hero-card-sub">For most Long Island locations</p>
-      <div class="hero-response">
-        <strong>15–25</strong>
-        <span>minutes average arrival</span>
-      </div>
-      <hr>
-      <ul>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          No hidden fees — price confirmed before we start
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Marked vehicle, ID-verified technician
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Non-destructive entry whenever possible
-        </li>
+      <ul class="hero-trust" role="list">
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#shield-check"></use></svg>Licensed &amp; insured</li>
+        <li class="hero-trust-hours"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#clock"></use></svg>Open 24 hours</li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#tag"></use></svg>Upfront, flat-rate pricing</li>
       </ul>
     </div>
+
+    <!-- The signature illustration: a technical-drawing cutaway of a
+         pin-tumbler lock on a dark "vault card". The drawing is decorative
+         (hidden from screen readers), and so is the arrival chip, which
+         repeats the facts strip below; the entry chip is read out. -->
+    <div class="hero-visual">
+      <div class="vault-card" aria-hidden="true">
+        <p class="vault-head">Pin-tumbler cylinder <span>· Cutaway</span></p>
+        <div class="vault-drawing">
+          <svg class="lock-cutaway" viewBox="0 30 640 360" aria-hidden="true" focusable="false">
+
+            <!-- Housing (the fixed shell) and the plug that turns inside it -->
+            <rect class="lk-shell" x="176" y="52" width="312" height="270" rx="22"/>
+            <rect class="lk-plug" x="168" y="186" width="306" height="114" rx="10"/>
+
+            <!-- Pin chambers drilled through housing and plug, and the keyway -->
+            <g class="lk-bores">
+              <rect x="217" y="68" width="26" height="166" rx="5"/>
+              <rect x="263" y="68" width="26" height="166" rx="5"/>
+              <rect x="309" y="68" width="26" height="166" rx="5"/>
+              <rect x="355" y="68" width="26" height="166" rx="5"/>
+              <rect x="401" y="68" width="26" height="166" rx="5"/>
+            </g>
+            <path class="lk-keyway" d="M168 230H462Q468 230 468 236V280Q468 286 462 286H168Z"/>
+
+            <!-- Five pin stacks: spring, driver pin (steel), key pin (brass).
+                 Drawn in the unlocked position; home.css starts each stack
+                 lower (springs stretched) and lifts it as the key passes. -->
+            <g class="lk-stack lk-stack--1">
+              <polyline class="lk-spring" points="230,70 230,73 238,76.89 222,84.67 238,92.44 222,100.22 238,108 222,115.78 238,123.56 222,131.33 238,139.11 230,143 230,146"/>
+              <g class="lk-pins">
+                <rect class="lk-driver" x="219" y="146" width="22" height="40" rx="4"/>
+                <path class="lk-keypin" d="M219 186H241V243L233 250H227L219 243Z"/>
+              </g>
+            </g>
+            <g class="lk-stack lk-stack--2">
+              <polyline class="lk-spring" points="276,70 276,73 284,76.89 268,84.67 284,92.44 268,100.22 284,108 268,115.78 284,123.56 268,131.33 284,139.11 276,143 276,146"/>
+              <g class="lk-pins">
+                <rect class="lk-driver" x="265" y="146" width="22" height="40" rx="4"/>
+                <path class="lk-keypin" d="M265 186H287V235L279 242H273L265 235Z"/>
+              </g>
+            </g>
+            <g class="lk-stack lk-stack--3">
+              <polyline class="lk-spring" points="322,70 322,73 330,76.89 314,84.67 330,92.44 314,100.22 330,108 314,115.78 330,123.56 314,131.33 330,139.11 322,143 322,146"/>
+              <g class="lk-pins">
+                <rect class="lk-driver" x="311" y="146" width="22" height="40" rx="4"/>
+                <path class="lk-keypin" d="M311 186H333V249L325 256H319L311 249Z"/>
+              </g>
+            </g>
+            <g class="lk-stack lk-stack--4">
+              <polyline class="lk-spring" points="368,70 368,73 376,76.89 360,84.67 376,92.44 360,100.22 376,108 360,115.78 376,123.56 360,131.33 376,139.11 368,143 368,146"/>
+              <g class="lk-pins">
+                <rect class="lk-driver" x="357" y="146" width="22" height="40" rx="4"/>
+                <path class="lk-keypin" d="M357 186H379V239L371 246H365L357 239Z"/>
+              </g>
+            </g>
+            <g class="lk-stack lk-stack--5">
+              <polyline class="lk-spring" points="414,70 414,73 422,76.89 406,84.67 422,92.44 406,100.22 422,108 406,115.78 422,123.56 406,131.33 422,139.11 414,143 414,146"/>
+              <g class="lk-pins">
+                <rect class="lk-driver" x="403" y="146" width="22" height="40" rx="4"/>
+                <path class="lk-keypin" d="M403 186H425V245L417 252H411L403 245Z"/>
+              </g>
+            </g>
+
+            <!-- The shear line: a dashed reference, plus the brass line that
+                 lights up once every pin gap sits on it -->
+            <line class="lk-shear" x1="168" y1="186" x2="498" y2="186"/>
+            <line class="lk-shear-lit" x1="168" y1="186" x2="474" y2="186" pathLength="1"/>
+
+            <!-- The key: bow, shoulder, and a blade with five bitting cuts -->
+            <g class="lk-key">
+              <path class="lk-key-body" d="M168 236L213 236L227 250H233L247 236L267 236L273 242H279L285 236L299 236L319 256H325L345 236L355 236L365 246H371L381 236L395 236L411 252H417L433 236L446 236L466 256V270L456 280H168V286H149A48 48 0 1 1 149 230H168ZM108 258A12 12 0 1 0 84 258A12 12 0 1 0 108 258Z" fill-rule="evenodd"/>
+              <line class="lk-key-groove" x1="178" y1="266" x2="440" y2="266"/>
+            </g>
+
+            <!-- End view of the plug: turns a quarter turn once the pins clear -->
+            <g class="lk-face">
+              <circle class="lk-face-shell" cx="566" cy="316" r="36"/>
+              <line class="lk-face-mark" x1="566" y1="274" x2="566" y2="284"/>
+              <g class="lk-face-plug">
+                <circle class="lk-face-core" cx="566" cy="316" r="24"/>
+                <path class="lk-face-keyway" d="M562.5 300H569.5V311L567 314L569.5 317V332H562.5V317L565 314L562.5 311Z"/>
+                <circle class="lk-face-dot" cx="566" cy="297" r="2.6"/>
+              </g>
+              <path class="lk-face-arrow" d="M566 270A46 46 0 0 1 612 316" pathLength="1"/>
+              <path class="lk-face-arrowhead" d="M606.5 309.5L612 317L617.5 309.5"/>
+              <text class="lk-label lk-face-caption" x="566" y="380" text-anchor="middle">Plug face</text>
+            </g>
+
+            <!-- Annotations with leader lines, technical-drawing style -->
+            <g class="lk-notes">
+              <path class="lk-leader" d="M500 156H421"/>
+              <circle class="lk-leader-dot" cx="420" cy="156" r="2.6"/>
+              <text class="lk-label" x="506" y="162">Driver pins</text>
+              <text class="lk-label lk-label--shear" x="506" y="193">Shear line</text>
+              <path class="lk-leader" d="M500 224H421"/>
+              <circle class="lk-leader-dot" cx="420" cy="224" r="2.6"/>
+              <text class="lk-label" x="506" y="230">Key pins</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <p class="vault-status" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#lock-open"></use></svg>Shear line clear · Unlocked</p>
+      <p class="vault-chip vault-chip--arrival" aria-hidden="true">
+        <span class="vault-chip-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#van"></use></svg></span>
+        <span class="vault-chip-text"><strong>15–25 min</strong> <span>typical arrival</span></span>
+      </p>
+      <p class="vault-chip vault-chip--entry">
+        <span class="vault-chip-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#check-circle"></use></svg></span>
+        <span class="vault-chip-text"><strong>Non-destructive</strong> <span>entry first</span></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap hero-foot">
+    <ul class="hero-facts" role="list">
+<!-- build:home-facts:start -->
+<li class="hero-fact"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#clock"></use></svg><strong>24/7</strong> <span>Emergency dispatch</span></li>
+<li class="hero-fact"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#van"></use></svg><strong>15–25 min</strong> <span>Typical arrival</span></li>
+<li class="hero-fact"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#map-pin"></use></svg><strong>12</strong> <span>Long Island towns</span></li>
+<li class="hero-fact"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#key"></use></svg><strong>12</strong> <span>Locksmith services</span></li>
+<!-- build:home-facts:end -->
+    </ul>
+    <a class="hero-scroll" href="#services"><span class="hero-scroll-label">Explore services</span><span class="hero-scroll-orb"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-down"></use></svg></span></a>
   </div>
 </section>
 
-<div class="trust-bar">
+<!-- Services: a cream panel that rides up over the hero's bottom edge. The
+     tabs filter the cards by category (home.js); the status line tells
+     screen-reader users how many cards are showing. -->
+<section class="home-services" id="services">
   <div class="wrap">
-    <span class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2 4 5v6c0 5 3.4 9.1 8 11 4.6-1.9 8-6 8-11V5l-8-3z" stroke="currentColor" stroke-width="1.4"/></svg>
-      Licensed &amp; Insured
-    </span>
-    <span class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Background-Checked Technicians
-    </span>
-    <span class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      24/7 Emergency Dispatch
-    </span>
-    <span class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.7 1.5 6.8L12 17l-6.2 3.5 1.5-6.8-5.1-4.7 6.9-.7L12 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-      Serving All of Long Island
-    </span>
-  </div>
-</div>
-
-<section id="services">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">What We Do</span>
-      <h2>Locksmith services for every situation</h2>
-      <p>From a 2 a.m. lockout to a full commercial master-key system, our technicians carry the tools and stock to finish most jobs in one visit.</p>
+    <div class="section-head section-head--row services-head">
+      <div class="section-head-text reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Locksmith services for every situation</h2>
+        <p>From a 2 a.m. lockout to a full commercial master-key system, our technicians carry the tools and stock to finish most jobs in one visit.</p>
+      </div>
+      <div class="section-head-aside reveal">
+        <div class="filter-tabs" role="group" aria-label="Filter services by category">
+<!-- build:services-filters:start -->
+<button type="button" class="filter-tab" data-filter="all" aria-pressed="true">All <span class="filter-count">12</span></button>
+<button type="button" class="filter-tab" data-filter="emergency" aria-pressed="false">Emergency <span class="filter-count">2</span></button>
+<button type="button" class="filter-tab" data-filter="residential" aria-pressed="false">Residential <span class="filter-count">5</span></button>
+<button type="button" class="filter-tab" data-filter="automotive" aria-pressed="false">Automotive <span class="filter-count">3</span></button>
+<button type="button" class="filter-tab" data-filter="commercial" aria-pressed="false">Commercial <span class="filter-count">2</span></button>
+<!-- build:services-filters:end -->
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="wrap">
+    <p class="sr-only" id="services-status" role="status" aria-live="polite"></p>
     <div class="services-grid reveal">
 <!-- build:services-grid:start -->
-<a class="service-card" href="home-lockout-service/">
-  <span class="service-tag">Emergency</span>
+<a class="service-card" data-category="emergency" href="home-lockout-service/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#house-key"></use></svg></span>
+    <span class="service-tag">Emergency</span>
+  </span>
   <h3>Home Lockout Service</h3>
   <p>Locked out of your house or apartment? A technician gets you back inside without damaging the door or the lock.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="car-lockout-service/">
-  <span class="service-tag">Emergency</span>
+<a class="service-card" data-category="emergency" href="car-lockout-service/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#car-lock"></use></svg></span>
+    <span class="service-tag">Emergency</span>
+  </span>
   <h3>Car Lockout Service</h3>
   <p>Keys locked in the car? We unlock most vehicles without scratching the paint or damaging the door.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="lock-rekeying/">
-  <span class="service-tag">Residential</span>
+<a class="service-card" data-category="residential" href="lock-rekeying/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#key-rotate"></use></svg></span>
+    <span class="service-tag">Residential</span>
+  </span>
   <h3>Lock Rekeying</h3>
   <p>Moved in, lost a key, or changed roommates? Rekeying makes old keys stop working without replacing the lock.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="lock-installation/">
-  <span class="service-tag">Residential</span>
+<a class="service-card" data-category="residential" href="lock-installation/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#lever-lock"></use></svg></span>
+    <span class="service-tag">Residential</span>
+  </span>
   <h3>Lock Installation</h3>
   <p>Worn, broken, or outdated locks replaced with new hardware that fits your door and your budget.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="deadbolt-installation/">
-  <span class="service-tag">Residential</span>
+<a class="service-card" data-category="residential" href="deadbolt-installation/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#deadbolt"></use></svg></span>
+    <span class="service-tag">Residential</span>
+  </span>
   <h3>Deadbolt Installation</h3>
   <p>Reinforced deadbolts and strike plates that make entry doors much harder to kick in or force.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="smart-lock-installation/">
-  <span class="service-tag">Residential</span>
+<a class="service-card" data-category="residential" href="smart-lock-installation/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#keypad"></use></svg></span>
+    <span class="service-tag">Residential</span>
+  </span>
   <h3>Smart Lock Installation</h3>
   <p>Keypad and Wi-Fi smart locks installed, paired, and tested so you can stop carrying keys.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="safe-installation/">
-  <span class="service-tag">Residential</span>
+<a class="service-card" data-category="residential" href="safe-installation/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#safe"></use></svg></span>
+    <span class="service-tag">Residential</span>
+  </span>
   <h3>Safe Installation</h3>
   <p>Home and business safes delivered, anchored, and set up so they stay put and stay locked.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="car-key-replacement/">
-  <span class="service-tag">Automotive</span>
+<a class="service-card" data-category="automotive" href="car-key-replacement/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#car-key"></use></svg></span>
+    <span class="service-tag">Automotive</span>
+  </span>
   <h3>Car Key Replacement</h3>
   <p>Lost every key or only have one? We cut and program replacement car keys, including transponder keys, on site.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="key-fob-programming/">
-  <span class="service-tag">Automotive</span>
+<a class="service-card" data-category="automotive" href="key-fob-programming/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#key-fob"></use></svg></span>
+    <span class="service-tag">Automotive</span>
+  </span>
   <h3>Key Fob Programming</h3>
   <p>Dead, lost, or new key fobs and remotes programmed to your vehicle at your location.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="ignition-repair/">
-  <span class="service-tag">Automotive</span>
+<a class="service-card" data-category="automotive" href="ignition-repair/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#ignition"></use></svg></span>
+    <span class="service-tag">Automotive</span>
+  </span>
   <h3>Ignition Repair</h3>
   <p>Key won't turn, stuck in the ignition, or worn out? Ignition cylinders repaired or replaced on site.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="master-key-systems/">
-  <span class="service-tag">Commercial</span>
+<a class="service-card" data-category="commercial" href="master-key-systems/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#key-ring"></use></svg></span>
+    <span class="service-tag">Commercial</span>
+  </span>
   <h3>Master Key Systems</h3>
   <p>One master key for managers and separate keys for each tenant, office, or door.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
-<a class="service-card" href="panic-bar-installation/">
-  <span class="service-tag">Commercial</span>
+<a class="service-card" data-category="commercial" href="panic-bar-installation/">
+  <span class="service-card-top">
+    <span class="service-card-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#panic-bar"></use></svg></span>
+    <span class="service-tag">Commercial</span>
+  </span>
   <h3>Panic Bar Installation</h3>
   <p>Panic bars and exit devices installed and adjusted so emergency exits open with one push.</p>
-  <span class="svc-link">Learn more →</span>
+  <span class="svc-link">Learn more <svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></span>
 </a>
 <!-- build:services-grid:end -->
     </div>
   </div>
 </section>
 
-<section class="section-dark">
+<!-- How it works: the three real steps from first call to open door, on a
+     dark drafting panel, with a call button beside the heading. -->
+<section class="how" id="how-it-works">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">How It Works</span>
-      <h2>Three steps to getting back in</h2>
-    </div>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>Call or book online</h3>
-        <p>Tell us your location and what's going on. We quote a flat rate before anyone heads out.</p>
+    <div class="how-panel">
+      <div class="section-head section-head--row how-head reveal">
+        <div class="section-head-text">
+          <span class="eyebrow">How it works</span>
+          <h2>Three steps to getting back in</h2>
+        </div>
+        <div class="section-head-aside">
+          <a class="call-block call-block--brass" href="tel:+15165550142">
+            <span class="call-orb call-orb--md call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg></span>
+            <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+          </a>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>We dispatch a local tech</h3>
-        <p>The nearest available, ID-verified technician is sent straight to you — most arrivals in 15–25 minutes.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>Fast, guaranteed fix</h3>
-        <p>Your lock, key, or entry issue is resolved on the spot, with workmanship backed by our guarantee.</p>
-      </div>
+      <ol class="steps reveal" role="list">
+        <li class="step">
+          <span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg></span>
+          <span class="step-num" aria-hidden="true">Step 01</span>
+          <h3>Call or book online</h3>
+          <p>Tell us your location and what's going on. We quote a flat rate before anyone heads out.</p>
+        </li>
+        <li class="step">
+          <span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#van"></use></svg></span>
+          <span class="step-num" aria-hidden="true">Step 02</span>
+          <h3>We dispatch a local tech</h3>
+          <p>The nearest available, ID-verified technician is sent straight to you — most arrivals in 15–25 minutes.</p>
+        </li>
+        <li class="step">
+          <span class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#lock-open"></use></svg></span>
+          <span class="step-num" aria-hidden="true">Step 03</span>
+          <h3>Fast, guaranteed fix</h3>
+          <p>Your lock, key, or entry issue is resolved on the spot, with workmanship backed by our guarantee.</p>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
 
-<section id="area">
-  <div class="wrap">
-    <div class="area-layout reveal">
-      <div>
-        <span class="eyebrow">Service Area</span>
-        <h2 style="margin-top:16px; font-size:clamp(1.9rem, 3vw, 2.5rem);">Proudly serving all of Long Island</h2>
-        <p style="margin-top:16px; color:var(--color-ink-soft); font-size:1.05rem;">Our technicians are positioned across Nassau and Suffolk County so a real person is always close by — not dispatched from across the island.</p>
-      </div>
-      <div class="town-list">
+<!-- Service area: the pitch and a link to every location on the left; the
+     towns we cover, grouped by county, on the right. -->
+<section class="area" id="area">
+  <div class="wrap area-layout">
+    <div class="area-copy reveal">
+      <span class="eyebrow">Service area</span>
+      <h2 class="area-title">Proudly serving all of Long Island</h2>
+      <p class="area-text">Our technicians are positioned across Nassau and Suffolk County so a real person is always close by — not dispatched from across the island.</p>
+      <a class="btn btn-outline" href="locations.html">See all locations<svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></a>
+    </div>
+    <div class="area-counties reveal">
 <!-- build:town-chips:start -->
-<a class="town-chip" href="locksmith-services-near-hempstead/">Hempstead</a>
-<a class="town-chip" href="locksmith-services-near-levittown/">Levittown</a>
-<a class="town-chip" href="locksmith-services-near-garden-city/">Garden City</a>
-<a class="town-chip" href="locksmith-services-near-freeport/">Freeport</a>
-<a class="town-chip" href="locksmith-services-near-massapequa/">Massapequa</a>
-<a class="town-chip" href="locksmith-services-near-huntington/">Huntington</a>
-<a class="town-chip" href="locksmith-services-near-babylon/">Babylon</a>
-<a class="town-chip" href="locksmith-services-near-smithtown/">Smithtown</a>
-<a class="town-chip" href="locksmith-services-near-patchogue/">Patchogue</a>
-<a class="town-chip" href="locksmith-services-near-bay-shore/">Bay Shore</a>
-<a class="town-chip" href="locksmith-services-near-islip/">Islip</a>
-<a class="town-chip" href="locksmith-services-near-riverhead/">Riverhead</a>
+<div class="county-group">
+  <p class="county-group-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#map-pin"></use></svg>Nassau County <span class="county-group-count">5 towns</span></p>
+  <div class="town-list">
+    <a class="town-chip" href="locksmith-services-near-hempstead/">Hempstead</a>
+    <a class="town-chip" href="locksmith-services-near-levittown/">Levittown</a>
+    <a class="town-chip" href="locksmith-services-near-garden-city/">Garden City</a>
+    <a class="town-chip" href="locksmith-services-near-freeport/">Freeport</a>
+    <a class="town-chip" href="locksmith-services-near-massapequa/">Massapequa</a>
+  </div>
+</div>
+<div class="county-group">
+  <p class="county-group-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#map-pin"></use></svg>Suffolk County <span class="county-group-count">7 towns</span></p>
+  <div class="town-list">
+    <a class="town-chip" href="locksmith-services-near-huntington/">Huntington</a>
+    <a class="town-chip" href="locksmith-services-near-babylon/">Babylon</a>
+    <a class="town-chip" href="locksmith-services-near-smithtown/">Smithtown</a>
+    <a class="town-chip" href="locksmith-services-near-patchogue/">Patchogue</a>
+    <a class="town-chip" href="locksmith-services-near-bay-shore/">Bay Shore</a>
+    <a class="town-chip" href="locksmith-services-near-islip/">Islip</a>
+    <a class="town-chip" href="locksmith-services-near-riverhead/">Riverhead</a>
+  </div>
+</div>
 <!-- build:town-chips:end -->
-      </div>
     </div>
   </div>
 </section>
 
+<!-- Closing call to action: the shared brass CTA panel (components/cta-band),
+     with the big round call button (same markup as callBlock() in
+     build/markup.js: tone dark, size lg). -->
 <section class="cta-band">
   <div class="wrap reveal">
-    <h2>Locked out right now?</h2>
-    <p>Call Haven Locksmith and a technician will be on the way in minutes — no matter the time.</p>
-    <a href="tel:+15165550142" class="btn btn-primary">Call (516) 555-0142</a>
+    <div class="cta-panel">
+      <div class="cta-copy">
+        <h2>Locked out right now?</h2>
+        <p>Call Haven Locksmith and a technician will be on the way in minutes — no matter the time.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="call-block call-block--dark" href="tel:+15165550142">
+          <span class="call-orb call-orb--lg call-orb--dark" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg></span>
+          <span class="call-block-text"><span class="call-block-kicker">Call now, 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+</main>
 
 <!-- build:footer:start -->
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
+    <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo-text">Haven <span>Locksmith</span></span>
-        <p>Licensed, insured locksmith services across Long Island, NY. Residential, commercial, and automotive — available 24/7.</p>
+        <a href="index.html" class="logo footer-logo">
+      <span class="logo-mark" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#keyhole"></use></svg></span>
+      <span class="logo-text">Haven <span>Locksmith</span></span>
+    </a>
+        <p class="footer-tagline">Licensed, insured locksmiths across Long Island, NY — open 24/7.</p>
       </div>
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--md call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
+    </div>
+    <div class="footer-grid">
       <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About Us</a></li>
+        <h2 class="footer-heading">Company</h2>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="locations.html">Locations</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Popular Services</h4>
-        <ul>
+        <h2 class="footer-heading">Popular services</h2>
+        <ul class="footer-links">
           <li><a href="home-lockout-service/">Home Lockout Service</a></li>
           <li><a href="car-key-replacement/">Car Key Replacement</a></li>
           <li><a href="lock-rekeying/">Lock Rekeying</a></li>
@@ -336,18 +527,26 @@
           <li><a href="smart-lock-installation/">Smart Lock Installation</a></li>
         </ul>
       </div>
-      <div class="footer-col footer-col-contact">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+15165550142">(516) 555-0142</a></li>
-          <li><a href="mailto:info@havenlocksmith.com">info@havenlocksmith.com</a></li>
-          <li>Long Island, NY</li>
+      <div class="footer-col">
+        <h2 class="footer-heading">Service area</h2>
+        <ul class="footer-links">
+          <li><a href="locations.html#nassau-county">Nassau County</a></li>
+          <li><a href="locations.html#suffolk-county">Suffolk County</a></li>
+          <li><a class="footer-link-more" href="locations.html">All locations<svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#arrow-right"></use></svg></a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col--contact">
+        <h2 class="footer-heading">Contact</h2>
+        <ul class="footer-contact">
+          <li><a class="footer-phone" href="tel:+15165550142"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#phone"></use></svg>(516) 555-0142</a></li>
+          <li><a href="mailto:info@havenlocksmith.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#mail"></use></svg>info@havenlocksmith.com</a></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="components/icons/icons.svg#clock"></use></svg>Open 24/7</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Haven Locksmith. All rights reserved.</span>
-      <span>License #placeholder-0000 · Fully Insured</span>
+      <p class="footer-copy">© 2026 Haven Locksmith. All rights reserved.</p>
+      <p class="footer-license">License #placeholder-0000 · Fully Insured</p>
     </div>
   </div>
 </footer>

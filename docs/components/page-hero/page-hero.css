@@ -1,31 +1,121 @@
-/* Dark banner at the top of every inner page (services, about, contact) —
-   an eyebrow, a heading, and a lede paragraph. The home page has its own,
-   much larger hero instead (see home.css). */
+/* Dark banner at the top of every inner page (services, locations, town
+   hubs, about, contact): optional breadcrumbs, an eyebrow, a big H1, a
+   lede, and call buttons, on flat charcoal with a brass line drawing. The
+   section right after it rises over its bottom edge with rounded corners.
+   The home page has its own full-screen hero instead (see home.css). */
 
+/* -------------------------------------------------------------------- Hero */
+
+/* The navbar is fixed over the page, so the top padding clears it first.
+   The bottom padding leaves room for the next section's 40px overlap. The
+   eyebrow inside takes the dark-surface colors set here. */
 .page-hero {
+  --focus-ring: var(--color-accent-bright);
+  --eyebrow-color: var(--color-accent-bright);
+  --eyebrow-line: var(--color-accent-line);
+  --eyebrow-bg: rgba(217, 164, 85, 0.08);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: calc(var(--header-clearance) + 40px) 0 96px;
   background: var(--color-panel);
   color: var(--color-panel-ink);
-  padding: 72px 0 64px;
 }
 
+/* A flat brass line drawing of a lock face (housing rings, the plug, the
+   keyway, a quarter-turn arrow) to the right of the copy. Inline SVG, so
+   no extra request. Its right edge is tied to the content column, so it
+   stays beside the text on very wide screens. */
+.page-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: max(-150px, calc(50% - var(--max-width) / 2 - 150px));
+  width: 600px;
+  height: 600px;
+  transform: translateY(-46%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='none' stroke='%23d9a455' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke-opacity='.1' stroke-dasharray='3 9' d='M320 4v632M4 320h632'/%3E%3Ccircle cx='320' cy='320' r='300' stroke-opacity='.12'/%3E%3Ccircle cx='320' cy='320' r='244' stroke-opacity='.17'/%3E%3Ccircle cx='320' cy='320' r='176' stroke-opacity='.3'/%3E%3Ccircle cx='320' cy='320' r='128' stroke-opacity='.18' stroke-dasharray='2 8'/%3E%3Cpath stroke-opacity='.55' d='M320 262a30 30 0 0 1 14 56.5L344 382H296l10-63.5A30 30 0 0 1 320 262z'/%3E%3Cpath stroke-opacity='.45' d='M320 110A210 210 0 0 1 502 215M501 201l1 14-11.5-8'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------------- Copy */
+
+/* The heading is capped at ~11.5em so long titles wrap before reaching the
+   drawing on the right. Its 2.5rem floor keeps it a step above section H2s
+   (2.2rem) on phones. */
 .page-hero h1 {
-  font-size: clamp(2.1rem, 4vw, 2.9rem);
+  max-width: 11.5em;
+  margin-top: 20px;
   color: var(--color-panel-ink);
-  margin-top: 16px;
-  max-width: 640px;
+  font-size: clamp(2.5rem, 1.4rem + 3.6vw, 4.2rem);
+  line-height: 0.95;
+}
+
+/* Nothing above the heading (no crumbs or eyebrow): no gap either */
+.page-hero h1:first-child {
+  margin-top: 0;
+}
+
+/* Words wrapped in <em> are set in brass, as in the home hero */
+.page-hero h1 em {
+  font-style: normal;
+  color: var(--color-accent-bright);
 }
 
 .page-hero p {
-  margin-top: 18px;
-  max-width: 560px;
+  max-width: 600px;
+  margin-top: 22px;
   color: var(--color-panel-ink-soft);
-  font-size: 1.05rem;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.2rem);
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
-/* Row of call / contact buttons under the intro paragraph */
+/* Row of call / contact buttons under the lede */
 .page-hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 30px;
+  gap: 12px 14px;
+  margin-top: 34px;
+}
+
+/* ------------------------------------------------- The overlapping section */
+
+/* The section after the hero rises 40px over its bottom edge with rounded
+   top corners, like a cream sheet laid over the dark hero. position:
+   relative paints it above the hero. */
+.page-hero + section {
+  position: relative;
+  margin-top: -40px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* ------------------------------------------------------------ Responsive */
+
+/* Below 1225px the copy spans the full width, so the drawing would sit
+   behind text: the hero goes plain charcoal */
+@media (max-width: 1225px) {
+  .page-hero::after {
+    display: none;
+  }
+}
+
+/* Phones: less padding, and the buttons stack full width */
+@media (max-width: 760px) {
+  .page-hero {
+    padding: calc(var(--header-clearance) + 20px) 0 84px;
+  }
+
+  .page-hero p {
+    margin-top: 18px;
+  }
+
+  .page-hero-actions {
+    margin-top: 28px;
+  }
+
+  .page-hero-actions .btn {
+    width: 100%;
+  }
 }

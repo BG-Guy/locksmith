@@ -1,19 +1,78 @@
 /* Heading block that introduces a section: an eyebrow label, an H2, and a
    short paragraph. Sits above grids of cards on the home, services, town,
-   and locations pages. */
+   and locations pages. The --row variant puts something (filter tabs, a
+   button) to the right of the text. Colors follow the surface: on a dark
+   section the H2 and paragraph pick up its light text color by themselves. */
+
+/* -------------------------------------------------------------- Stacked */
 
 .section-head {
-  max-width: 620px;
-  margin-bottom: 56px;
+  max-width: 720px;
+  margin-bottom: clamp(36px, 4.5vw, 56px);
 }
 
 .section-head h2 {
-  font-size: clamp(1.9rem, 3vw, 2.5rem);
-  margin-top: 16px;
+  margin-top: 18px;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 0.95;
 }
 
+/* No eyebrow above it: no gap either */
+.section-head h2:first-child {
+  margin-top: 0;
+}
+
+/* The intro paragraph is the surface's own text color at 72%: ~6.5:1 on
+   cream and ~7.7:1 on charcoal, so dark sections need no override. The
+   first line is the fallback for browsers without color-mix(). */
 .section-head p {
-  margin-top: 16px;
+  margin-top: 18px;
+  max-width: 60ch;
   color: var(--color-ink-soft);
-  font-size: 1.05rem;
+  color: color-mix(in srgb, currentColor 72%, transparent);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------ Row variant */
+
+/* Text on the left, an aside on the right, bottom-aligned. When the two
+   can't share a line (a wide aside on a mid-size screen), the aside drops
+   below the text instead of squeezing it. */
+.section-head--row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px 48px;
+  max-width: none;
+}
+
+.section-head-text {
+  flex: 1 1 420px;
+  max-width: 680px;
+}
+
+/* min-width: 0 lets wide content (like a row of tabs) shrink or scroll
+   inside the aside instead of widening the page */
+.section-head-aside {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------ Responsive */
+
+/* Phones: the row variant stacks, aside under the text */
+@media (max-width: 760px) {
+  .section-head--row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .section-head-text {
+    flex: none;
+  }
 }

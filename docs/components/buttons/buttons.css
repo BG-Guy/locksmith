@@ -1,54 +1,176 @@
-/* Button styles shared by every page: primary (filled), ghost and outline
-   (bordered), plus a full-width variant. */
+/* Buttons shared by every page: one flat pill shape in four solid finishes —
+   primary (brass, the main action on any surface), ghost (dark surfaces),
+   outline (light surfaces), and dark (the brass CTA panel) — plus a
+   full-width modifier. Works on <a> and <button> alike. */
 
+/* --------------------------------------------------------------- Base pill */
+
+/* Shape, type, and motion shared by every variant; variants set colors only.
+   Flat: no shadows or gradients — states change color, never depth. The
+   transparent border keeps the outline visible in Windows high-contrast
+   mode, where backgrounds are dropped. */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  padding: 15px 28px;
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
+  min-height: 52px;
+  padding: 12px 26px;
   border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: inherit;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    transform 0.2s var(--ease-out),
+    background-color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    color 0.2s var(--ease-out);
 }
 
+/* Icons inside a button stay 18px whatever the label size */
+.btn .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s var(--ease-out), color 0.2s var(--ease-out);
+}
+
+/* Pressing gives a small 2D squeeze as feedback */
+.btn:active {
+  transform: scale(0.98);
+  transition-duration: 0.08s;
+}
+
+/* An arrow icon nudges 3px toward where the button goes. Matched by the
+   sprite id, because the arrow's position in the label varies. */
+.btn:hover .icon:has(use[href$="#arrow-right"]),
+.btn:focus-visible .icon:has(use[href$="#arrow-right"]) {
+  transform: translateX(3px);
+}
+
+.btn:hover .icon:has(use[href$="#arrow-up-right"]),
+.btn:focus-visible .icon:has(use[href$="#arrow-up-right"]) {
+  transform: translate(2px, -2px);
+}
+
+.btn:hover .icon:has(use[href$="#arrow-down"]),
+.btn:focus-visible .icon:has(use[href$="#arrow-down"]) {
+  transform: translateY(3px);
+}
+
+/* ------------------------------------------------------------- Primary */
+
+/* Solid brass with ink text (5.3:1) on every surface; hover brightens it */
 .btn-primary {
   background: var(--color-accent);
-  color: #1b1b1d;
-}
-
-.btn-primary:hover {
-  background: var(--color-accent-bright);
-  transform: translateY(-1px);
-}
-
-.btn-ghost {
-  background: transparent;
-  border-color: var(--color-line-dark);
-  color: var(--color-panel-ink);
-}
-
-.btn-ghost:hover {
   border-color: var(--color-accent);
-  color: var(--color-accent-bright);
-}
-
-.btn-outline {
-  background: transparent;
-  border-color: var(--color-line);
   color: var(--color-ink);
 }
 
-.btn-outline:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--color-accent-bright);
+  border-color: var(--color-accent-bright);
 }
 
+/* --------------------------------------------------------------- Ghost */
+
+/* A faint cream tint with a cream hairline, for dark surfaces (heroes,
+   dark panels, the mobile drawer). Its icon is brass to tie it to the
+   primary. */
+.btn-ghost {
+  background: rgba(241, 236, 225, 0.04);
+  border-color: rgba(241, 236, 225, 0.24);
+  color: var(--color-panel-ink);
+}
+
+.btn-ghost .icon {
+  color: var(--color-accent-bright);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: rgba(241, 236, 225, 0.1);
+  border-color: var(--color-accent-bright);
+}
+
+/* ------------------------------------------------------------- Outline */
+
+/* Ink hairline for light surfaces (cream sections, white cards). Hover
+   fills it charcoal, the same move as the dark panels elsewhere. */
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+}
+
+.btn-outline .icon {
+  color: var(--color-accent-deep);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-panel-ink);
+}
+
+.btn-outline:hover .icon,
+.btn-outline:focus-visible .icon {
+  color: var(--color-accent-bright);
+}
+
+/* On light surfaces the focus ring uses deep brass (4.6:1 on cream) */
+.btn-outline:focus-visible {
+  outline-color: var(--color-accent-deep);
+}
+
+/* ---------------------------------------------------------------- Dark */
+
+/* Charcoal with cream text, for brass surfaces (the CTA panel) */
+.btn-dark {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+
+.btn-dark .icon {
+  color: var(--color-accent-bright);
+}
+
+.btn-dark:hover,
+.btn-dark:focus-visible {
+  background: var(--color-panel-soft);
+}
+
+/* A brass ring would vanish against brass, so here the ring is charcoal */
+.btn-dark:focus-visible {
+  outline-color: var(--color-ink);
+}
+
+/* ----------------------------------------------------------- Modifiers */
+
+/* Full width: form submits, sidebar cards, the mobile drawer. Its label is
+   centered, so it can spare side padding — which keeps labels on one line
+   in narrow cards (the drawer's call card on a 320px phone). */
 .btn-block {
   width: 100%;
-  justify-content: center;
+  padding-inline: 18px;
+}
+
+/* Disabled (e.g. the contact form's brief "Sending…" state): dimmed and
+   inert, so hover and press effects can't fire on it either. */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+  transform: none;
 }

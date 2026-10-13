@@ -1,6 +1,10 @@
 /* Rounded chips that name towns. A chip is a link when we have a page for
-   that town, and plain text when we do not. Used on the home page's service
-   area section and at the bottom of service, town, and services pages. */
+   that town (solid white, with a brass map-point dot) and plain text when
+   we do not (quieter, no dot, no hover), so the two never look alike. Used
+   in the home page's service-area cards, the "Also serving..." blocks on
+   service and town pages, and the services index. */
+
+/* -------------------------------------------------------------------- List */
 
 .town-list {
   display: flex;
@@ -8,29 +12,100 @@
   gap: 10px;
 }
 
+/* -------------------------------------------------------------------- Chip */
+
+/* Base pill, as used by a plain chip (no page for that place): a hairline
+   border on a faint white wash, softer text */
 .town-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+  padding: 0 18px;
   border: 1px solid var(--color-line);
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 0.86rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.45);
   color: var(--color-ink-soft);
-  background: var(--color-bg-alt);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
   text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
 }
 
+/* Linked chip: solid white, ink text, and a brass dot marking a place
+   that has its own page */
+a.town-chip {
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
+}
+
+a.town-chip::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transition: transform 0.25s var(--ease-out);
+}
+
+/* Flat hover / focus: brass border, deep-brass text, the dot swells */
 a.town-chip:hover,
 a.town-chip:focus-visible {
   border-color: var(--color-accent);
-  color: var(--color-accent);
+  color: var(--color-accent-deep);
 }
 
-/* A short section holding just a heading and chips, sitting under a grid */
+a.town-chip:hover::before,
+a.town-chip:focus-visible::before {
+  transform: scale(1.35);
+}
+
+a.town-chip:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+
+/* Chips sit on light surfaces: deep brass keeps the focus ring at 4.6:1+ */
+a.town-chip:focus-visible {
+  outline-color: var(--color-accent-deep);
+}
+
+/* ---------------------------------------------------------- Chips section */
+
+/* A short section under a grid of cards (town hubs, the services index):
+   a heading on the left and the chips on the right on desktop, stacked
+   below 1225px. The section above already supplies the space on top. */
 .chips-section {
-  padding: 8px 0 88px;
+  padding: 0 0 clamp(64px, 8vw, 104px);
+}
+
+.chips-section .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: 24px 64px;
 }
 
 .chips-title {
-  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
-  margin-bottom: 20px;
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------ Responsive */
+
+@media (max-width: 1225px) {
+  .chips-section .wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Phones: chips grow to the 44px minimum tap size */
+@media (max-width: 760px) {
+  .town-chip {
+    min-height: 44px;
+  }
 }

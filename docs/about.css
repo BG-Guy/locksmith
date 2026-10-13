@@ -1,53 +1,242 @@
-/* Styles unique to about.html: the two-column story/values layout below
-   the shared page-hero banner. */
+/* Styles unique to about.html: the story section, with the copy and a
+   pricing pull-quote on the left and the four values as cards on the
+   right. The hero, buttons, and CTA band are shared (see components/). */
 
+/* ----------------------------------------------------------------- Layout */
+
+/* Story on the left, values on the right. The values column is a touch
+   wider so two cards per row keep a comfortable line length. */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+  gap: clamp(48px, 6vw, 88px);
   align-items: start;
 }
 
-.about-copy p + p {
+/* ------------------------------------------------------------------ Story */
+
+/* The shared section head brings the eyebrow and the H2 scale; in this
+   column it only needs a tighter gap above the paragraphs. */
+.about-copy .section-head {
+  margin-bottom: 28px;
+}
+
+/* The column's own paragraphs only (the pull-quote styles its own text) */
+.about-copy > p {
+  color: var(--color-ink-soft);
+  text-wrap: pretty;
+}
+
+.about-copy > p + p {
   margin-top: 18px;
 }
 
-.about-copy p {
-  color: var(--color-ink-soft);
-  font-size: 1.02rem;
+/* The opening paragraph doubles as the lede: larger and in full ink */
+.about-copy > .about-lede {
+  font-size: 1.16rem;
+  line-height: 1.6;
+  color: var(--color-ink);
 }
 
-.value-list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+/* ------------------------------------------------------------- Pull-quote */
+
+/* A charcoal plate that repeats the pricing line from the paragraph above
+   it, set like an engraved nameplate. It is a visual echo only
+   (aria-hidden in the HTML), so screen readers hear the line just once. */
+.about-pullquote {
+  position: relative;
+  isolation: isolate;
+  margin: 36px 0;
+  padding: 32px 36px 36px;
+  border: 1px solid var(--color-accent-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
 }
 
-.value-item {
-  display: flex;
-  gap: 18px;
-}
-
-.value-num {
+/* Oversized quote mark in faint brass, tucked into the top-right corner
+   behind the text (positioned, so it never affects the layout) */
+.about-pullquote::after {
+  content: "\201C";
+  position: absolute;
+  top: 6px;
+  right: 24px;
+  z-index: -1;
   font-family: var(--font-display);
-  color: var(--color-accent);
-  font-size: 1.1rem;
+  font-size: 7.5rem;
+  line-height: 1;
+  color: var(--color-accent-bright);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* Stamped label above the quote, led by a short brass rule */
+.about-pullquote-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-logo);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-bright);
+}
+
+/* Teko sits high in its line box; nudge the rule up to its visual middle
+   (the same correction the global .eyebrow dot uses) */
+.about-pullquote-kicker::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  margin-top: -2px;
+  background: currentColor;
   flex-shrink: 0;
 }
 
-.value-item h4 {
-  font-size: 1.05rem;
-  margin-bottom: 6px;
+/* The quote itself in the display face, its payoff half in brass */
+.about-pullquote-text {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.5vw, 2.15rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--color-panel-ink);
 }
 
-.value-item p {
+.about-pullquote-text em {
+  font-style: normal;
+  color: var(--color-accent-bright);
+}
+
+/* ----------------------------------------------------------------- Values */
+
+/* The four values as a 2x2 grid of white cards */
+.value-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* One value: icon well, name, short explanation. Not a link, so it has
+   no hover state (a lift would promise a click that goes nowhere). */
+.value-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px 30px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+
+/* Round icon well, like the face of a lock cylinder: a flat brass disc,
+   the icon in deep brass so it reads on white */
+.value-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-deep);
+}
+
+.value-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.value-card h3 {
+  margin-top: 24px;
+  font-size: 1.35rem;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.value-card p {
+  margin-top: 10px;
   color: var(--color-ink-soft);
-  font-size: 0.94rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
+/* ------------------------------------------------------------- Responsive */
+
+/* Desktop with height to spare: the values stay in view beside the longer
+   story column as it scrolls, parked clear of the fixed navbar */
+@media (min-width: 1226px) and (min-height: 760px) {
+  .value-grid {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+  }
+}
+
+/* Tablet: the columns stack; the story keeps a readable line length and
+   the values stay 2x2 underneath it */
 @media (max-width: 1225px) {
   .about-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
+  }
+
+  .about-copy {
+    max-width: 720px;
+  }
+}
+
+/* Phone: one value per row with the icon beside the text (saves height),
+   and a tighter pull-quote plate */
+@media (max-width: 760px) {
+  .about-grid {
+    gap: 44px;
+  }
+
+  .about-pullquote {
+    margin: 30px 0;
+    padding: 26px 22px 28px;
+  }
+
+  .about-pullquote::after {
+    right: 14px;
+    font-size: 6rem;
+  }
+
+  .value-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .value-card {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 16px;
+    padding: 22px 20px 24px;
+  }
+
+  .value-icon {
+    grid-row: span 2;
+    width: 48px;
+    height: 48px;
+  }
+
+  .value-icon .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .value-card h3 {
+    margin-top: 3px;
+    font-size: 1.3rem;
+  }
+
+  .value-card p {
+    margin-top: 6px;
   }
 }

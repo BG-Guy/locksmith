@@ -1,32 +1,71 @@
 /* Breadcrumb trail (Home / Locations / Huntington / Service) shown at the
-   top of dark hero banners on service and town pages. */
+   top of the dark hero on service, town-hub, and other inner pages. Always
+   sits on a dark surface, so its colors are the light panel tints. */
+
+/* ------------------------------------------------------------------ Trail */
 
 .crumbs {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 22px;
-  font-size: 0.84rem;
+  gap: 4px 10px;
+  margin-bottom: 26px;
   color: var(--color-panel-ink-soft);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
+/* Links: soft cream, brightening on hover with an underline that draws in
+   from the left (a background line, so it can animate). The small radius
+   softens the focus ring without clipping the underline's ends. */
 .crumbs a {
+  border-radius: 3px;
   color: var(--color-panel-ink-soft);
   text-decoration: none;
-  transition: color 0.2s ease;
+  background-image: linear-gradient(var(--color-accent-bright), var(--color-accent-bright));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: color 0.2s var(--ease-out), background-size 0.3s var(--ease-out);
 }
 
 .crumbs a:hover,
 .crumbs a:focus-visible {
-  color: var(--color-accent-bright);
+  color: var(--color-panel-ink);
+  background-size: 100% 1px;
 }
 
+/* The "/" between items: quieter than the links, but still 5:1 text */
 .crumb-sep {
-  opacity: 0.5;
+  color: rgba(241, 236, 225, 0.55);
 }
 
-/* The current page */
+/* The current page: full-strength cream, not a link */
 .crumbs [aria-current] {
   color: var(--color-panel-ink);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------ Responsive */
+
+/* Phones: each link becomes a 44px-tall tap target; the row gap shrinks
+   to keep wrapped trails compact */
+@media (max-width: 760px) {
+  .crumbs {
+    row-gap: 0;
+    margin-bottom: 14px;
+  }
+
+  .crumbs a,
+  .crumbs [aria-current] {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* The underline sits under the text, not at the bottom of the tall box */
+  .crumbs a {
+    background-position: 0 calc(50% + 0.7em);
+  }
 }

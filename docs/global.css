@@ -1,28 +1,71 @@
-/* Truly site-wide styles only: CSS variables, reset, and base typography.
-   Anything specific to one component or page lives with that file instead —
-   see components/ for shared UI pieces, or the CSS file next to each page. */
+/* Truly site-wide styles only: design tokens (CSS variables), reset, and
+   base typography. Anything specific to one component or page lives with
+   that file instead — see components/ for shared UI pieces, or the CSS
+   file next to each page. */
+
+/* ------------------------------------------------------------ Design tokens */
 
 :root {
+  /* Color: charcoal + brass + cream. The palette itself never changes;
+     the extra tones below are tints of it for borders, wells, and text. */
   --color-bg: #f6f2ea;
   --color-bg-alt: #ffffff;
   --color-ink: #1b1b1d;
   --color-ink-soft: #4a4640;
   --color-panel: #1f2126;
+  --color-panel-deep: #16171a;
   --color-panel-soft: #2a2d33;
   --color-panel-ink: #f1ece1;
   --color-panel-ink-soft: #b9b3a6;
   --color-accent: #b8863b;
   --color-accent-bright: #d9a455;
+  /* Brass dark enough to pass AA as small text on cream, white, and the
+     light brass tints (eyebrow pills, icon wells): 4.9–5.2:1 */
+  --color-accent-deep: #835e27;
+  --color-accent-soft: rgba(184, 134, 59, 0.12);
+  --color-accent-line: rgba(217, 164, 85, 0.32);
   --color-line: rgba(27, 27, 29, 0.12);
+  --color-line-strong: rgba(27, 27, 29, 0.22);
   --color-line-dark: rgba(241, 236, 225, 0.14);
 
   --font-display: "Anton", "Arial Narrow", sans-serif;
   --font-body: "Barlow", "Segoe UI", sans-serif;
   --font-logo: "Teko", "Arial Narrow", sans-serif;
 
+  /* Shape: soft, generous corners */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* Flat design: no shadow or gradient tokens on purpose. Surfaces are
+     solid colors separated by contrast and 1px lines, and states change
+     color, never depth. */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Layout. The navbar is fixed over the page, so the first section on
+     every page pads its top by --header-clearance to start below it. */
   --max-width: 1180px;
-  --radius: 4px;
+  --gutter: 28px;
+  --section-pad: clamp(72px, 9vw, 120px);
+  --header-h: 76px;
+  --header-gap: 14px;
+  --header-clearance: calc(var(--header-h) + var(--header-gap) + 28px);
 }
+
+@media (max-width: 760px) {
+  :root {
+    --gutter: 20px;
+    --header-h: 64px;
+    --header-gap: 10px;
+  }
+}
+
+/* -------------------------------------------------------------------- Reset */
 
 * {
   box-sizing: border-box;
@@ -30,26 +73,25 @@
 
 html {
   scroll-behavior: smooth;
+  /* In-page anchor jumps stop below the fixed navbar, not under it */
+  scroll-padding-top: calc(var(--header-h) + 24px);
   /* Safety net: nothing on the site should scroll sideways. Without this,
      off-canvas elements like the mobile nav drawer (translated past the
-     right edge, see components/navbar/) let mobile browsers swipe the
-     whole page left/right even though desktop tools don't show it. */
+     edge of the screen, see components/navbar/) let mobile browsers swipe
+     the whole page sideways even though desktop tools don't show it. */
   overflow-x: hidden;
 }
 
 body {
   margin: 0;
   /* Every page's first section (.hero, .page-hero, .svc-hero) is this
-     same dark color. Body's own background only ever shows through in
-     the thin gap the sticky navbar leaves around itself (see
-     components/navbar/) — matching it here, instead of the page's usual
-     light --color-bg, is what makes the navbar's light pill read as a
-     distinct floating shape instead of blending into a same-toned page. */
+     same dark color and the footer is a deeper charcoal, so overscrolling
+     past either end of the page shows a dark color, not a flash of cream. */
   background: var(--color-panel);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -62,61 +104,133 @@ a {
   color: inherit;
 }
 
-/* Centered content column reused by every section on every page */
-.wrap {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 28px;
+::selection {
+  background: var(--color-accent-bright);
+  color: var(--color-ink);
 }
+
+/* One visible focus style for keyboard users everywhere. Its color is a
+   variable so it can keep 3:1 contrast on every surface: bright brass on
+   dark (the default here), deep brass inside the light sections (see
+   section, below), ink on brass. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--color-accent-bright));
+  outline-offset: 3px;
+}
+
+/* <main> takes focus from the skip link (tabindex="-1") only so keyboard
+   users start reading there; it needs no ring of its own */
+main:focus {
+  outline: none;
+}
+
+/* Text that only screen readers should hear */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------- Typography */
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.02;
+  line-height: 1;
   margin: 0;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.01em;
 }
 
 h1, h2 {
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 p {
   margin: 0;
 }
 
-/* Small uppercase label used above headings across every page */
+/* Small stamped label above headings on every page. Light surfaces get
+   deep brass; a dark surface sets --eyebrow-color/-line/-bg to brighter
+   tints so the label stays readable there too. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  gap: 9px;
+  padding: 7px 14px 5px;
+  border: 1px solid var(--eyebrow-line, rgba(143, 101, 40, 0.28));
+  border-radius: var(--radius-pill);
+  background: var(--eyebrow-bg, rgba(184, 134, 59, 0.08));
+  color: var(--eyebrow-color, var(--color-accent-deep));
+  font-family: var(--font-logo);
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
 }
 
 .eyebrow::before {
   content: "";
-  width: 22px;
-  height: 1px;
-  background: var(--color-accent);
+  width: 6px;
+  height: 6px;
+  margin-top: -2px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
 }
 
-/* Base vertical rhythm between page sections */
+/* ------------------------------------------------------------------ Layout */
+
+/* Centered content column reused by every section on every page */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
 /* Every section paints its own background — never leave it to inherit
    body's (see body, above): a section that wants to be dark already sets
-   that explicitly (.hero, .page-hero, .svc-hero, .section-dark), so this
+   that explicitly (.hero, .page-hero, .svc-hero), so this
    default only ever applies to the plain, light ones. */
 section {
-  padding: 96px 0;
+  /* Bright brass is only ~2:1 on cream; deep brass is 4.6:1. Dark sections
+     set --focus-ring back to bright brass. */
+  --focus-ring: var(--color-accent-deep);
+  padding: var(--section-pad) 0;
   background: var(--color-bg);
 }
 
-@media (max-width: 760px) {
-  section {
-    padding: 64px 0;
+/* Cream behind all the sections too. Section edges often land on a
+   fractional pixel; two cream edges anti-aliased separately over the dark
+   body leave a faint dark hairline between them. Over cream, they don't. */
+main {
+  display: block;
+  background: var(--color-bg);
+}
+
+/* ------------------------------------------------------------------ Motion */
+
+/* Visitors who ask their device for less motion get none: animations and
+   transitions finish instantly and smooth scrolling is turned off. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
   }
 }

@@ -1,0 +1,20 @@
+/* Icons: base styling for every <svg class="icon"> that points at a symbol
+   in icons.svg (see build/icons.js for the helper). */
+
+/* Line weight, round ends and color are set here, on the <svg>, and
+   inherited by the symbol's shapes, so every icon on the site is drawn the
+   same way and follows the surrounding text color (the sprite's few solid
+   details use currentColor too). 1.25em suits an icon inside a line of
+   text; a component sizes its icons by setting width/height on .icon in
+   its own CSS. */
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.2em;
+}

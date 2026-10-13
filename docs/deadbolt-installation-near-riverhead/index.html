@@ -16,7 +16,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../global.css">
+<link rel="stylesheet" href="../components/icons/icons.css">
+<link rel="stylesheet" href="../components/logo/logo.css">
 <link rel="stylesheet" href="../components/buttons/buttons.css">
+<link rel="stylesheet" href="../components/call-orb/call-orb.css">
 <link rel="stylesheet" href="../components/navbar/navbar.css">
 <link rel="stylesheet" href="../components/footer/footer.css">
 <link rel="stylesheet" href="../components/breadcrumbs/breadcrumbs.css">
@@ -27,154 +30,210 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
-  <div class="wrap">
+  <div class="site-header-inner">
+    <button type="button" class="nav-toggle" aria-controls="mobileNavDrawer" aria-expanded="false" aria-label="Open menu">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#menu"></use></svg>
+    </button>
     <a href="../index.html" class="logo">
-      <span class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4" stroke="#D9A455" stroke-width="1.6"/>
-          <path d="M12 12v8M9 16h6M9 19h6" stroke="#D9A455" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </span>
+      <span class="logo-mark" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#keyhole"></use></svg></span>
       <span class="logo-text">Haven <span>Locksmith</span></span>
     </a>
-    <nav class="main-nav">
-      <a href="../index.html">Home</a>
-      <a href="../services.html">Services</a>
-      <a href="../locations.html" class="active">Locations</a>
-      <a href="../about.html">About</a>
-      <a href="../contact.html">Contact</a>
+    <nav class="main-nav" aria-label="Main">
+      <ul class="main-nav-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../locations.html" aria-current="true">Locations</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
     </nav>
     <div class="header-actions">
-      <a href="../contact.html" class="btn btn-outline">Request Service</a>
-      <a href="tel:+15165550142" class="btn btn-primary phone-pill">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span>(516) 555-0142</span>
-      </a>
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--md call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
     </div>
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
   <div class="mobile-nav-scrim"></div>
-  <nav class="mobile-nav-panel" aria-label="Site navigation">
-    <div class="mobile-nav-panel-head">
-      <span class="mobile-nav-panel-title">Menu</span>
-      <button class="mobile-nav-close" aria-label="Close menu">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-nav-head">
+      <span class="logo-text">Haven <span>Locksmith</span></span>
+      <button type="button" class="mobile-nav-close" aria-label="Close menu">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#close"></use></svg>
       </button>
     </div>
-    <ul class="mobile-nav-list">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../services.html">Services</a></li>
-      <li><a href="../locations.html" class="active">Locations</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a href="../contact.html">Contact</a></li>
-    </ul>
-    <div class="mobile-nav-panel-foot">
-      <a href="tel:+15165550142" class="btn btn-primary btn-block">Call (516) 555-0142</a>
+    <nav class="mobile-nav-body" aria-label="Main">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html"><span>Home</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="../services.html"><span>Services</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="../locations.html" aria-current="true"><span>Locations</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="../about.html"><span>About</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="../contact.html"><span>Contact</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+      </ul>
+    </nav>
+    <div class="mobile-nav-call">
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--lg call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
+      <a class="btn btn-ghost btn-block" href="../contact.html">Request service<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg></a>
     </div>
-  </nav>
+    <ul class="mobile-nav-trust">
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#shield-check"></use></svg>Licensed &amp; insured</li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#clock"></use></svg>Open 24/7</li>
+    </ul>
+  </div>
 </div>
 
-<main>
+<main id="main" tabindex="-1">
 <section class="svc-hero">
   <div class="wrap">
-    <div>
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">/</span><a href="../locations.html">Locations</a><span class="crumb-sep">/</span><a href="../locksmith-services-near-riverhead/">Riverhead</a><span class="crumb-sep">/</span><span aria-current="page">Deadbolt Installation</span></nav>
-      <span class="eyebrow">Residential locksmith · Riverhead, NY</span>
-      <h1>Deadbolt Installation Near Riverhead, NY</h1>
-      <p class="svc-lede">Grade 1 or 2 deadbolts with reinforced strike plates in Riverhead, installed to resist kick-ins and forced entry.</p>
-      <div class="svc-actions">
-        <a href="tel:+15165550142" class="btn btn-primary">Call (516) 555-0142</a>
-<a href="../contact.html" class="btn btn-ghost">Request a free estimate</a>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="crumb-sep">/</span><a href="../locations.html">Locations</a><span class="crumb-sep">/</span><a href="../locksmith-services-near-riverhead/">Riverhead</a><span class="crumb-sep">/</span><span aria-current="page">Deadbolt Installation</span></nav>
+    <div class="svc-hero-grid">
+      <div class="svc-hero-copy">
+        <span class="eyebrow">Residential locksmith · Riverhead, NY</span>
+        <h1>Deadbolt Installation <span class="svc-h1-place">Near Riverhead, NY</span></h1>
+        <p class="svc-lede">Grade 1 or 2 deadbolts with reinforced strike plates in Riverhead, installed to resist kick-ins and forced entry.</p>
+        <div class="svc-actions">
+          <a href="tel:+15165550142" class="btn btn-primary"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg>Call (516) 555-0142</a>
+<a href="../contact.html" class="btn btn-ghost">Request a free estimate<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg></a>
+        </div>
+        <ul class="svc-trust">
+          <li><span class="svc-trust-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#shield-check"></use></svg></span>Licensed &amp; insured</li>
+          <li><span class="svc-trust-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#clock"></use></svg></span>Same-day available</li>
+          <li><span class="svc-trust-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#tag"></use></svg></span>Free estimates</li>
+        </ul>
       </div>
-      <ul class="svc-trust">
-        <li>Licensed &amp; insured</li>
-        <li>Same-day available</li>
-        <li>Free estimates</li>
-      </ul>
+      <aside class="svc-included" aria-labelledby="svc-included-title">
+        <div class="svc-included-head">
+          <span class="svc-included-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#deadbolt"></use></svg></span>
+          <p class="svc-included-title" id="svc-included-title">What's included</p>
+        </div>
+        <ul class="svc-included-list">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#check-circle"></use></svg><span>Grade 1 or 2 deadbolt options</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#check-circle"></use></svg><span>Reinforced strike plate</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#check-circle"></use></svg><span>Long screws into the wall stud</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#check-circle"></use></svg><span>Door and frame alignment check</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#check-circle"></use></svg><span>Keyed to match your other locks</span></li>
+        </ul>
+        <div class="svc-included-cost">
+          <p class="svc-cost-label">Typical cost</p>
+          <p class="svc-price"><span class="svc-price-range">$100 <span class="svc-price-joiner">to</span> $250</span> <span class="svc-price-note">per door</span></p>
+        </div>
+      </aside>
     </div>
-    <aside class="svc-included" aria-label="What is included">
-      <p class="svc-included-title">What's included</p>
-      <ul>
-        <li>Grade 1 or 2 deadbolt options</li>
-        <li>Reinforced strike plate</li>
-        <li>Long screws into the wall stud</li>
-        <li>Door and frame alignment check</li>
-        <li>Keyed to match your other locks</li>
-      </ul>
-    </aside>
   </div>
 </section>
 
 <section class="svc-content">
   <div class="wrap svc-layout">
     <div class="svc-main">
-<div class="svc-section">
+<div class="svc-section" id="why">
+  <p class="svc-topic">Why you need it</p>
   <h2>Why a Better Deadbolt Matters in Riverhead</h2>
   <p>Most forced entries are simple kick-ins: the door frame splits at the strike plate, which is usually held by short screws into thin wood. A basic knob lock, or a deadbolt with a weak strike, gives way in seconds. In Riverhead you will find farmhouses, newer subdivisions, and Route 58 retail businesses, and many original entry doors still carry hardware that has not changed since the house was built. A properly installed deadbolt with a reinforced strike and long screws is one of the most effective security upgrades for the money.</p>
-  <p>Properties in Riverhead often include gates, sheds, and outbuildings as well as the house, so locks keyed alike to share one key are a common request.</p>
+  <div class="svc-local">
+    <p class="svc-local-label"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#map-pin"></use></svg>Local note · Riverhead</p>
+    <p>Properties in Riverhead often include gates, sheds, and outbuildings as well as the house, so locks keyed alike to share one key are a common request.</p>
+  </div>
 </div>
-<div class="svc-section">
+<div class="svc-section" id="how">
+  <p class="svc-topic">How we do it</p>
   <h2>How We Install a Reinforced Deadbolt in Riverhead</h2>
   <p>We choose a deadbolt with a solid bolt and a full one-inch throw, and install it so it sits square in the door. The key step is the strike: we replace the flimsy factory plate with a reinforced strike and drive long screws through the jamb and into the wall stud, which spreads the force of a kick across the framing instead of the thin trim. We check the door for warping, adjust the alignment so the bolt throws smoothly, and can key the new deadbolt to match your other locks. A single deadbolt usually takes about 45 to 60 minutes.</p>
 </div>
-<div class="svc-section">
+<div class="svc-section" id="cost">
+  <p class="svc-topic">Cost &amp; lifespan</p>
   <h2>Deadbolt Installation Cost in Riverhead and Expected Lifespan</h2>
   <p>Deadbolt installation in Riverhead typically runs $100 to $250 per door, depending on the grade of the lock, whether a new hole must be bored, and the condition of the frame. A good deadbolt lasts 15 years or more. We quote a flat rate up front, and hardware options are shown at the estimate so you can pick your grade and finish.</p>
 </div>
-<div class="svc-section">
+<div class="svc-section" id="risk">
+  <p class="svc-topic">If you wait</p>
   <h2>What Happens to a Door With Weak Hardware</h2>
   <p>Weak hardware fails under force it should have resisted: a boot to the door, a shoulder, a pry bar. The frame splits, the door swings in, and the repair often costs more than the deadbolt upgrade would have. Beyond the bill, a forced entry leaves a household feeling unsafe in its own home. Homeowners in Riverhead and nearby Calverton and Aquebogue can close this gap in a single visit.</p>
 </div>
     </div>
-    <aside class="svc-side">
-      <div class="svc-quote">
-        <p class="svc-quote-title">Get a flat-rate quote</p>
-        <p>Call for a price before any work starts. Typical range: $100 to $250 per door.</p>
-        <a href="tel:+15165550142" class="btn btn-primary btn-block">Call (516) 555-0142</a>
-        <a href="../contact.html" class="btn btn-outline btn-block">Request service online</a>
-      </div>
-      <div class="svc-related">
-        <p class="svc-related-title">Related services</p>
-        <ul>
-<li><a href="../lock-installation-near-riverhead/">Lock Installation</a></li>
-<li><a href="../lock-rekeying-near-riverhead/">Lock Rekeying</a></li>
-<li><a href="../smart-lock-installation-near-riverhead/">Smart Lock Installation</a></li>
-        </ul>
-      </div>
-    </aside>
+    <aside class="svc-side" aria-label="Quote and related services">
+  <div class="svc-side-track">
+    <nav class="svc-toc" aria-labelledby="svc-toc-title">
+      <p class="svc-side-title" id="svc-toc-title">On this page</p>
+      <ul>
+        <li><a href="#why">Why you need it<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="#how">How we do it<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="#cost">Cost &amp; lifespan<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+        <li><a href="#risk">If you wait<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#chevron-right"></use></svg></a></li>
+      </ul>
+    </nav>
+    <div class="svc-quote">
+      <p class="svc-quote-title">Get a flat-rate quote</p>
+      <p class="svc-cost-label">Typical cost</p>
+      <p class="svc-price"><span class="svc-price-range">$100 <span class="svc-price-joiner">to</span> $250</span> <span class="svc-price-note">per door</span></p>
+      <p class="svc-quote-text">Call for a price before any work starts.</p>
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--md call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
+      <a href="../contact.html" class="btn btn-outline btn-block">Request service online<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg></a>
+    </div>
+  </div>
+  <div class="svc-related">
+    <p class="svc-side-title">Related services</p>
+    <ul>
+      <li><a class="svc-related-card" href="../lock-installation-near-riverhead/">
+        <span class="svc-related-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#lever-lock"></use></svg></span>
+        <span class="svc-related-name">Lock Installation</span>
+        <svg class="icon svc-related-arrow" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg>
+      </a></li>
+      <li><a class="svc-related-card" href="../lock-rekeying-near-riverhead/">
+        <span class="svc-related-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#key-rotate"></use></svg></span>
+        <span class="svc-related-name">Lock Rekeying</span>
+        <svg class="icon svc-related-arrow" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg>
+      </a></li>
+      <li><a class="svc-related-card" href="../smart-lock-installation-near-riverhead/">
+        <span class="svc-related-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#keypad"></use></svg></span>
+        <span class="svc-related-name">Smart Lock Installation</span>
+        <svg class="icon svc-related-arrow" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg>
+      </a></li>
+    </ul>
+  </div>
+</aside>
   </div>
 </section>
 
 <section class="svc-more">
-  <div class="wrap">
+  <div class="wrap svc-more-grid">
     <div class="svc-more-block">
+      <p class="svc-topic">Nearby</p>
       <h2>Also serving communities near Riverhead</h2>
       <div class="town-list"><span class="town-chip">Calverton</span>
 <span class="town-chip">Aquebogue</span>
 <span class="town-chip">Jamesport</span>
 <span class="town-chip">Wading River</span></div>
-      <p class="svc-more-links"><a href="../locksmith-services-near-riverhead/">All locksmith services near Riverhead</a> · <a href="../deadbolt-installation/">Deadbolt Installation across Long Island</a></p>
+      <ul class="svc-more-links">
+        <li><a href="../locksmith-services-near-riverhead/">All locksmith services near Riverhead<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg></a></li>
+        <li><a href="../deadbolt-installation/">Deadbolt Installation across Long Island<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg></a></li>
+      </ul>
     </div>
     <div class="svc-more-block">
+      <p class="svc-topic">Other services</p>
       <h2>More locksmith services near Riverhead</h2>
       <ul class="svc-links">
-<li><a href="../home-lockout-service-near-riverhead/">Home Lockout Service</a></li>
-<li><a href="../car-lockout-service-near-riverhead/">Car Lockout Service</a></li>
-<li><a href="../lock-rekeying-near-riverhead/">Lock Rekeying</a></li>
-<li><a href="../lock-installation-near-riverhead/">Lock Installation</a></li>
-<li><a href="../smart-lock-installation-near-riverhead/">Smart Lock Installation</a></li>
-<li><a href="../safe-installation-near-riverhead/">Safe Installation</a></li>
-<li><a href="../car-key-replacement-near-riverhead/">Car Key Replacement</a></li>
-<li><a href="../key-fob-programming-near-riverhead/">Key Fob Programming</a></li>
-<li><a href="../ignition-repair-near-riverhead/">Ignition Repair</a></li>
-<li><a href="../master-key-systems-near-riverhead/">Master Key Systems</a></li>
-<li><a href="../panic-bar-installation-near-riverhead/">Panic Bar Installation</a></li>
+        <li><a href="../home-lockout-service-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#house-key"></use></svg><span>Home Lockout Service</span></a></li>
+        <li><a href="../car-lockout-service-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#car-lock"></use></svg><span>Car Lockout Service</span></a></li>
+        <li><a href="../lock-rekeying-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#key-rotate"></use></svg><span>Lock Rekeying</span></a></li>
+        <li><a href="../lock-installation-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#lever-lock"></use></svg><span>Lock Installation</span></a></li>
+        <li><a href="../smart-lock-installation-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#keypad"></use></svg><span>Smart Lock Installation</span></a></li>
+        <li><a href="../safe-installation-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#safe"></use></svg><span>Safe Installation</span></a></li>
+        <li><a href="../car-key-replacement-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#car-key"></use></svg><span>Car Key Replacement</span></a></li>
+        <li><a href="../key-fob-programming-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#key-fob"></use></svg><span>Key Fob Programming</span></a></li>
+        <li><a href="../ignition-repair-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#ignition"></use></svg><span>Ignition Repair</span></a></li>
+        <li><a href="../master-key-systems-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#key-ring"></use></svg><span>Master Key Systems</span></a></li>
+        <li><a href="../panic-bar-installation-near-riverhead/"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#panic-bar"></use></svg><span>Panic Bar Installation</span></a></li>
       </ul>
     </div>
   </div>
@@ -182,32 +241,50 @@
 
 <section class="cta-band">
   <div class="wrap">
-    <h2>Need Deadbolt Installation Near Riverhead?</h2>
-    <p>Call Haven Locksmith for a flat-rate quote before any work begins. Same-day service is often available.</p>
-    <a href="tel:+15165550142" class="btn btn-primary">Call (516) 555-0142</a>
+    <div class="cta-panel">
+      <div class="cta-copy">
+        <h2>Need Deadbolt Installation Near Riverhead?</h2>
+        <p>Call Haven Locksmith for a flat-rate quote before any work begins. Same-day service is often available.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="call-block call-block--dark" href="tel:+15165550142">
+  <span class="call-orb call-orb--lg call-orb--dark" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call now, 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
+      </div>
+    </div>
   </div>
 </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
+    <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo-text">Haven <span>Locksmith</span></span>
-        <p>Licensed, insured locksmith services across Long Island, NY. Residential, commercial, and automotive — available 24/7.</p>
+        <a href="../index.html" class="logo footer-logo">
+      <span class="logo-mark" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#keyhole"></use></svg></span>
+      <span class="logo-text">Haven <span>Locksmith</span></span>
+    </a>
+        <p class="footer-tagline">Licensed, insured locksmiths across Long Island, NY — open 24/7.</p>
       </div>
+      <a class="call-block call-block--brass" href="tel:+15165550142">
+  <span class="call-orb call-orb--md call-orb--brass" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg></span>
+  <span class="call-block-text"><span class="call-block-kicker">Call 24/7</span><span class="call-block-number">(516) 555-0142</span></span>
+</a>
+    </div>
+    <div class="footer-grid">
       <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="../about.html">About Us</a></li>
+        <h2 class="footer-heading">Company</h2>
+        <ul class="footer-links">
+          <li><a href="../about.html">About</a></li>
           <li><a href="../services.html">Services</a></li>
           <li><a href="../locations.html">Locations</a></li>
           <li><a href="../contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Popular Services</h4>
-        <ul>
+        <h2 class="footer-heading">Popular services</h2>
+        <ul class="footer-links">
           <li><a href="../home-lockout-service/">Home Lockout Service</a></li>
           <li><a href="../car-key-replacement/">Car Key Replacement</a></li>
           <li><a href="../lock-rekeying/">Lock Rekeying</a></li>
@@ -215,18 +292,26 @@
           <li><a href="../smart-lock-installation/">Smart Lock Installation</a></li>
         </ul>
       </div>
-      <div class="footer-col footer-col-contact">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+15165550142">(516) 555-0142</a></li>
-          <li><a href="mailto:info@havenlocksmith.com">info@havenlocksmith.com</a></li>
-          <li>Long Island, NY</li>
+      <div class="footer-col">
+        <h2 class="footer-heading">Service area</h2>
+        <ul class="footer-links">
+          <li><a href="../locations.html#nassau-county">Nassau County</a></li>
+          <li><a href="../locations.html#suffolk-county">Suffolk County</a></li>
+          <li><a class="footer-link-more" href="../locations.html">All locations<svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#arrow-right"></use></svg></a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col--contact">
+        <h2 class="footer-heading">Contact</h2>
+        <ul class="footer-contact">
+          <li><a class="footer-phone" href="tel:+15165550142"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#phone"></use></svg>(516) 555-0142</a></li>
+          <li><a href="mailto:info@havenlocksmith.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#mail"></use></svg>info@havenlocksmith.com</a></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="../components/icons/icons.svg#clock"></use></svg>Open 24/7</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Haven Locksmith. All rights reserved.</span>
-      <span>License #placeholder-0000 · Fully Insured</span>
+      <p class="footer-copy">© 2026 Haven Locksmith. All rights reserved.</p>
+      <p class="footer-license">License #placeholder-0000 · Fully Insured</p>
     </div>
   </div>
 </footer>
